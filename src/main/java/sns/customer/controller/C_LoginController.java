@@ -34,7 +34,7 @@ public class C_LoginController {
 	@RequestMapping(value="/login.do")
 	public String loginForm(){
 		System.out.println("고객로그인 모달폼 get으로요청");
-		return "tiles/modal_login"; //loginForm.jsp로 넘겨준다
+		return "customer/body/modal_login"; //loginForm.jsp로 넘겨준다
 	}
 	
 	
@@ -45,7 +45,6 @@ public class C_LoginController {
 		System.out.println("login.do");
 		System.out.println(userid);
 		System.out.println(password);
-		
 		
 		CustomerDTO customerDTO = c_LoginDao.selectIdPass(userid);
 		
@@ -58,18 +57,18 @@ public class C_LoginController {
 			if(password.equals(customerDTO.getPassword())){
 				
 				request.getSession().setAttribute("sessionUserid",true); //userid 값으로 키 값을 준다.
-				mav.setViewName("C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
+				mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
 				mav.addObject("msg","success");//메시지 띄워주기
 			}
 			
 			if(!password.equals(customerDTO.getPassword())){
-				mav.setViewName("FirstMainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
+				mav.setViewName("customer/main/FirstMainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
 				mav.addObject("msg","PwFailure");
 				
 			}
 			
 		} catch (NullPointerException e) {
-			mav.setViewName("FirstMainPage");//로그인 실패 시 다시 로그인 창을 띄워준다. 
+			mav.setViewName("customer/main/FirstMainPage");//로그인 실패 시 다시 로그인 창을 띄워준다. 
 			mav.addObject("msg","IdFailure");//로그인 실패 메시지
 			
 		}
@@ -85,7 +84,7 @@ public class C_LoginController {
 	@RequestMapping("/logout.do")
 	public ModelAndView logOut(HttpServletRequest request, ModelAndView mav){
 		request.getSession().invalidate();//session제거!
-		mav.setViewName("/FirstMainPage");
+		mav.setViewName("customer/main/FirstMainPage");
 		mav.addObject("msg","logout");
 		return mav;
 	}
@@ -95,7 +94,7 @@ public class C_LoginController {
 	public ModelAndView main(HttpServletRequest request,ModelAndView mav){
 		if(request.getSession().getAttribute("sessionUserid") == null){ //세션값이 없다면
 			mav.addObject("msg","alert"); //로그인하고 사용해달라는 경고메시지
-			mav.setViewName("FirstMainPage"); //main.jsp페이지로
+			mav.setViewName("customer/main/FirstMainPage"); //main.jsp페이지로
 			System.out.println("레스토랑세션값없음...");
 		}
 		return mav;

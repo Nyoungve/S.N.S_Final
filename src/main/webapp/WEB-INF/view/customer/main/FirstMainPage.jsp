@@ -14,9 +14,9 @@
     <meta name="author" content="">
 
     <title>S.N.S</title>
+	
 	<!--플러그인 파일 첨부-->
 	<%@include file="../../lib/library.jsp"%>
-	
 	
 	<!-- 달력 style 지정 -->	 
 	<style>
@@ -32,10 +32,7 @@
 <!-- 로딩용 이미지 -->  
 
 	<%@include file="../nav_bar/navbar.jsp"%>
-	
-	
 	<header class="row">
-	
 		<div class="header-content blur">
 			<div>
 				<%@include file="../header/header.jsp"%>
@@ -46,7 +43,6 @@
 	<contents>
 		<%@include file="../body/body_main.jsp"%>
 	</contents>
-	
 	<footer>
 		<%@include file="../footer/footer.jsp"%>
 	</footer>
@@ -68,16 +64,31 @@
 		</script>
 </c:if>
 	
-	<!-- 더보기 버튼 javascript -->
 	<script type="text/javascript">
 
 	//오늘 날짜 yyyy-mm-dd 형식으로 Main 페이지에서 전역변수로 가지고 있는다.
 	var today = null;
 	
-	
-	
-	
-	
+	//더보기 버튼
+	$('#more').on('click',function(){
+		
+		var url='more.do'
+		var query='dum=1';
+		
+		$.ajax({
+			 type:"GET"
+			 ,url:url
+			 ,data:query
+			 ,success:function(data){
+				
+			  $('#portfolio').append(data); 
+			  
+			 }
+			 ,error:function(e){
+			  console.log(e.responseText);
+			 }
+		})
+	})
 	
 	//레스토랑 예약 요청
 	$('#restaurant1').on('click',function(){
@@ -125,11 +136,7 @@
 	})
 	
 	</script>
-	
-	
-	
-	
-	
+	<a href="restaurantDetailView.do">레스토랑 상세페이지로 이동!</a>
 </body>
 
 </html>
