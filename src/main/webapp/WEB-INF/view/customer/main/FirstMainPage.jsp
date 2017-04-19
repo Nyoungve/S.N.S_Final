@@ -17,9 +17,17 @@
 	
 	<!--플러그인 파일 첨부-->
 	<%@include file="../../lib/library.jsp"%>
-	<!-- 달력 style 지정 css/index.css 로 이동 -->
-    <!-- 회원가입 유효성 검사 -->
-    <%@include file="../../../../js/index3.min.jsp"%>
+	
+	    
+	<%@include file="../../../../../js/index3.min.jsp"%> 
+	
+	<!-- 달력 style 지정 -->	 
+	<style>
+	.ui-datepicker{width:100%;font-size:30px;}
+	.ui-datepicker select.ui-datepicker-month{width:100%;font-size:30px;}
+	.ui-datepicker select.ui-datepicker-year{width:100%;font-size:30px;}
+	</style>
+    
 </head>
 
 <body id="page-top">
