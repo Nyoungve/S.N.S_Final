@@ -1,6 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
+ 
+<script type="text/javascript">
+
+	function imageViewer(id, viewer) {
+		
+		var upload = document.getElementById(id)
+		var viewDiv = document.getElementById(viewer)
+		
+		upload.onchange = function(e) {
+			e.preventDefault();
+			
+			var file = upload.files[0], reader = new FileReader();
+			reader.onload = function(event) {
+				var img = new Image();
+				img.src = event.target.result;
+				img.width = 300;
+				viewDiv.innerHTML = '';
+				viewDiv.appendChild(img);
+			};
+			reader.readAsDataURL(file);
+	
+			return false;
+		};
+		
+	}
+	
+</script>
+ 
  <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">

@@ -40,5 +40,7 @@
 	
 	<!-- 에이작스 -->
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
+	
+	
 </body>
 </html>

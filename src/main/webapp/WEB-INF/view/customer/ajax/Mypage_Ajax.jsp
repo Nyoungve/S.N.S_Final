@@ -7,7 +7,7 @@
 
 $(function(){
 	
-
+alert('asgs')
 
 		//예약현황
 		$('#Mypage_ReserveBtn').on('click',function() {
@@ -208,7 +208,10 @@ $(function(){
 		        ,contentType: false
 		        ,success:function(data){
 		        	
+		        	
 		        	$('#myModal').modal("hide");
+		        	
+		        	
 		        	
 		        	$('#resultTable').empty();
 		        	$('#resultTable').html(data);

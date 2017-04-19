@@ -3,32 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<script type="text/javascript">
-
-	function imageViewer(id, viewer) {
-		
-		var upload = document.getElementById(id)
-		var viewDiv = document.getElementById(viewer)
-		
-		upload.onchange = function(e) {
-			e.preventDefault();
-			
-			var file = upload.files[0], reader = new FileReader();
-			reader.onload = function(event) {
-				var img = new Image();
-				img.src = event.target.result;
-				img.width = 300;
-				viewDiv.innerHTML = '';
-				viewDiv.appendChild(img);
-			};
-			reader.readAsDataURL(file);
-	
-			return false;
-		};
-		
-	}
-	
-</script>
 
 <jsp:useBean id="toDay" class="java.util.Date" />
 
