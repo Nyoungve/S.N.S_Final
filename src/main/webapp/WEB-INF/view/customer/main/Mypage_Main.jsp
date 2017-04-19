@@ -27,7 +27,7 @@
 	<%@include file="../footer/footer.jsp"%>
 	
 	<!-- 리뷰 모달 -->
-	<%@include file="../body/Mypage/ReviewModal.jsp" %>	 
+	<%@include file="../body/Mypage/Mypage_ReviewModal.jsp" %>	 
 	
 	<!-- 에이작스 -->
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
