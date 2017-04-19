@@ -69,6 +69,7 @@ $(document).ready(function(){
         
      });
 	
+	
 	//아이디 중복 검사
 	$("#btnIdCheck").click(function(){
 		//alert("클릭!")
