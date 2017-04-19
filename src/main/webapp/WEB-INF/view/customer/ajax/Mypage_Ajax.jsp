@@ -4,11 +4,6 @@
 
 <script type="text/javascript">	
 
-alert('12')
- 
-
-
-
 $(function(){
 	
 
@@ -47,8 +42,6 @@ $(function(){
 		
 		//정보수정
 		$('#Mypage_UserInfoBtn').on('click',function() {
-		
-			alert("정보수정클릭")
 			
 			var url="Mypage_UserInfo.do"
 			var query="dup=userid";
@@ -81,8 +74,6 @@ $(function(){
 		
 		//후기수정
 		$('#Mypage_ReviewBtn').on('click',function() {
-		
-			alert("후기버튼클릭")
 			
 			var url="Mypage_Review.do"
 			var query="dup=userid";
@@ -148,6 +139,7 @@ $(function(){
 		//예약 취소
 		$(document).on('click','[name="btn_c_reserveCancel"]',function(){
 				var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
+				console.log(reserveNumber)
 				var url = "C_reserveCancel.do"
 				var query = "reserveNumber="+reserveNumber+"&end_rno="+end_rno
 				
@@ -163,7 +155,6 @@ $(function(){
 						$('#resultTable').html(data);
 						
 					}
-					,beforeSend:check
 					,error:function(e){
 						console.log(e.responseText);
 					}
@@ -178,7 +169,6 @@ $(function(){
 		//후기 글 쓰기 버튼
 		$(document).on('click','[name="btn_write"]',function(){
 			
-			alert("글쓰기 버튼 클릭")
 			var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
 			$('#rntext').val(reserveNumber)
 			$("#myModal").modal({backdrop: "static"});
@@ -225,6 +215,35 @@ $(function(){
 					console.log(e.responseText)
 				}	
 			})
+			
+		})
+		
+		
+		$(document).on('click','[name="btn_reviewDelete"]',function(){
+			
+			var reserveNumber = $(this).attr('data-Num')
+			
+			var url = "Review_Delete.do"
+			var query = "reserveNumber="+reserveNumber
+			
+			$.ajax({
+				
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(data){
+					
+					$('#resultTable').empty();
+					
+					$('#resultTable').html(data);
+					
+				}
+				,error:function(e){
+					console.log(e.responseText);
+				}
+				
+			});
+			
 			
 		})
 

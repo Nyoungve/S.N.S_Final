@@ -13,15 +13,6 @@
 	<!-- 불러오기 -->
 	<%@include file="../nav_bar/navbar_mypage.jsp"%>
 	
-	<header class="row">
-		<div class="header-content blur">
-			<div>
-				<%@include file="../header/header.jsp"%>
-			</div>
-		</div>
-	</header>
-	
-	
 	<section id="reviewSection" style="height: 100% ">
     	<div class="container">
 			<div class="col-lg-2 col-sm-2"></div>

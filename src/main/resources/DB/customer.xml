@@ -5,25 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="customer">
 
-<select id="getList" parameterType="string" resultType="sns.dto.CustomerDTO">
-
-select * from customer where userid=#{id}
-
-</select>
-
-
-<select id="getOne" parameterType="string" resultType="sns.dto.CustomerDTO">
-select * from customer where userid=#{id}
-</select>
-
-
-
-<update id="update" parameterType="string">
-
-update customer set noshowcount  = noshowcount - 1 
-where noshowcount>0 and userid = #{id}
-
-</update>
-
+	<select id="getList" parameterType="string" resultType="sns.dto.CustomerDTO">
+		select * from customer where userid=#{id}
+	</select>
+	
+	<select id="getOne" parameterType="string" resultType="sns.dto.CustomerDTO">
+		select * from customer where userid=#{id}
+	</select>
+	
+	<update id="update" parameterType="string">
+		update customer set noshowcount  = noshowcount - 1 
+		where noshowcount>0 and userid = #{id}
+	</update>
 
 </mapper>
