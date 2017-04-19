@@ -46,6 +46,7 @@
 	<contents>
 		<%@include file="../body/body_main.jsp"%>
 	</contents>
+	
 	<footer>
 		<%@include file="../footer/footer.jsp"%>
 	</footer>
