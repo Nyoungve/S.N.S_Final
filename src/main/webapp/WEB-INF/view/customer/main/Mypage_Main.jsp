@@ -8,7 +8,8 @@
 <%@include file="../../lib/library.jsp"%>
 
 </head>
-<body>
+<body id="page-top">
+
 	<!-- 불러오기 -->
 	<%@include file="../nav_bar/navbar_logout.jsp"%>
 	<%@include file="../header/header.jsp"%>
