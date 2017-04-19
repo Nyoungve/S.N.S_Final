@@ -9,13 +9,14 @@
 
 <!-- autowire사용 -->
 
+
 <context:annotation-config></context:annotation-config>
 
 <!-- 컨트롤러로 지정된 것 자동으로 빈 설정 -->
 <context:component-scan base-package="sns.customer.controller"></context:component-scan>
 <context:component-scan base-package="sns.administrator.controller"></context:component-scan>
 <context:component-scan base-package="sns.enterprise.controller"></context:component-scan>
-
+<context:component-scan base-package="sns.mail.controller"></context:component-scan>
 
 <!-- 뷰 리졸버 등록 -->
 <bean name="viewResolvor" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,6 +28,11 @@
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 <!-- Dao 등록 -->
+
+	<!-- 회원가입처리 DAO -->
+	<bean id="c_JoinDAO" class="sns.dao.C_JoinDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 	
 	<!-- 로그인처리 DAO -->
 	<bean id="c_LoginDAO" class="sns.dao.C_LoginDAO">
