@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="join">
+	
+	<select id="idCheck" parameterType="sns.dto.CustomerDTO" resultType="sns.dto.CustomerDTO">
+		select userid from customer <![CDATA[where userid=#{userid}]]>	
+	</select>
+	
+	<insert id="joinCustomer" parameterType="sns.dto.CustomerDTO">
+		insert into customer(userid,name,password,mobile,email) values (#{userid},#{name},#{password},#{mobile},#{email})
+	</insert>
+	
+</mapper>
