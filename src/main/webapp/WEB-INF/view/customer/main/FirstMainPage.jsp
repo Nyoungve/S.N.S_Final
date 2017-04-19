@@ -6,7 +6,6 @@
 <html lang="kr">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +23,6 @@
 	.ui-datepicker select.ui-datepicker-month{width:100%;font-size:30px;}
 	.ui-datepicker select.ui-datepicker-year{width:100%;font-size:30px;}
 	</style>
-    
 </head>
 
 <body id="page-top">
@@ -49,20 +47,19 @@
 
 	<%@include file="../body/modal_login.jsp"%>
 	<!-- 내가 입력한 javascirpt -->
-	
-<c:if test="${msg=='PwFailure'}">
-		<script type="text/javascript">
-			alert("로그인 비밀번호를 확인해주세요!");
-			location.href="main.do"
-		</script>
-</c:if>
-	
-<c:if test="${msg=='IdFailure'}">
-		<script type="text/javascript">
-			alert("로그인 아이디를 확인해주세요!");
-			location.href="main.do"
-		</script>
-</c:if>
+	<c:if test="${msg=='PwFailure'}">
+			<script type="text/javascript">
+				alert("로그인 비밀번호를 확인해주세요!");
+				location.href="main.do"
+			</script>
+	</c:if>
+		
+	<c:if test="${msg=='IdFailure'}">
+			<script type="text/javascript">
+				alert("로그인 아이디를 확인해주세요!");
+				location.href="main.do"
+			</script>
+	</c:if>
 	
 	<script type="text/javascript">
 
@@ -93,9 +90,6 @@
 	//레스토랑 예약 요청
 	$('#restaurant1').on('click',function(){
 		//alert('asdf');
-	
-		
-		
 		//오늘 날짜 구하기
 		var now = new Date();
    	    var year= now.getFullYear();
@@ -105,11 +99,9 @@
     	//날짜 형식을 yyyy-mm-dd 로 만듬
         today = year + '-' + mon + '-' + day;
       
-		
     	// 레스토랑의 정보를 불러 올 때 레스토랑 번호와 오늘 날짜를 보내줘야한다.
 		var url="reserve.do";
 		var query="restaurant_number=0505"+"&today="+today;
-		
 		
 		$.ajax({
 			 type:"GET"

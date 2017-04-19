@@ -46,12 +46,7 @@
 	</contents>
 	<footer>
 		<%@include file="../footer/footer.jsp"%>
-	</footer>
-
-
-	<%@include file="../body/modal_login.jsp"%>
-	<!-- 내가 입력한 javascirpt -->
-	
+	</footer>	
 	
 	<script type="text/javascript">
 	

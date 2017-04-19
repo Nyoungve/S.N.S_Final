@@ -15,7 +15,6 @@ import sns.dto.CustomerDTO;
 @Controller
 public class C_LoginController {
 	
-	
 	@Autowired
 	private C_LoginDAO c_LoginDao;
 
@@ -48,14 +47,11 @@ public class C_LoginController {
 		
 		CustomerDTO customerDTO = c_LoginDao.selectIdPass(userid);
 		
-		//mav.addObject("loginForm",customerDTO); //DB에 저장된 값을 뷰페이지에 넘겨준다.
-				
-			//로그인 성공시
-			
+		mav.addObject("loginForm",customerDTO); //DB에 저장된 값을 뷰페이지에 넘겨준다.
+		System.out.println("파라미터유저아이디: "+userid+"디비유저아이디: "+ customerDTO.getUserid()+"디비유저비번: "+customerDTO.getPassword());		
+		//로그인 성공시
 		try {
-			
 			if(password.equals(customerDTO.getPassword())){
-				
 				request.getSession().setAttribute("sessionUserid",true); //userid 값으로 키 값을 준다.
 				mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
 				mav.addObject("msg","success");//메시지 띄워주기
@@ -64,18 +60,13 @@ public class C_LoginController {
 			if(!password.equals(customerDTO.getPassword())){
 				mav.setViewName("customer/main/FirstMainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
 				mav.addObject("msg","PwFailure");
-				
 			}
 			
 		} catch (NullPointerException e) {
-			
 			mav.setViewName("customer/main/FirstMainPage");//로그인 실패 시 다시 로그인 창을 띄워준다. 
 			mav.addObject("msg","IdFailure");//로그인 실패 메시지
 			
-		}
-			
-			
-			
+		}	
 		return mav;
 	}
 	

@@ -82,7 +82,20 @@
 	</dependency>
     
     <!-- 파일 업로드용 -->
+  	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+	<dependency>
+    	<groupId>commons-fileupload</groupId>
+    	<artifactId>commons-fileupload</artifactId>
+    	<version>1.3.2</version>
+	</dependency>
    
+    <!-- 이메일인증 -->
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>mail</artifactId>
+	    <version>1.4</version>
+	</dependency>
+	
     <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 	<dependency>
     	<groupId>commons-fileupload</groupId>

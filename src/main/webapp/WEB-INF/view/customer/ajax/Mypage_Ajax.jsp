@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <script type="text/javascript">	
+
+alert('12')
+ 
+
+
+
 $(function(){
 	
 
@@ -38,6 +46,8 @@ $(function(){
 		//정보수정
 		$('#Mypage_UserInfoBtn').on('click',function() {
 		
+			alert("정보수정클릭")
+			
 			var url="Mypage_UserInfo.do"
 			var query="dup=userid";
 			
@@ -69,6 +79,8 @@ $(function(){
 		
 		//후기수정
 		$('#Mypage_ReviewBtn').on('click',function() {
+		
+			alert("후기버튼클릭")
 			
 			var url="Mypage_Review.do"
 			var query="dup=userid";
@@ -119,7 +131,7 @@ $(function(){
 							
 					$('#resultTable').empty();
 					
-					$('#resultTable').append(data);
+					$('#resultTable').html(data);
 							
 				}
 					
@@ -146,9 +158,10 @@ $(function(){
 						
 						$('#resultTable').empty();
 						
-						$('#resultTable').append(data);
+						$('#resultTable').html(data);
 						
 					}
+					,beforeSend:check
 					,error:function(e){
 						console.log(e.responseText);
 					}
@@ -158,17 +171,25 @@ $(function(){
 			});
 		
 		
+		
+		
 		//후기 글 쓰기 버튼
 		$(document).on('click','[name="btn_write"]',function(){
+			
+			alert("글쓰기 버튼 클릭")
 			var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
 			$('#rntext').val(reserveNumber)
 			$("#myModal").modal({backdrop: "static"});
 			
+			
 		})
+		
 		
 		
 		//후기 작성 완료
 		$(document).on('click','#btn_reviewSubmit',function(){
+			
+				
 			var formData = new FormData()
 			
 			formData.append("reserveNumber", $('#rntext').val())
@@ -177,11 +198,13 @@ $(function(){
 			formData.append("ranking", $("input[name=ranking]").val())
 			formData.append("end_rno", end_rno)
 			
-			console.log(formData)
+		
 			
 			var url = "Review_Submit.do"
 			
 			$.ajax({
+				
+		
 				type:"POST"
 		       	,url:url
 		       	,data:formData
@@ -190,9 +213,10 @@ $(function(){
 		        ,success:function(data){
 		        	
 		        	$('#myModal').modal("hide");
+		        	
 		        	$('#resultTable').empty();
-					$('#resultTable').html(data);
-					
+		        	$('#resultTable').html(data);
+		
 				}
 				,error:function(e){
 					console.log(e.responseText)
@@ -200,9 +224,10 @@ $(function(){
 			})
 			
 		})
-		
-		
-		
+
+
 
 })
+
+
 </script>	
