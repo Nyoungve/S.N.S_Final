@@ -1,0 +1,39 @@
+@CHARSET "EUC-KR";
+body {
+	padding: 0px;
+	margin: 0px;
+}
+#video { 
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     min-width: 100%;
+     min-height: 100%;
+     width: auto;
+     height: auto;
+     z-index: -1;
+     overflow: hidden;
+}
+
+.blur {
+	height: 70%;
+	margin: 10%;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.sidText1 {
+	margin: 20px;
+}
+
+.sidText2 {
+	text-align: center;
+	margin: 20px;
+}
+
+
+#intro {
+	font-size: 75px;
+}

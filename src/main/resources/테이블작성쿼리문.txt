@@ -1,0 +1,262 @@
+--테이블 생성
+
+--1. 고객 테이블
+drop table customer;
+
+create table customer(
+USERID varchar2(20) not null
+,NAME varchar2(20) not null
+,PASSWORD varchar2(20) not null
+,MOBILE varchar2(20) not null
+,EMAIL varchar2(20) not null
+,NOSHOWCOUNT number
+,constraint PK_tbl_customer_userid primary key(userid) 
+);
+
+
+--2. 업주 테이블
+drop table owner;
+
+create table owner(
+RESTAURANT_NUMBER varchar2(20) not null
+,USERID varchar2(20) not null
+,NAME varchar2(20) not null
+,password varchar2(20) not null
+,mobile varchar2(20) 
+,email varchar2(30)
+,constraint PK_tbl_e_RESTAURANT_NUMBER primary key(RESTAURANT_NUMBER)
+);
+
+--더미 데이터
+
+
+--3. 레스토랑 테이블
+
+drop table RESTAURANT;
+
+
+create table RESTAURANT(
+RESTAURANT_NUMBER varchar2(20)
+, E_NAME VARCHAR(20)
+, ADDRESS VARCHAR(200)
+, TEAMCOUNT number
+, TYPE VARCHAR(20)
+, PAY_KEY VARCHAR(20)
+, R_info VARCHAR2(3000)
+, R_time varchar2(300)
+, openingTime number not null
+, closingTime number not null
+,zipcode varchar2(20)
+,constraint FK_tbl_r_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
+references owner(RESTAURANT_NUMBER)
+,constraint UK_tbl_restaurant_pay_key unique(pay_key)
+,constraint pK_tbl_r_RESTAURANT_NUMBER primary key(RESTAURANT_NUMBER)
+);
+
+--레스토랑 더미 데이터
+insert into restaurant values('0101','totai','서울 강남','5','양식','paykey1','최고급 식당','11시부터 저녁 9시','11','22','06267');
+
+
+
+-- 4. 레스토랑 파일 업로드 RESTAURANTUPLOAD
+drop table RESTAURANTUPLOAD;
+
+create table restaurantupload(
+restaurant_number varchar2(20)
+,M_path varchar2(200)
+,D_path1 varchar2(200)
+,Mn_path varchar2(200)
+);
+ 
+--파일업로드용 시퀀스
+drop sequence ru_filenumber;
+create sequence ru_FILENUMBER; 
+
+----5. 휴일 Holidays
+
+drop table holidays;
+
+create table holidays(
+RESTAURANT_NUMBER VARCHAR2(20)
+,Holiday date 
+,constraint FK_tbl_h_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
+references  RESTAURANT(RESTAURANT_NUMBER)
+);
+
+
+
+----6. 예약정보테이블              RESERVE
+drop table reserve;
+
+create table reserve(
+  restaurant_number varchar2(20) not null
+  ,reserve_date date
+  ,userid varchar2(20)
+  ,deposit varchar2(20)
+  ,r_state number
+  ,guestCount number
+  ,reserveNumber number
+  ,reviewCheck number
+  ,constraint fk_tbl_rv_restaurant_number foreign key(restaurant_number)
+  references  restaurant(restaurant_number)
+  ,constraint fk_tbl_rv_userid foreign key(userid)
+  references  customer(userid)
+);
+
+
+----6.1 예약번호 시퀀스 생성
+create sequence seq_reserveNumber;
+
+----6.2 더미데이터 예시
+insert into reserve values('0101',to_date('2017-04-18 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-18 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','4', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-18 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','3', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-18 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','2', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-18 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','1', '3', seq_reserveNumber.nextval, '0');
+
+insert into reserve values('0101',to_date('2017-04-16 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval, '1');
+insert into reserve values('0101',to_date('2017-04-16 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','4', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-16 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','3', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-16 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','2', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-16 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','1', '3', seq_reserveNumber.nextval, '0');
+
+insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval, '1');
+insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','4', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','3', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','2', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','1', '3', seq_reserveNumber.nextval, '0');
+
+commit;
+
+
+--1. 승인대기
+--2. 예약완료
+--3. 취소요청
+--4. 취소완료
+--5. 이용완료
+
+-- 7.방문확인         RESERVECHECK
+drop table RESERVECHECK;
+
+create table RESERVECHECK(
+RESTAURANT_NUMBER VARCHAR2(20)
+,USERID VARCHAR2(20)
+,Reserve_Date DATE
+,VisitFix varchar2(4)
+,constraint FK_tbl_rvc_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
+references  restaurant(RESTAURANT_NUMBER)
+,constraint FK_tbl_rvc_userid foreign key(userid)
+references  customer(userid)
+);
+
+
+
+-- 8. 리뷰 review
+
+drop table review;
+
+create table review(
+  restaurant_number varchar2(20)
+  ,write_date date default sysdate
+  ,reserve_date date
+  ,userid varchar2(20)
+  ,comments varchar2(300)
+  ,ranking number
+  ,Review_filePath varchar2(100)
+  ,reserveNumber number
+  ,constraint fk_tbl_review_r_number foreign key(restaurant_number)
+  references restaurant(restaurant_number)
+  ,constraint fk_tbl_review_userid foreign key(userid)
+  references customer(userid)
+);
+
+--9. 집코드     Zipcode
+
+drop table zipcode;
+
+create table zipcode(
+zipcode varchar2(10)
+,area1 varchar2(100)
+,area2 varchar2(100)
+,area3 varchar2(100)
+,area4 varchar2(1000)
+);
+
+
+---- 10. 운영자          ADMINISTRATOR
+drop table  ADMINISTRATOR;
+
+create table  ADMINISTRATOR(
+USERID VARCHAR(20) not null
+, PASSWORD VARCHAR(20) not null
+);
+
+
+--더미 데이터 입력
+
+--1.customer--
+insert into customer values('a','김동규','1','010-3333-3333','ad@naver,com','0');
+insert into customer values('b','최빛찬','2','010-3333-3332','ad2@naver,com','0');
+insert into customer values('c','김나영','3','010-3333-3333','ad3@naver,com','0');
+insert into customer values('d','이희성','4','010-3333-3334','ad4@naver,com','0');
+commit;
+
+--2.기업 
+insert into owner values('0101','ea1','김동규','1','010-1111-1111','ea@naver,com');
+insert into owner values('0202','ea2','최빛찬','2','010-1111-1112','ea2@naver,com');
+insert into owner values('0303','ea3','김나영','3','010-1111-1113','ea3@naver,com');
+insert into owner values('0404','ea4','이희성','4','010-1111-1114','ea4@naver,com');
+insert into owner values('0505','ea4','이수진','4','010-1111-1114','ea4@naver,com');
+commit;
+
+--3.레스토랑
+insert into restaurant values('0101','totai','서울 강남','5','양식','paykey1','최고급 식당','11시부터 저녁 9시','11','22','06266');
+insert into restaurant values('0202','outback','서울 종로','4','중식','paykey2','고급 식당','11시부터 저녁 10시','11','22','06242');
+insert into restaurant values('0303','chicken','서울 강북','3','일식','paykey3','고고급 식당','11시부터 저녁 8시','11','22','06232');
+insert into restaurant values('0404','totai','서울 성남','2','한식','paykey4','고오급 식당','10시부터 저녁 9시','11','22','06241');
+commit;
+
+--4. 레스토랑 파일 업로드
+insert into restaurantupload values('0101',ru_filenumber.nextval,'f1','100','c:\ma.jpg','c:\a1.jpg','c:\a2.jpg','c:\a3.jpg','c:\a4.jpg','c:\menu1.jpg');
+insert into restaurantupload values('0202',ru_filenumber.nextval,'f2','100','c:\mb.jpg','c:\b1.jpg','c:\b2.jpg','c:\b3.jpg','c:\b4.jpg','c:\menu2.jpg');
+insert into restaurantupload values('0303',ru_filenumber.nextval,'f3','100','c:\mc.jpg','c:\c1.jpg','c:\c2.jpg','c:\c3.jpg','c:\c4.jpg','c:\menu3.jpg');
+insert into restaurantupload values('0404',ru_filenumber.nextval,'f4','100','c:\md.jpg','c:\d1.jpg','c:\d2.jpg','c:\d3.jpg','c:\d4.jpg','c:\menu4.jpg');
+commit;
+
+-- 5. holidays
+insert into holidays values('0101','2017-3-2'); 
+insert into holidays values('0202','2017-3-2');
+insert into holidays values('0303','2017-3-2');
+
+-- 6. 예약 정보
+insert into reserve values('0101',to_date('2017-04-01 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval);
+
+
+-- 7. 방문 확인
+insert into reservecheck values('0101','a','2017-1-1','Y');
+insert into reservecheck values('0202','b','2017-2-1','N');
+insert into reservecheck values('0303','c','2017-1-1','Y');
+insert into reservecheck values('0404','d','2017-1-1','Y');
+commit;
+
+--8. 리뷰 등록
+insert into review values('0101','2017-1-1','a','2017-4-1','정말좋아요','5','c:\after.jpg');
+insert into review values('0202''2017-2-1','b','2017-4-1','정말나빠요','4','c:\after1.jpg');
+insert into review values('0303','2017-1-1','c','2017-4-1','그럭저럭','3','c:\after2.jpg');
+insert into review values('0404','2017-1-1','d','2017-4-1','최악','1','c:\after3.jpg');
+
+commit;
+
+-- 9. 휴일등록
+insert into holidays values('0101','2017-1-8');
+insert into holidays values('0202','2017-1-8');
+insert into holidays values('0303','2017-1-8');
+insert into holidays values('0404','2017-1-8');
+commit;
+
+--10.zipcode 추가는   zipcode 폴더 참조
+
+--레스토랑예약정보확인용
+select restaurant_number,to_char(reserve_date,'yyyy-mm-dd hh24:mi:ss'),userid,deposit,r_state,teamcount
+from reserve;
+

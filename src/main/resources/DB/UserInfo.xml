@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userInfo">
+
+	<select id="getInfo" parameterType="String" resultType="sns.dto.CustomerDTO">
+		select * from customer where userid = #{userid}
+	</select>
+	
+	<update id="modifyInfo" parameterType="sns.dto.CustomerDTO">
+		update customer set name = #{name}, password = #{password}, mobile = #{mobile}, email = #{email} where userid = #{userid}
+	</update>
+
+</mapper>

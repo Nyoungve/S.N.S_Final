@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- autowire사용 -->
+
+<context:annotation-config></context:annotation-config>
+
+<!-- 컨트롤러로 지정된 것 자동으로 빈 설정 -->
+<context:component-scan base-package="sns.customer.controller"></context:component-scan>
+<context:component-scan base-package="sns.administrator.controller"></context:component-scan>
+<context:component-scan base-package="sns.enterprise.controller"></context:component-scan>
+
+
+<!-- 뷰 리졸버 등록 -->
+<bean name="viewResolvor" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/view/"></property>
+<property name="suffix" value=".jsp"></property>
+</bean>
+
+<!-- 업로드 -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+<!-- Dao 등록 -->
+	
+	<!-- 로그인처리 DAO -->
+	<bean id="c_LoginDAO" class="sns.dao.C_LoginDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="holidaysDao" class="sns.dao.HolidaysDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="restaurantDao" class="sns.dao.RestaurantDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="reserveDao" class="sns.dao.ReserveDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="reviewDao" class="sns.dao.ReviewDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="customerDao" class="sns.dao.CustomerDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="zipcodeDao" class="sns.dao.ZipcodeDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="ownerDao" class="sns.dao.OwnerDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+
+	<bean id="c_MypageDao" class="sns.dao.C_MypageDAO">
+	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+
+	<bean id="restaurantuploadDao" class="sns.dao.RestaurantuploadDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
+	
+	
+	
+<!-- 예외처리 페이지 -->	
+<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				
+				<!-- 예외는 순서대로 따라가기 때문에 최상위에 Exception이 오면 안된다. -->
+				
+				<!-- 사업주 등록시 에러 처리 -->
+				<prop key="exception.InsertShopException">
+					error/insertShopException
+				</prop>
+			</props>
+		</property>
+	</bean>			
+
+<!-- 
+	인터셉터 세션 로그인 처리 
+	-->
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/restaurantDetailView.do" /> <!-- 모든 URL 에 대해 Interceptor 를 적용하고자 한다면 /** -->
+	        <bean class="sns.session.interceptor.Interceptor"/> <!-- HandlerInterceptor 인터페이스를 구현한 클래스 -->
+	    	<!-- 추가로 여러개의 인터셉터 설정이 가능하다. -->
+	    </mvc:interceptor>
+	</mvc:interceptors>				
+		
+			
+<!-- 한글 처리 -->		
+<mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- @ResponseBody로 String 처리할때 한글처리 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+</mvc:annotation-driven>
+
+			
+			
+</beans>
+

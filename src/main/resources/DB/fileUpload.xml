@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="upload">
+	<insert id="addFile" parameterType="sns.dto.FileInfoDTO">
+		insert into restaurant_imagesave values (#{originalFilename},#{filePath},#{fileSize})
+	</insert>
+	
+	<insert id="review_image" parameterType="sns.dto.ReviewImageDTO">
+		insert into review_imagesave values (#{originalFilename}, #{filePath}, #{fileSize}, #{restaurant_number}, #{userid}, default)
+	</insert>	
+	
+	
+	
+	
+	
+	
+</mapper>

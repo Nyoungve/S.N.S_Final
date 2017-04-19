@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="enterInfo">
+
+	
+	<insert id="updateE_info" parameterType="sns.dto.RestaurantDTO">
+	
+
+update restaurant 
+<set>
+<if test="e_name != null">e_name= #{e_name} ,</if>
+<if test="address != null">address=#{address},</if>
+<if test="teamCount != null">teamcount=#{teamCount},</if>
+<if test="r_info != null">r_info=#{r_info},</if>
+<if test="r_time != null">r_time=#{r_time},</if>
+<if test="type != null">type=#{type},</if>
+<if test="openingTime!= null">openingtime=#{openingTime},</if>
+<if test="closingTime!= null">closingtime=#{closingTime},</if>
+<if test="zipcode!= null">zipcode=#{zipcode}</if>
+</set>
+where restaurant_number=#{restaurant_number}
+		
+		
+	</insert>
+
+</mapper>

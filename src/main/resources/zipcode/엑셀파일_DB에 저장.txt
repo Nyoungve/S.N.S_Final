@@ -1,0 +1,24 @@
+오라클을 실행하고 데이터를 넣기 위한 테이블을 만들어 줍니다.
+
+create table zipcode(
+zipcode varchar2(10)
+,area1 varchar2(100)
+,area2 varchar2(100)
+,area3 varchar2(100)
+,area4 varchar2(1000)
+
+)
+
+
+즉 csv란 엑셀 파일을 text 형식으로 저장한 파일이다.
+
+SQL Loader를 실행하기 위한 control 파일을 만듭니다. Control 파일에는 데이터를 가져올 파일의 경로와 이름, 가져올 필드, 저장할 테이블과 필드, 구분자 등을 지정할 수 있습니다.
+
+
+C:\Users\user\Downloads
+
+도스 cmd 창에 
+
+cmd> sqlldr userid=[오라클아이디]/[오라클비밀번호] control='c:\zipcode.ctl'
+
+sqlldr userid=dd/1234 control='c:\zipcode.ctl'

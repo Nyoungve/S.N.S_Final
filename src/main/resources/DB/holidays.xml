@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="holidays">
+<insert id="insert" parameterType="map">
+
+insert into holidays values(#{restaurant_number},#{dateText})
+</insert>
+
+<select id="selectList" parameterType="string" resultType="sns.dto.HolidayDTO">
+select * from holidays where restaurant_number = #{restaurant_number}
+</select>
+
+<select id="compareholiday" parameterType="map" resultType="int">
+select count(*) from holidays where restaurant_number= #{restaurant_number} and holiday=#{dateText}
+</select>
+
+<delete id="delete" parameterType="map">
+delete from holidays where restaurant_number= #{restaurant_number} and holiday=#{dateText}
+</delete>
+
+</mapper>
