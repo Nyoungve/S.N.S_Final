@@ -48,8 +48,11 @@
 		<%@include file="../footer/footer.jsp"%>
 	</footer>
 
+
 	<%@include file="../body/modal_login.jsp"%>
 	<!-- 내가 입력한 javascirpt -->
+	
+	
 	<script type="text/javascript">
 	
 
@@ -59,28 +62,7 @@
 	//오늘 날짜 yyyy-mm-dd 형식으로 Main 페이지에서 전역변수로 가지고 있는다.
 	var today = null;
 	
-	//더보기 버튼
-	$('#more').on('click',function(){
-		
-		var url='more.do'
-		var query='dum=1';
-		
-		$.ajax({
-			 type:"GET"
-			 ,url:url
-			 ,data:query
-			 ,success:function(data){
-				
-			  $('#portfolio').append(data); 
-			  
-			 }
-			 ,error:function(e){
-				 
-			  console.log(e.responseText);
-			  
-			 }
-		})
-	})
+	
 	
 	//레스토랑 예약 요청
 	$('#restaurant1').on('click',function(){
