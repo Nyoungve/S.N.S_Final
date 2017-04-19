@@ -53,9 +53,6 @@ jQuery.browser = {};
 </script>
 
 
-<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
-<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 
-
 
 <style type="text/css">
 .Highlighted a {

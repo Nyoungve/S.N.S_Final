@@ -127,8 +127,7 @@ $(function() {
 	// 휴일 날짜 담을 공간
 	var disabledDays = new Array();
 
-	
-	
+		
 	// 초기 휴일 정보 세팅
 	var defaultDate = null; // 초기 달력 상태 페이지
 
