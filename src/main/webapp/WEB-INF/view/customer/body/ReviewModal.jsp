@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
  <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">

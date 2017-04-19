@@ -4,10 +4,6 @@
 
 <script type="text/javascript">	
 
-alert('12')
- 
-
-
 
 $(function(){
 	
