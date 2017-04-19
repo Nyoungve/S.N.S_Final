@@ -24,9 +24,15 @@ public class C_LoginController {
 	
 	//첫번째 메인페이지로 이동
 	@RequestMapping(value="/main.do")
-	public String main(){
+	public String main(HttpServletRequest request){
 		System.out.println("메인페이지로이동!");
-		return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
+		//세션값여부에따라 아이디값을 주어 다르게함.
+		if(request.getSession(true).getAttribute("userid")==null){
+			return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
+		}
+		else{
+			return "customer/main/C_MainPage";//C_MainPage.jsp로 요청
+		}
 	}
 	
 	//고객 로그인페이지로 이동
