@@ -85,7 +85,7 @@ public class E_MyPageController {
 		
 		
 		
-		ModelAndView mav = new ModelAndView("enterprise/E_Mypage_Reserve");
+		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
 		
@@ -134,7 +134,7 @@ public class E_MyPageController {
 	@RequestMapping("/findZipcode.do")
 	public ModelAndView findZipcode(@RequestParam(value="area4", defaultValue="a") String area4) {
 		
-		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/findZipcode");
+		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/zipcode/findZipcode");
 		
 		List<ZipcodeDTO> zipCodeList = new ArrayList<ZipcodeDTO>();
 		zipCodeList = zipcodeDao.zipcodeRead(area4);
@@ -165,6 +165,7 @@ public class E_MyPageController {
 		restaurantDao.upload(restaurantDto.getMenu_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
 			
 		
+		
 		//이미 레스토랑 이미지 파일이 있는지 없는지 확인
 	
 		int resultNum = restaurantuploadDao.searchNumber(restaurantDto.getRestaurant_number());
@@ -185,9 +186,6 @@ public class E_MyPageController {
 		
 		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/enterprise_Main");
-		
-		
-		mav.addObject("inserOk", true);
 		
 		
 		return mav;

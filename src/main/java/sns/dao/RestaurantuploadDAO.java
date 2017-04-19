@@ -35,17 +35,11 @@ public class RestaurantuploadDAO extends SqlSessionDaoSupport{
 	
 	
 	
-	
+	//업주가 정보수정을 요구했을 때 원래 있던 초기 값을 보여주는 로직
 	public RestaurantuploadDTO selectImageList(String restaurant_number){
 	
 		
 		RestaurantuploadDTO restaurantuploadDTO  = getSqlSession().selectOne("restaurantupload.selectPath", restaurant_number);
-		
-		
-		System.out.println(restaurantuploadDTO.getM_path());
-		System.out.println(restaurantuploadDTO.getD_path1());
-		System.out.println(restaurantuploadDTO.getMn_path());
-		
 		
 		return restaurantuploadDTO;
 	}

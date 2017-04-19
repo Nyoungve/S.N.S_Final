@@ -17,7 +17,7 @@
 	<!-- 필요한 라이브 파일들 -->
    <%@include file="/WEB-INF/view/lib/library.jsp" %>
    
-   <!-- 로그인 처리 시 필요한 자바스크립트 -->
+   <!-- 로그인 처리 시(성공,실패) 필요한 자바스크립트 -->
     <%@include file="E_Main_LoginEvent.jsp" %>   
        
 </head>
