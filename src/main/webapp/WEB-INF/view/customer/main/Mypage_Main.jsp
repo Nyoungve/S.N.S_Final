@@ -12,6 +12,7 @@
 
 	<!-- 불러오기 -->
 	<%@include file="../nav_bar/navbar_mypage.jsp"%>
+	
 	<header class="row">
 		<div class="header-content blur">
 			<div>
@@ -31,7 +32,10 @@
 	
 	
 	<!-- 불러오기 -->
+	
 	<%@include file="../footer/footer.jsp"%>
+	
+	
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
 
 </body>

@@ -123,7 +123,7 @@ $(function(){
 							
 					$('#resultTable').empty();
 					
-					$('#resultTable').append(data);
+					$('#resultTable').html(data);
 							
 				}
 					
@@ -150,7 +150,7 @@ $(function(){
 						
 						$('#resultTable').empty();
 						
-						$('#resultTable').append(data);
+						$('#resultTable').html(data);
 						
 					}
 					,error:function(e){
@@ -160,6 +160,8 @@ $(function(){
 				});
 				
 			});
+		
+		
 		
 		
 		//후기 글 쓰기 버튼
@@ -172,8 +174,11 @@ $(function(){
 		})
 		
 		
+		
 		//후기 작성 완료
 		$(document).on('click','#btn_reviewSubmit',function(){
+			
+				
 			var formData = new FormData()
 			
 			formData.append("reserveNumber", $('#rntext').val())
@@ -187,6 +192,8 @@ $(function(){
 			var url = "Review_Submit.do"
 			
 			$.ajax({
+				
+		
 				type:"POST"
 		       	,url:url
 		       	,data:formData
@@ -194,9 +201,9 @@ $(function(){
 		        ,contentType: false
 		        ,success:function(data){
 		        	
-		        	$("#myModal").hide();
-					$('#resultTable').empty();
-					$('#resultTable').append(data);
+		        	console.log(data)
+		        	
+				
 		        	
 					
 				}
