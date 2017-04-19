@@ -15,7 +15,6 @@ import sns.dto.CustomerDTO;
 @Controller
 public class C_LoginController {
 	
-	
 	@Autowired
 	private C_LoginDAO c_LoginDao;
 

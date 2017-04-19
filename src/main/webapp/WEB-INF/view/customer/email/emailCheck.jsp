@@ -6,6 +6,7 @@
 <title> 이메일 인증 V(^_^)V !!</title>
 <script type="text/javascript">
 function check(){
+	
 	var form = document.authenform;
 	var authNum = ${authNum}; //인증번호 
 	console.log(authNum+" 인증번호?");

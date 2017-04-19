@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EmailAuthController {
 	
+	
 	//근데 왜 이메일을 두개 보낼깡... 
 	@RequestMapping(value="/emailAuth.do",method=RequestMethod.GET)
 	public ModelAndView emailAuth(HttpServletResponse response,HttpServletRequest request, @RequestParam("email") String email,String authNum) throws Exception{ 
