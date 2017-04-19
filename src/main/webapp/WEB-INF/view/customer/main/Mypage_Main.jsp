@@ -8,10 +8,18 @@
 <%@include file="../../lib/library.jsp"%>
 
 </head>
-<body>
+<body id="page-top">
+
 	<!-- 불러오기 -->
-	<%@include file="../nav_bar/navbar_logout.jsp"%>
-	<%@include file="../header/header.jsp"%>
+	<%@include file="../nav_bar/navbar_mypage.jsp"%>
+	
+	<header class="row">
+		<div class="header-content blur">
+			<div>
+				<%@include file="../header/header.jsp"%>
+			</div>
+		</div>
+	</header>
 	
 	
 	<section id="reviewSection" style="height: 100% ">
@@ -23,7 +31,10 @@
 	</section>
 
 	<!-- 불러오기 -->
+	
 	<%@include file="../footer/footer.jsp"%>
+	
+	
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
 </body>
 </html>

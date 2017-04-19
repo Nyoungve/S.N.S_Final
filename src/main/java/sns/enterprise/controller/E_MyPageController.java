@@ -68,13 +68,13 @@ public class E_MyPageController {
 
 
 	//업주 마이 페이지
-	@RequestMapping(value="/ownerMain.do",method = RequestMethod.POST)
+	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
 	public String enterpriseForm(String restaurant_number,HttpSession session){
 	
 	
 		session.setAttribute("sessionRestaurant_number", restaurant_number);
 		
-		return "enterprise/enterprise_Main";
+		return "enterprise/main/Mypage/enterprise_Main";
 		
 	}
 	

@@ -93,11 +93,12 @@
 					<c:if test="${reDay.time - toDay.time < 0}">
 						<c:if test="${reDay.time - toDay.time > -3*(1000*60*60*24)}">
 							<c:if test="${reserveList.r_state==5}">
-								${reserveList.reviewCheck}
-								<form name="form_writeReview">
-									<input type="hidden" value="${reserveList.reserveNumber}" name="reserveNumber">
-									<input type="button" value="Write" name="btn_write" class="btn btn-info btn-sm">
-								</form>
+								<c:if test="${reserveList.reviewCheck == 0}">
+									<form name="form_writeReview">
+										<input type="hidden" value="${reserveList.reserveNumber}" name="reserveNumber">
+										<input type="button" value="Write" name="btn_write" class="btn btn-info btn-sm">
+									</form>
+								</c:if>
 							</c:if>
 						</c:if>
 					</c:if>
@@ -106,6 +107,7 @@
 		</c:forEach>
 	</tbody>
 </table>
+
 <input type="button" id="btn_more" class="btn btn-info btn-sm" value="더 보기">
 
 	  <!-- Modal -->
@@ -135,9 +137,10 @@
     					</label>
     				</c:forEach>
 	            </div>
+	            
 	            <button type="button" class="btn btn-success btn-block" id="btn_reviewSubmit">작성 완료</button>
 	          </form>
-	        </div>
+	        </div> 
 	      </div>
 	      
 	    </div>
