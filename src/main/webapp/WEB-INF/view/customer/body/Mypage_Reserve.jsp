@@ -138,7 +138,7 @@
     				</c:forEach>
 	            </div>
 	            
-	            <button type="button" class="btn btn-success btn-block" id="btn_reviewSubmit">작성 완료</button>
+	            <button type="button" class="btn btn-success btn-block" id="btn_reviewSubmit" data-dismiss="modal">작성 완료</button>
 	          </form>
 	        </div> 
 	      </div>
