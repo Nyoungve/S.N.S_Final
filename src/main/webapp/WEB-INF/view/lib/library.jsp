@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
    <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
@@ -32,4 +31,3 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
- 		<%@include file="../../../js/index3.min.jsp"%> 

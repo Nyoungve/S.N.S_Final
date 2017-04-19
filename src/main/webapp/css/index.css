@@ -37,3 +37,8 @@ body {
 #intro {
 	font-size: 75px;
 }
+
+	<!-- 달력 style 지정 -->	 
+	.ui-datepicker{width:100%;font-size:30px;}
+	.ui-datepicker select.ui-datepicker-month{width:100%;font-size:30px;}
+	.ui-datepicker select.ui-datepicker-year{width:100%;font-size:30px;}
