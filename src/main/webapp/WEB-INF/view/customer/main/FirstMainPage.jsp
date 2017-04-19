@@ -14,8 +14,10 @@
     <meta name="author" content="">
 
     <title>S.N.S</title>
+	
 	<!--플러그인 파일 첨부-->
 	<%@include file="../../lib/library.jsp"%>
+	
 	<!-- 달력 style 지정 -->	 
 	<style>
 	.ui-datepicker{width:100%;font-size:30px;}
