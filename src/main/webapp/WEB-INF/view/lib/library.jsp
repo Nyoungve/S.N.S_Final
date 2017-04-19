@@ -33,4 +33,4 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
- 		<%-- <%@include file="../../js/index3.min.jsp"%>  --%>
+ 		<%@include file="../../../js/index3.min.jsp"%> 
