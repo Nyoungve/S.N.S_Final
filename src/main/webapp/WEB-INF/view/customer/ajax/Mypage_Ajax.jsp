@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <script type="text/javascript">	
+
 $(function(){
 	
 
@@ -27,6 +30,8 @@ $(function(){
 					//결과 테이블을 뿌려준다.
 					$('#resultTable').html(arg);
 					
+					
+					
 				},error:function(e){
 				  console.log(e.responseText);
 				 }
@@ -37,8 +42,6 @@ $(function(){
 		
 		//정보수정
 		$('#Mypage_UserInfoBtn').on('click',function() {
-		
-			alert("정보수정클릭")
 			
 			var url="Mypage_UserInfo.do"
 			var query="dup=userid";
@@ -71,8 +74,6 @@ $(function(){
 		
 		//후기수정
 		$('#Mypage_ReviewBtn').on('click',function() {
-		
-			alert("후기버튼클릭")
 			
 			var url="Mypage_Review.do"
 			var query="dup=userid";
@@ -138,6 +139,7 @@ $(function(){
 		//예약 취소
 		$(document).on('click','[name="btn_c_reserveCancel"]',function(){
 				var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
+				console.log(reserveNumber)
 				var url = "C_reserveCancel.do"
 				var query = "reserveNumber="+reserveNumber+"&end_rno="+end_rno
 				
@@ -166,10 +168,11 @@ $(function(){
 		
 		//후기 글 쓰기 버튼
 		$(document).on('click','[name="btn_write"]',function(){
-			alert("글쓰기 버튼 클릭")
+			
 			var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
 			$('#rntext').val(reserveNumber)
 			$("#myModal").modal({backdrop: "static"});
+			
 			
 		})
 		
@@ -187,7 +190,7 @@ $(function(){
 			formData.append("ranking", $("input[name=ranking]").val())
 			formData.append("end_rno", end_rno)
 			
-			console.log(formData)
+		
 			
 			var url = "Review_Submit.do"
 			
@@ -201,11 +204,12 @@ $(function(){
 		        ,contentType: false
 		        ,success:function(data){
 		        	
-		        	console.log(data)
-		        	
-				
-		        	
-					
+		        	$('#myModal').modal("hide");
+		        	$('#myModal').find('form')[0].reset();
+		        	$('#review_view').html("");
+		        	$('#resultTable').empty();
+		        	$('#resultTable').html(data);
+		
 				}
 				,error:function(e){
 					console.log(e.responseText)
@@ -213,7 +217,39 @@ $(function(){
 			})
 			
 		})
+		
+		
+		$(document).on('click','[name="btn_reviewDelete"]',function(){
+			
+			var reserveNumber = $(this).attr('data-Num')
+			
+			var url = "Review_Delete.do"
+			var query = "reserveNumber=" + reserveNumber
+			
+			$.ajax({
+				
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(data){
+					
+					$('#resultTable').empty();
+					
+					$('#resultTable').html(data);
+					
+				}
+				,error:function(e){
+					console.log(e.responseText);
+				}
+				
+			});
+			
+			
+		})
+
 
 
 })
+
+
 </script>	

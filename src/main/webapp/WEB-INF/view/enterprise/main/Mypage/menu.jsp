@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+	
 	<!-- 네비 메뉴 시작 -->
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -24,3 +25,8 @@
 			</ul>
 		</div>
 	</nav>
+
+
+<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
+<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 	
+

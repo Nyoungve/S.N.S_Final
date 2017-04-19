@@ -191,6 +191,22 @@ USERID VARCHAR(20) not null
 , PASSWORD VARCHAR(20) not null
 );
 
+----------- 11. 리뷰 파일 저장  review_imagesave 
+
+create table review_imagesave (
+  originalFilename varchar2(100)
+  ,filePath varchar2(100)
+  ,fileSize number
+  ,restaurant_number varchar2(20)
+  ,userid varchar2(20)
+  ,write_date date default sysdate
+  ,constraint fk_tbl_image_r_number foreign key(restaurant_number)
+  references restaurant(restaurant_number)
+);
+
+
+
+
 
 --더미 데이터 입력
 
@@ -230,6 +246,12 @@ insert into holidays values('0303','2017-3-2');
 
 -- 6. 예약 정보
 insert into reserve values('0101',to_date('2017-04-01 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval);
+
+--1.승인대기
+--2.예약완료
+--3.취소요청
+--4.이용완료
+--5.취소완료
 
 
 -- 7. 방문 확인

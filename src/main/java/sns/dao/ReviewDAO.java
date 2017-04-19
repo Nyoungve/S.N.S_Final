@@ -14,13 +14,13 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 	
 		//고객 후기 정보 확인을 위해 review 테이블에서 알려주는 Dao
 		public List<ReviewDTO> getReviewList(String userid) {
-			List<ReviewDTO> reviewDTO = getSqlSession().selectList("review.getReview", userid);
+			List<ReviewDTO> reviewDTO = getSqlSession().selectList("review.c_getReview", userid);
 			return reviewDTO;
 		}
 		
 		//고객 후기 지우는 review 테이블에서 알려주는 Dao
-		public void deleteReview(ReviewDTO reviewDto) {
-			getSqlSession().delete("review.deleteReview", reviewDto);
+		public void deleteReview(String reserveNumber) {
+			getSqlSession().delete("review.c_deleteReview", reserveNumber);
 		}
 		
 		//고객 후기 등록

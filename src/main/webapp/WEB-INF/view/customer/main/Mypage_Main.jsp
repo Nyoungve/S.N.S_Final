@@ -13,19 +13,11 @@
 	<!-- 불러오기 -->
 	<%@include file="../nav_bar/navbar_mypage.jsp"%>
 	
-	<header class="row">
-		<div class="header-content blur">
-			<div>
-				<%@include file="../header/header.jsp"%>
-			</div>
-		</div>
-	</header>
-	
-	
 	<section id="reviewSection" style="height: 100% ">
     	<div class="container">
 			<div class="col-lg-2 col-sm-2"></div>
 			<div id="jemok" class="col-lg-10 col-sm-10"><h2>마이페이지</h2></div>
+	  		<!-- 결과 테이블 -->
 	  		<div id="resultTable" class="col-lg-10 col-sm-10"></div>
 		</div>
 	</section>
@@ -34,7 +26,12 @@
 	
 	<%@include file="../footer/footer.jsp"%>
 	
+	<!-- 리뷰 모달 -->
+	<%@include file="../body/Mypage/Mypage_ReviewModal.jsp" %>	 
 	
+	<!-- 에이작스 -->
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
+	
+	
 </body>
 </html>

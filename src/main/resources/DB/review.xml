@@ -4,9 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="review">
-	<select id="getReview" parameterType="String" resultType="sns.dto.ReviewDTO">
+	<select id="c_getReview" parameterType="String" resultType="sns.dto.ReviewDTO">
 		<!-- select * from review where userid = #{userid} order by write_Date desc -->
-		select * from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER ) V where V.userid = #{userid} order by write_Date desc
+		select * from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER ) V where V.userid = #{userid} order by write_Date desc
 	</select>
 	
 	<insert id="c_writeReview" parameterType="sns.dto.ReviewDTO">
@@ -17,8 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reserve set reviewCheck = '1' where reserveNumber = #{reserveNumber}
 	</update>
 	
-	<delete id="deleteReview" parameterType="sns.dto.ReviewDTO">
-		delete from review where userid = #{userid} and comments = #{comments} and write_date = #{write_date}
+	<delete id="c_deleteReview" parameterType="String">
+		delete from review where reserveNumber = #{reserveNumber}
 	</delete>
 	
 </mapper>
