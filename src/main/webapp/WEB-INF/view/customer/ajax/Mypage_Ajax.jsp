@@ -35,6 +35,8 @@ $(function(){
 					//결과 테이블을 뿌려준다.
 					$('#resultTable').html(arg);
 					
+					
+					
 				},error:function(e){
 				  console.log(e.responseText);
 				 }
