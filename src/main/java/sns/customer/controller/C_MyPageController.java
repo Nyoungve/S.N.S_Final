@@ -44,7 +44,7 @@ public class C_MyPageController {
 	@RequestMapping("/Mypage_Main.do")
 	public String mypage_main() {
 		
-		return "Mypage_Main";
+		return "customer/main/Mypage_Main";
 	}
 	
 	//고객 예약 정보 확인 처리 (테이블 reserve)
@@ -52,7 +52,7 @@ public class C_MyPageController {
 	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="10") String end_rno) {
 		System.out.println("Reserve page");
 		System.out.println(end_rno);
-		ModelAndView mav = new ModelAndView("Mypage_Reserve");
+		ModelAndView mav = new ModelAndView("customer/body/Mypage_Reserve");
 		
 		List<ReserveDTO> list = new ArrayList<ReserveDTO>();
 		list = reserveDao.c_getReserveList("a", end_rno);
@@ -76,14 +76,14 @@ public class C_MyPageController {
 	@RequestMapping("/Mypage_UserInfo.do")
 	public String mypage_userinfo() {
 		
-		return "Mypage_UserInfo";
+		return "customer/body/Mypage_UserInfo";
 	}
 	
 	//고객이 후기 리스트를 가져오기 위한 요청 처리
 	@RequestMapping("/Mypage_Review.do")
 	public ModelAndView mypage_review() {
 		
-		ModelAndView mav = new ModelAndView("Mypage_Review");
+		ModelAndView mav = new ModelAndView("customer/body/Mypage_Review");
 		
 		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		list =reviewDao.getReviewList("a");
