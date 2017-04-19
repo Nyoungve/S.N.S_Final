@@ -213,7 +213,8 @@ $(function(){
 		        ,success:function(data){
 		        	
 		        	$('#myModal').modal("hide");
-		        	
+		        	$('#myModal').find('form')[0].reset();
+		        	$('#review_view').html("");
 		        	$('#resultTable').empty();
 		        	$('#resultTable').html(data);
 		
