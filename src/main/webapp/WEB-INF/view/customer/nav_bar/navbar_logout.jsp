@@ -49,33 +49,7 @@ $('#home').click( function() {
 //드랍 다운을 누르면 마이 페이지 전환
 $('.Mypage_Main_Open').on('click',function() {
 	
-	$('body').css('height','0px');
-	$('header').html('');
-	
-	var urlMain="Mypage_Main.do";
-	var query="dup=userid";
-	
-	$.ajax({
-		type:"GET"
-		,url:urlMain
-		,data:query
-		,success:function(arg){
-			
-			//ajax로 가져온 내용을 뿌리기 전 초기화
-			$('#portfolio').empty();
-			
-			//더보기 버튼 삭제
-			$('#moreBtn').remove();
-			
-			//셀렉션 태그 id= portfolio 인 곳에 data를 text 형식으로 집어 넣는다.
-			$('#portfolio').html(arg);
-			
-		}
-	 	,error:function(e){
-		  console.log(e.responseText);
-		 }
-		
-	});
+	location.href="Mypage_Main.do";
 	
 });
 
