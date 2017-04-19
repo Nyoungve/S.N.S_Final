@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
 	<!-- 불러오기 -->
 	<%@include file="../nav_bar/navbar_logout.jsp"%>
 	<%@include file="../header/header.jsp"%>
