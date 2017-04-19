@@ -31,6 +31,7 @@
 </nav>
 
 <script type="text/javascript">	
+
 $('#home').click( function() {
 	location.href="main.do";
 });

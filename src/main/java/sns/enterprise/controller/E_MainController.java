@@ -35,7 +35,7 @@ public class E_MainController {
 	@RequestMapping("/ownerLoginMain.do")
 	public String loginForm(){
 		
-		return "ownerLoginMain";
+		return "enterprise/main/login/ownerLoginMain";
 	}
 	
 	
@@ -73,7 +73,7 @@ public class E_MainController {
 		
 		
 			
-			return "ownerLoginMain";
+			return "enterprise/main/login/ownerLoginMain";
 	}
 	
 	

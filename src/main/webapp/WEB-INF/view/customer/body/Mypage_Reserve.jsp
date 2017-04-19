@@ -107,6 +107,7 @@
 		</c:forEach>
 	</tbody>
 </table>
+
 <input type="button" id="btn_more" class="btn btn-info btn-sm" value="더 보기">
 
 	  <!-- Modal -->
@@ -136,9 +137,10 @@
     					</label>
     				</c:forEach>
 	            </div>
+	            
 	            <button type="button" class="btn btn-success btn-block" id="btn_reviewSubmit">작성 완료</button>
 	          </form>
-	        </div>
+	        </div> 
 	      </div>
 	      
 	    </div>

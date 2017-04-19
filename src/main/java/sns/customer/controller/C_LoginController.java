@@ -68,13 +68,12 @@ public class C_LoginController {
 			}
 			
 		} catch (NullPointerException e) {
+			
 			mav.setViewName("customer/main/FirstMainPage");//로그인 실패 시 다시 로그인 창을 띄워준다. 
 			mav.addObject("msg","IdFailure");//로그인 실패 메시지
 			
 		}
 			
-				
-				
 			
 			
 		return mav;
