@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,8 @@ public class C_MyPageController {
 
 	//고객 마이 페이지 메인으로 보내는 처리
 	@RequestMapping("/Mypage_Main.do")
-	public String mypage_main() {
+	public String mypage_main(HttpServletRequest request) {
+		request.getSession(true).getAttribute("userid");
 		
 		return "customer/main/Mypage_Main";
 	}

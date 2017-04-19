@@ -53,8 +53,11 @@ public class C_LoginController {
 		try {
 			if(password.equals(customerDTO.getPassword())){
 				request.getSession().setAttribute("sessionUserid",true); //userid 값으로 키 값을 준다.
-				mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
-				mav.addObject("msg","success");//메시지 띄워주기
+				if(userid!=null){
+					request.getSession().setAttribute("userid",userid);
+					mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
+					mav.addObject("msg","success");//메시지 띄워주기
+				}
 			}
 			
 			if(!password.equals(customerDTO.getPassword())){

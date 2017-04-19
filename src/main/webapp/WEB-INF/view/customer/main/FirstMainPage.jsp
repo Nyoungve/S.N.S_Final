@@ -46,6 +46,7 @@
 	</footer>
 
 	<%@include file="../body/modal_login.jsp"%>
+	
 	<!-- 내가 입력한 javascirpt -->
 	<c:if test="${msg=='PwFailure'}">
 			<script type="text/javascript">
@@ -59,6 +60,18 @@
 				alert("로그인 아이디를 확인해주세요!");
 				location.href="main.do"
 			</script>
+	</c:if>
+	
+	<c:if test="${msg=='alert'}">
+	<script type="text/javascript">
+		alert("로그인 후 이용해 주세요!^^");
+	</script>
+	</c:if>
+	
+	<c:if test="${msg=='logout'}">
+		<script type="text/javascript">
+			alert("로그아웃 되었습니다.");
+		</script>
 	</c:if>
 	
 	<script type="text/javascript">

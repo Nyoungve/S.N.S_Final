@@ -30,10 +30,6 @@ public class C_JoinController {
 		return "customer/body/modal_join"; //modal_join.jsp로 넘겨준다.
 	}
 	
-	
-	
-	
-	
 	//아이디중복검사
 	@RequestMapping(value="/idCheck.do",method=RequestMethod.POST, produces ="text/plain;charset=UTF-8")
 	@ResponseBody 
