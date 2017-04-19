@@ -25,7 +25,9 @@
 								<td>${reviewList.e_name}</td>
 								<td>${reviewList.comments}</td>
 								<td>
-									<input type="button" name="btn_reviewModify" class="btn btn-info btn-sm" value="Modify">
+									<button name="btn_reviewModify" class="btn btn-info btn-sm" data-Num="${reviewList.reserveNumber}">
+										Modify
+									</button>
 								</td>
 								<td>
 									<button name="btn_reviewDelete" class="btn btn-info btn-sm" data-Num="${reviewList.reserveNumber}">

@@ -224,7 +224,7 @@ $(function(){
 			var reserveNumber = $(this).attr('data-Num')
 			
 			var url = "Review_Delete.do"
-			var query = "reserveNumber="+reserveNumber
+			var query = "reserveNumber=" + reserveNumber
 			
 			$.ajax({
 				
