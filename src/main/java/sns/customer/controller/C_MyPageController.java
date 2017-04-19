@@ -120,7 +120,7 @@ public class C_MyPageController {
 		
 		
 		System.out.println(reviewDTO.getRanking());	
-		return "test";
+		return "redirect:Mypage_Reserve.do";
 		
 	}
 	

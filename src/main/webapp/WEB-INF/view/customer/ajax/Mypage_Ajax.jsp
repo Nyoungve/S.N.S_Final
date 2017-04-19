@@ -9,31 +9,8 @@ $(function(){
 		$('#Mypage_ReserveBtn').on('click',function() {
 		
 			
-			var urlMain="Mypage_Main.do";
 			var url="Mypage_Reserve.do";
 			var query="dup=userid";
-			
-			$.ajax({
-				type:"GET"
-				,url:urlMain
-				,data:query
-				,success:function(arg){
-					
-					//ajax로 가져온 내용을 뿌리기 전 초기화
-					$('#portfolio').empty();
-					
-					//더보기 버튼 삭제
-					$('#moreBtn').remove();
-					
-					//셀렉션 태그 id= portfolio 인 곳에 data를 text 형식으로 집어 넣는다.
-					$('#portfolio').html(arg);
-					
-				}
-			 	,error:function(e){
-				  console.log(e.responseText);
-				 }
-				
-			});
 			
 			$.ajax({
 				type:"GET"
@@ -58,65 +35,7 @@ $(function(){
 			
 		});
 		
-		// 예약 현황 더보기
-		var end_rno = 10 + Number(${end_rno})
-			
-		$('#btn_more').on('click',function(){
-			end_rno += 10
-			var url = "Mypage_Reserve.do"
-			var query = "end_rno="+end_rno
-					
-			$.ajax({
-					
-				type:"GET"
-				,url:url
-				,data:query
-				,success:function(data){
-							
-					$('#resultTable').empty();
-					
-					$('#resultTable').append(data);
-							
-				}
-					
-				,error:function(e){
-						console.log(e.responseText);
-				}
-						
-			});
-					
-		});
-		
-		//예약 취소
-		$('[name="btn_c_reserveCancel"]').on('click',function(){
-				var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
-				var url = "C_reserveCancel.do"
-				var query = "reserveNumber="+reserveNumber+"&end_rno="+end_rno
-				
-				$.ajax({
-					
-					type:"GET"
-					,url:url
-					,data:query
-					,success:function(data){
-						
-						$('#resultTable').empty();
-						
-						$('#resultTable').append(data);
-						
-					}
-					,error:function(e){
-						console.log(e.responseText);
-					}
-					
-				});
-				
-			});
-		
-		
-		
 		//정보수정
-		
 		$('#Mypage_UserInfoBtn').on('click',function() {
 		
 			alert("정보수정클릭")
@@ -149,7 +68,6 @@ $(function(){
 			});
 			
 		});
-		
 		
 		//후기수정
 		$('#Mypage_ReviewBtn').on('click',function() {
@@ -185,8 +103,67 @@ $(function(){
 			
 		});
 		
+		
+		
+		
+		// 예약 현황 더보기
+		var end_rno = 10 + Number(${end_rno})
+			
+		$(document).on('click','#btn_more',function(){
+			end_rno += 10
+			var url = "Mypage_Reserve.do"
+			var query = "end_rno="+end_rno
+					
+			$.ajax({
+					
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(data){
+							
+					$('#resultTable').empty();
+					
+					$('#resultTable').append(data);
+							
+				}
+					
+				,error:function(e){
+						console.log(e.responseText);
+				}
+						
+			});
+					
+		});
+		
+		//예약 취소
+		$(document).on('click','[name="btn_c_reserveCancel"]',function(){
+				var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
+				var url = "C_reserveCancel.do"
+				var query = "reserveNumber="+reserveNumber+"&end_rno="+end_rno
+				
+				$.ajax({
+					
+					type:"GET"
+					,url:url
+					,data:query
+					,success:function(data){
+						
+						$('#resultTable').empty();
+						
+						$('#resultTable').append(data);
+						
+					}
+					,error:function(e){
+						console.log(e.responseText);
+					}
+					
+				});
+				
+			});
+		
+		
 		//후기 글 쓰기 버튼
-		$('[name="btn_write"]').on('click',function(){
+		$(document).on('click','[name="btn_write"]',function(){
 			alert("글쓰기 버튼 클릭")
 			var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
 			$('#rntext').val(reserveNumber)
@@ -196,7 +173,7 @@ $(function(){
 		
 		
 		//후기 작성 완료
-		$('#btn_reviewSubmit').on('click',function(){
+		$(document).on('click','#btn_reviewSubmit',function(){
 			var formData = new FormData()
 			
 			formData.append("reserveNumber", $('#rntext').val())
@@ -215,9 +192,12 @@ $(function(){
 		       	,data:formData
 		        ,processData: false
 		        ,contentType: false
-		        ,success:function(){
+		        ,success:function(data){
 		        	
-		        	$("#myModal").modal("hide");
+		        	$("#myModal").hide();
+					$('#resultTable').empty();
+					$('#resultTable').append(data);
+		        	
 					
 				}
 				,error:function(e){

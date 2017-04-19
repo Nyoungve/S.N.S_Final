@@ -15,11 +15,6 @@
 				<li class="dropdown">
                  	<!-- MyPage버튼 -->
 					<a class="dropdown-toggle Mypage_Main_Open" data-toggle="dropdown" href="#"> MyPage <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a id="Mypage_ReserveBtn"><span class="glyphicon glyphicon-book"></span> 예약현황</a></li>
-						<li><a id="Mypage_UserInfoBtn"><span class="glyphicon glyphicon-cog"></span> 정보수정</a></li>
-						<li><a id="Mypage_ReviewBtn"><span class="glyphicon glyphicon-list-alt"></span> 후기목록</a></li>
-					</ul>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
