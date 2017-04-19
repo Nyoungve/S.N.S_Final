@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <script type="text/javascript">	
+
+alert('12')
+ 
+
+
+
 $(function(){
 	
 
@@ -153,6 +161,7 @@ $(function(){
 						$('#resultTable').html(data);
 						
 					}
+					,beforeSend:check
 					,error:function(e){
 						console.log(e.responseText);
 					}
@@ -166,10 +175,12 @@ $(function(){
 		
 		//후기 글 쓰기 버튼
 		$(document).on('click','[name="btn_write"]',function(){
+			
 			alert("글쓰기 버튼 클릭")
 			var reserveNumber = $(this).parents("form").find('[name="reserveNumber"]').val()
 			$('#rntext').val(reserveNumber)
 			$("#myModal").modal({backdrop: "static"});
+			
 			
 		})
 		
@@ -187,7 +198,7 @@ $(function(){
 			formData.append("ranking", $("input[name=ranking]").val())
 			formData.append("end_rno", end_rno)
 			
-			console.log(formData)
+		
 			
 			var url = "Review_Submit.do"
 			
@@ -201,11 +212,11 @@ $(function(){
 		        ,contentType: false
 		        ,success:function(data){
 		        	
-		        	console.log(data)
+		        	$('#myModal').modal("hide");
 		        	
-				
-		        	
-					
+		        	$('#resultTable').empty();
+		        	$('#resultTable').html(data);
+		
 				}
 				,error:function(e){
 					console.log(e.responseText)
@@ -215,5 +226,8 @@ $(function(){
 		})
 
 
+
 })
+
+
 </script>	

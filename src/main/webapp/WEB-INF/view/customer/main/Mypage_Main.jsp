@@ -26,6 +26,7 @@
     	<div class="container">
 			<div class="col-lg-2 col-sm-2"></div>
 			<div id="jemok" class="col-lg-10 col-sm-10"><h2>마이페이지</h2></div>
+	  		<!-- 결과 테이블 -->
 	  		<div id="resultTable" class="col-lg-10 col-sm-10"></div>
 		</div>
 	</section>
@@ -35,7 +36,10 @@
 	
 	<%@include file="../footer/footer.jsp"%>
 	
+	<!-- 리뷰 모달 -->
+	<%@include file="../body/ReviewModal.jsp" %>	 
 	
+	<!-- 에이작스 -->
 	<%@include file="../ajax/Mypage_Ajax.jsp"%>
 
 </body>
