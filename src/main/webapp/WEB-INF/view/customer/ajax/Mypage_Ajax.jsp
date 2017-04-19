@@ -4,10 +4,14 @@
 
 <script type="text/javascript">	
 
+alert('12')
+ 
+
+
 
 $(function(){
 	
-alert('asgs')
+
 
 		//예약현황
 		$('#Mypage_ReserveBtn').on('click',function() {
@@ -208,11 +212,9 @@ alert('asgs')
 		        ,contentType: false
 		        ,success:function(data){
 		        	
-		        	
 		        	$('#myModal').modal("hide");
-		        	
-		        	
-		        	
+		        	$('#myModal').find('form')[0].reset();
+		        	$('#review_view').html("");
 		        	$('#resultTable').empty();
 		        	$('#resultTable').html(data);
 		
