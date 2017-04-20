@@ -23,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reserve set reviewCheck = '1' where reserveNumber = #{reserveNumber}
 	</update>
 	
+	<update id="c_modifyReview" parameterType="sns.dto.ReviewDTO">
+		update review set comments = #{comments}, ranking = #{ranking}, review_filePath = #{review_filePath} where reserveNumber = #{reserveNumber}
+	</update>
+	
 	<delete id="c_deleteReview" parameterType="String">
 		delete from review where reserveNumber = #{reserveNumber}
 	</delete>

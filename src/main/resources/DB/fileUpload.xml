@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select distinct substr(filepath, instr(filepath,'\', -1,1) +1) as filepath from review_imagesave where reserveNumber = #{reserveNumber}
 	</select>	
 	
+	<update id="review_imageModify" parameterType="sns.dto.ReviewImageDTO">
+		update review_imagesave set originalFilename = #{originalFilename}, filePath = #{filePath}, fileSize = #{fileSize} where reserveNumber = #{reserveNumber}
+	</update>
+	
 	
 	
 	

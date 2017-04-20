@@ -54,7 +54,7 @@ public class C_MyPageController {
 	@RequestMapping("/Mypage_Main.do")
 	public String mypage_main(HttpServletRequest request) {
 		System.out.println("userid : " + request.getSession().getAttribute("userid"));
-		return "customer/main/Mypage_Main";
+		return "customer/main/C_Mypage_Main";
 	}
 	
 	//고객 예약 정보 확인 처리 (테이블 reserve)
@@ -136,14 +136,14 @@ public class C_MyPageController {
 		reviewDTO.setReserve_date(reserveDTO.getReserve_date());
 		reviewDTO.setUserid(userid);
 		
-		String path = reviewDao.upload(reviewDTO);
+		String path = reviewDao.imageUpload(reviewDTO);
 		
 		reviewDTO.setReview_filePath(path);
 		reviewDao.writeReview(reviewDTO);
 		
 		
 		System.out.println(reviewDTO.getRanking());	
-		return "redirect:Mypage_Reserve.do?end_rno=" + reserve_rno;
+		return "redirect:Mypage_Reserve.do?reserve_rno=" + reserve_rno;
 		
 	}
 	
@@ -162,13 +162,20 @@ public class C_MyPageController {
 	}
 	
 	@RequestMapping("/Review_reviewModify.do")
-	public String review_modifySubmit(ReviewDTO reviewDTO) {
+	public String review_modifySubmit(ReviewDTO reviewDTO, String review_rno) {
 		System.out.println("review_modifySubmit");
-		System.out.println(reviewDTO.getReserveNumber());
-		System.out.println(reviewDTO.getComments());
-		System.out.println(reviewDTO.getRanking());
+		System.out.println("코멘트 : "+reviewDTO.getComments());
+		System.out.println("파일 이름 : "+reviewDTO.getReview_image().getOriginalFilename());
+		System.out.println("예약번호 : "+reviewDTO.getReserveNumber());
+		System.out.println("코멘트 : "+reviewDTO.getComments());
+		System.out.println("평점 : "+reviewDTO.getRanking());
 		
-		return "redirect:Mypage_Review.do";
+		String path = reviewDao.imageModify(reviewDTO);
+		
+		reviewDTO.setReview_filePath(path);
+		reviewDao.modifyReview(reviewDTO);
+		
+		return "redirect:Mypage_Review.do?review_rno=" + review_rno;
 	}
 	
 	//고객 후기 삭제를 위한 요청 처리
