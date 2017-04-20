@@ -344,6 +344,9 @@ $(function(){
 			        ,success:function(data){
 			        	
 			        	$('#reviewModal_modify').modal("hide");
+			        	$('.modal-backdrop').hide()
+						$('#resultTable').empty();
+						$('#resultTable').html(data);
 			
 					}
 					,error:function(e){
