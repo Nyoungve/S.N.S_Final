@@ -10,8 +10,15 @@ public class ReviewImageDTO {
 	private long fileSize;
 	private String userid;
 	private Date write_date;
+	private int reserveNumber;
 	
 	
+	public int getReserveNumber() {
+		return reserveNumber;
+	}
+	public void setReserveNumber(int reserveNumber) {
+		this.reserveNumber = reserveNumber;
+	}
 	public String getRestaurant_number() {
 		return restaurant_number;
 	}
