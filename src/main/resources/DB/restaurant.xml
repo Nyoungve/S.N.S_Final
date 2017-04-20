@@ -29,4 +29,10 @@ open="(" separator="," close=")">
 
 
 
+<select id="mainRestaurantList" resultType="sns.dto.RestaurantDTO">
+select * from restaurant
+</select>
+
+
+
 </mapper>

@@ -99,13 +99,24 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 	}
 
 	
-	//업주 로그인 시 업주의 사업장 번호들로부터 레스토랑 정보를 가져오는 메스도
+	//업주 로그인 시 업주의 사업장 번호들로부터 레스토랑 정보를 가져오는 메소드
 	public List<RestaurantDTO> getRestaurants(List<String> ownerRestaurantNumberList){
 		
 		List<RestaurantDTO> restaurants = getSqlSession().selectList("restaurant.getRestaurants", ownerRestaurantNumberList);
 		
 		return restaurants;
 	}
+	
+	//메인 페이지에서 레스토랑들을 보여줄 리스트 가져오는 메소드
+	public List<RestaurantDTO> selectRestaurantList(){
+		
+		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList");
+		
+		return restaurantDtos;
+	}
+	
+	
+	
 	
 	
 	
