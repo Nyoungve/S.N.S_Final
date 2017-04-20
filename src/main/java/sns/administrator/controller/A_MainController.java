@@ -9,7 +9,7 @@ public class A_MainController {
 	
 	@RequestMapping("/adminMain.do")
 	public String adminMain(){
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	
