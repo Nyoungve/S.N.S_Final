@@ -162,8 +162,13 @@ public class C_MyPageController {
 	}
 	
 	@RequestMapping("/Review_reviewModify.do")
-	public void review_modifySubmit(ReviewDTO reviewDTO) {
+	public String review_modifySubmit(ReviewDTO reviewDTO) {
+		System.out.println("review_modifySubmit");
+		System.out.println(reviewDTO.getReserveNumber());
+		System.out.println(reviewDTO.getComments());
+		System.out.println(reviewDTO.getRanking());
 		
+		return "redirect:Mypage_Review.do";
 	}
 	
 	//고객 후기 삭제를 위한 요청 처리

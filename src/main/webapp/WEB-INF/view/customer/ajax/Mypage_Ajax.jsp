@@ -328,10 +328,28 @@ $(function(){
 			formData.append("review_image", $("input[name=review_image]")[0].files[0])
 			formData.append("comments", $("textarea[name=comments]").val());
 			formData.append("ranking", $("input[name=ranking]:checked").val())
+			formData.append("review_rno", review_rno)
+			
 			
 			var url = "Review_reviewModify.do"
 			
+				$.ajax({
+					
+					
+					type:"POST"
+			       	,url:url
+			       	,data:formData
+			        ,processData: false
+			        ,contentType: false
+			        ,success:function(data){
+			        	
+			        	$('#reviewModal_modify').modal("hide");
 			
+					}
+					,error:function(e){
+						console.log(e.responseText)
+					}	
+				})
 			
 		})
 
