@@ -128,7 +128,7 @@ insert into reserve values('0101',to_date('2017-04-15 18:00:00', 'yyyy-mm-dd hh2
 
 commit;
 
-
+--5번째 컬럼 값의 의미
 --1. 승인대기
 --2. 예약완료
 --3. 취소요청

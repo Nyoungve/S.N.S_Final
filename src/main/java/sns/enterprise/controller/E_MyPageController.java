@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -284,7 +287,7 @@ public class E_MyPageController {
 	
 
 	// 노쇼회원 리스트를 보내주는 처리 E_Mypage_NoShowUserList.do
-	@RequestMapping("E_Mypage_NoShowUserList.do")
+	@RequestMapping("/E_Mypage_NoShowUserList.do")
 	public String noShowList(String restaurant_number,Model model){
 		
 		List<ReserveDTO> noShowList =reserveDao.noShowList(restaurant_number);
@@ -296,6 +299,20 @@ public class E_MyPageController {
 		
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
 	}
+	
+	//업주가 노쇼 회원들을 등록하는 처리​
+	@RequestMapping(value="/noShowSave.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String noShowSave(@RequestBody Map<String,Object> params){
+		System.out.println("/noShowSave.do");
+		
+		
+		Map<String,Object> resultMap = new HashMap<>();
+		
+		
+		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
+	}
+	
 	
 	
 	

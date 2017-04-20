@@ -96,7 +96,7 @@ where restaurant_number= #{restaurant_number} and reserve_date = to_date( #{toda
 select restaurant_number, to_date(reserve_date,'yyyy-mm-dd hh24:mi:ss') as reserve_date,userid,deposit,r_state,guestCount,reserveNumber,reviewcheck
 from reserve
 where to_char(reserve_date,'yyyy-mm-dd') =to_char(sysdate,'yyyy-mm-dd') 
-and restaurant_number=#{restaurant_number}
+and restaurant_number=#{restaurant_number} and r_state=2
 
 
 </select>
