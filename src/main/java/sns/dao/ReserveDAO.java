@@ -79,4 +79,22 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		
 	}
 	
+	//업주 마이 페이지에서 노쇼 확정 처리 , 노쇼인 고객은 r_state 6번으로 업데이트
+	
+	public void updateNoShow(String reserveNumber){
+		
+		getSqlSession().update("reserve.updateNoShow", Integer.parseInt(reserveNumber));
+		
+		
+	}
+	
+	//예약 번호에 해당하는 유저 id를 가져오는 처리
+	public String selectId(String reserveNumber){
+		
+		String userid =getSqlSession().selectOne("reserve.selectId", Integer.parseInt(reserveNumber));
+		
+		return userid;
+	}
+	
+	
 }

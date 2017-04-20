@@ -187,10 +187,9 @@ $(function(){
 			formData.append("reserveNumber", $('#rntext').val())
 			formData.append("review_image", $("input[name=review_image]")[0].files[0])
 			formData.append("comments", $("textarea[name=comments]").val());
-			formData.append("ranking", $("input[name=ranking]").val())
+			formData.append("ranking", $("input[name=ranking]:checked").val())
 			formData.append("end_rno", end_rno)
 			
-		
 			
 			var url = "Review_Submit.do"
 			

@@ -101,5 +101,15 @@ and restaurant_number=#{restaurant_number} and r_state=2
 
 </select>
 
+<update id="updateNoShow" parameterType="int">
+
+update reserve set r_state='6'
+where reserveNumber=#{reserveNumber}
+
+</update>
+
+
+
+
 
 </mapper>

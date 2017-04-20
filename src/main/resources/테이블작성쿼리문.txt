@@ -135,21 +135,6 @@ commit;
 --4. 취소완료
 --5. 이용완료
 
--- 7.방문확인         RESERVECHECK
-drop table RESERVECHECK;
-
-create table RESERVECHECK(
-RESTAURANT_NUMBER VARCHAR2(20)
-,USERID VARCHAR2(20)
-,Reserve_Date DATE
-,VisitFix varchar2(4)
-,constraint FK_tbl_rvc_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
-references  restaurant(RESTAURANT_NUMBER)
-,constraint FK_tbl_rvc_userid foreign key(userid)
-references  customer(userid)
-);
-
-
 
 -- 8. 리뷰 review
 
@@ -250,16 +235,10 @@ insert into reserve values('0101',to_date('2017-04-01 18:00:00', 'yyyy-mm-dd hh2
 --1.승인대기
 --2.예약완료
 --3.취소요청
---4.이용완료
---5.취소완료
+--4.취소완료
+--5.이용완료(온 사람)
+--6.노쇼
 
-
--- 7. 방문 확인
-insert into reservecheck values('0101','a','2017-1-1','Y');
-insert into reservecheck values('0202','b','2017-2-1','N');
-insert into reservecheck values('0303','c','2017-1-1','Y');
-insert into reservecheck values('0404','d','2017-1-1','Y');
-commit;
 
 --8. 리뷰 등록
 insert into review values('0101','2017-1-1','a','2017-4-1','정말좋아요','5','c:\after.jpg');

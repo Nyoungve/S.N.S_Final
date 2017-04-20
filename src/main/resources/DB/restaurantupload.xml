@@ -29,7 +29,6 @@ where restaurant_number = #{restaurant_number}
 
 </update>
 
-
 <select id="selectPath" parameterType="string" resultType="sns.dto.RestaurantuploadDTO">
 	
 select distinct substr(m_path, instr(m_path,'\', -1,1) +1) as m_path , substr(d_path1, instr(d_path1,'\', -1,1) +1) as d_path1, substr(mn_path, instr(mn_path,'\', -1,1) +1) as mn_path
