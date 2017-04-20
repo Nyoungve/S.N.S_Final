@@ -348,7 +348,7 @@ public class E_MyPageController {
 			if(jsoValue.equals("n")){ //안 온 사람 확정
 				
 				//reserve 테이블에서 r_state를 6으로 만든다.
-				reserveDao.updateNoShow(jsoKeyName);
+				reserveDao.updateNotComePeople(jsoKeyName);
 				
 				
 				//예약 번호에 해당하는 고객 아이디를 가져온다.
@@ -356,14 +356,19 @@ public class E_MyPageController {
 				
 				
 				//customer 테이블에서 NoShowCount를 1 증가 시킨다.
-				customerDao.updateNoShowPlusone(jsoKeyName);
+				customerDao.updateNoShowPlusone(userid);
+				
+			}else if(jsoValue.equals("y")){ //온 사람 확정
+				
+				//reserve 테이블에서 r_state를 5으로 만든다.
+				reserveDao.updateComePeople(jsoKeyName);
 				
 			}
 			
 			
 			
 			
-		}
+		} //while 문 종료
 		
 		
 		

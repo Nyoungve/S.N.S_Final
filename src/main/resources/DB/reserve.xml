@@ -101,7 +101,7 @@ and restaurant_number=#{restaurant_number} and r_state=2
 
 </select>
 
-<update id="updateNoShow" parameterType="int">
+<update id="updateNotComePeople" parameterType="int">
 
 update reserve set r_state='6'
 where reserveNumber=#{reserveNumber}
@@ -109,7 +109,16 @@ where reserveNumber=#{reserveNumber}
 </update>
 
 
+<select id="selectId" parameterType="int" resultType="string">
+select userid from reserve where reserveNumber = #{reserveNumber}
+</select>
 
 
+<update id="updateComePeople" parameterType="int">
+
+update reserve set r_state='5'
+where reserveNumber=#{reserveNumber}
+
+</update>
 
 </mapper>

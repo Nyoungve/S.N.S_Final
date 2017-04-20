@@ -81,9 +81,9 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	
 	//업주 마이 페이지에서 노쇼 확정 처리 , 노쇼인 고객은 r_state 6번으로 업데이트
 	
-	public void updateNoShow(String reserveNumber){
+	public void updateNotComePeople(String reserveNumber){
 		
-		getSqlSession().update("reserve.updateNoShow", Integer.parseInt(reserveNumber));
+		getSqlSession().update("reserve.updateNotComePeople", Integer.parseInt(reserveNumber));
 		
 		
 	}
@@ -95,6 +95,17 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		
 		return userid;
 	}
+	
+	
+	//업주 마이 페이지에서 노쇼 확정 처리 , 온  고객은 r_state 5번으로 업데이트
+	
+		public void updateComePeople(String reserveNumber){
+			
+			getSqlSession().update("reserve.updateComePeople", Integer.parseInt(reserveNumber));
+			
+			
+		}
+	
 	
 	
 }
