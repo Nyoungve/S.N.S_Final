@@ -65,7 +65,7 @@ public class C_MyPageController {
 		
 		String userid = (String)request.getSession().getAttribute("userid");
 		
-		ModelAndView mav = new ModelAndView("customer/body/Mypage_Reserve");
+		ModelAndView mav = new ModelAndView("customer/body/Mypage/Mypage_Reserve");
 		
 		List<ReserveDTO> list = new ArrayList<ReserveDTO>();
 		list = reserveDao.c_getReserveList(userid, end_rno);
@@ -90,7 +90,7 @@ public class C_MyPageController {
 	public ModelAndView mypage_userinfo(HttpServletRequest request) {
 		String userid = (String)request.getSession().getAttribute("userid");
 		
-		ModelAndView mav = new ModelAndView("customer/body/Mypage_UserInfo");
+		ModelAndView mav = new ModelAndView("customer/body/Mypage/Mypage_UserInfo");
 		
 		CustomerDTO userInfo = new CustomerDTO();
 		userInfo = customerDao.getCustomer(userid);
@@ -103,7 +103,7 @@ public class C_MyPageController {
 	@RequestMapping("/Mypage_Review.do")
 	public ModelAndView mypage_review(HttpServletRequest request) {
 		
-		ModelAndView mav = new ModelAndView("customer/body/Mypage_Review");
+		ModelAndView mav = new ModelAndView("customer/body/Mypage/Mypage_Review");
 		
 		String userid = (String)request.getSession().getAttribute("userid");
 		
