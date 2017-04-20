@@ -1,7 +1,9 @@
 package sns.dao;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -13,8 +15,20 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 	
 	
 		//고객 후기 정보 확인을 위해 review 테이블에서 알려주는 Dao
-		public List<ReviewDTO> getReviewList(String userid) {
-			List<ReviewDTO> reviewDTO = getSqlSession().selectList("review.c_getReview", userid);
+		public List<ReviewDTO> getReviewList(String userid, String review_rno) {
+			
+			Map<String, String> map = new HashMap<>();
+			map.put("userid", userid);
+			map.put("review_rno", review_rno);
+			
+			List<ReviewDTO> reviewDTO = getSqlSession().selectList("review.c_getReviewList", map);
+			return reviewDTO;
+		}
+		
+		public ReviewDTO getReviewInfo(String reserveNumber) {
+			
+			ReviewDTO reviewDTO = getSqlSession().selectOne("review.c_getReviewInfo", reserveNumber);
+			
 			return reviewDTO;
 		}
 		
@@ -36,7 +50,9 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			String name = reviewDTO.getUserid();
 			String ori_name = reviewDTO.getReview_image().getOriginalFilename();
 			
-			String path = "c://Review_image//" + now + "_" + name + "_" + ori_name;
+			// 빛찬 학원 컴퓨터
+			String projectPath = "C:\\Users\\user2\\workspace2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\S.N.S_Final\\img\\";
+			String path = projectPath + now + "_" + name + "_" + ori_name;
 			File new_file = new File(path);
 			System.out.println(new_file);
 			try {
@@ -50,10 +66,12 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			imageDTO.setFileSize(reviewDTO.getReview_image().getSize());
 			imageDTO.setRestaurant_number(reviewDTO.getRestaurant_number());
 			imageDTO.setUserid(reviewDTO.getUserid());
+			imageDTO.setReserveNumber(reviewDTO.getReserveNumber());
 			
 			getSqlSession().insert("upload.review_image", imageDTO);
 			
 			return path;
 		}
+		
 		
 }
