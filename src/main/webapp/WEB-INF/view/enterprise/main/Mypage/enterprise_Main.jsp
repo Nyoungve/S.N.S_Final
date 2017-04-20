@@ -90,8 +90,10 @@ jQuery.browser = {};
 				<!-- 버튼을 클릭하면 나오는 바디 내용 부분 -->
 				<div class="header-content-inner col-md-6">
 
+				<!-- 휴일 선택시 캘린더를 만들어줄 공간 -->
 					<div id="calendar1"></div>
-					<div id="calendar2"></div>
+					
+					<!-- 처음 이미지 로고 -->
 					<div id="divBox"><img alt="Logo" src="img/snslogoTransparency500X500.png" style="width: 100%"></div>
 
 				</div>
