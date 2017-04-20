@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,8 +72,8 @@ public class E_MyPageController {
 	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
 	public String enterpriseForm(String restaurant_number,HttpSession session){
 	
-	
-		session.setAttribute("sessionRestaurant_number", restaurant_number);
+		
+	session.setAttribute("sessionRestaurant_number", restaurant_number);
 		
 		return "enterprise/main/Mypage/enterprise_Main";
 		
@@ -116,14 +117,15 @@ public class E_MyPageController {
 		
 		//타입 블럭을  보내준다.
 		mav.addObject("timeBlock", timeBlock);
-		
 	
 		//등록된 이미지를 보여준다.
 		RestaurantuploadDTO restaurantuploadDTO = restaurantuploadDao.selectImageList(restaurant_number);
 		
 		
+		if(restaurantuploadDTO!=null){
 		//등록된 이미지 경로를 보내준다.
 		mav.addObject("restaurantuploadDTO", restaurantuploadDTO);
+		}
 		
 		
 		return mav;
@@ -148,7 +150,9 @@ public class E_MyPageController {
 	@RequestMapping("/E_insertInfo.do")
 	public ModelAndView insertEnterInfo(RestaurantDTO restaurantDto) {
 		
-	
+		
+		System.out.println(restaurantDto);
+		
 		//레스토랑 정보 입력
 		restaurantDao.updateInfo(restaurantDto);
 		
@@ -157,14 +161,15 @@ public class E_MyPageController {
 				
 		//파일 업로드 처리할 dto에 레스토랑 번호 세팅
 		restaurantuploadDto.setRestaurant_number(restaurantDto.getRestaurant_number());
-				
+		System.out.println(restaurantDto.getRestaurant_number());	
 				
 		//각각의 파일 패스를 담는다.
 		restaurantDao.upload(restaurantDto.getMain_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+		
 		restaurantDao.upload(restaurantDto.getDetail_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+		
 		restaurantDao.upload(restaurantDto.getMenu_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
 			
-		
 		
 		//이미 레스토랑 이미지 파일이 있는지 없는지 확인
 	
@@ -173,13 +178,15 @@ public class E_MyPageController {
 		System.out.println(resultNum);
 		
 		
-		if(resultNum ==1){ //파일 정보가 있었다면 update
+		if(resultNum >=1){ //파일 정보가 있었다면 update
 			
+			System.out.println("파일정보 업로드");
 			restaurantuploadDao.updateInfo(restaurantuploadDto);
 			
 		}else if(resultNum ==0){//파일 정보가 없었으므로 insert
 			
-			//파일정보를 업로드
+			System.out.println("파일 정보 인서트");
+			
 			restaurantuploadDao.insertInfo(restaurantuploadDto);
 	
 		}
@@ -276,6 +283,20 @@ public class E_MyPageController {
 	}
 	
 
+	// 노쇼회원 리스트를 보내주는 처리 E_Mypage_NoShowUserList.do
+	@RequestMapping("E_Mypage_NoShowUserList.do")
+	public String noShowList(String restaurant_number,Model model){
+		
+		List<ReserveDTO> noShowList =reserveDao.noShowList(restaurant_number);
+		
+		//노쇼 리스트 세팅
+		model.addAttribute("noShowList", noShowList);
+		
+		
+		
+		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
+	}
+	
 	
 	
 }

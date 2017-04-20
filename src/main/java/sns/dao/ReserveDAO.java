@@ -71,4 +71,12 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("reserve.c_reserveCancel", reserveNumber);
 	}
 	
+	
+	//업주 마이 페이지에서 노쇼 리스트를 처리하기 위해 reserve 테이블에 접근
+	public List<ReserveDTO> noShowList(String restaurant_number){
+		List<ReserveDTO> noShowList =getSqlSession().selectList("reserve.noShowList", restaurant_number);
+		return noShowList;
+		
+	}
+	
 }

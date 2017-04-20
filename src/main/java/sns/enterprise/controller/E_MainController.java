@@ -48,7 +48,6 @@ public class E_MainController {
 		String userid=ownerDao.searchIdPw(user_id,password);
 		
 			if(userid != null){
-				System.out.println("로그인성공");
 				
 				model.addAttribute("userid", userid);
 				

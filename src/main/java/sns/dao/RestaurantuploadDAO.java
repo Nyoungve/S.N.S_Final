@@ -10,9 +10,13 @@ public class RestaurantuploadDAO extends SqlSessionDaoSupport{
 
 	// 처음에 이미지를 등록하는  처리
 	public void insertInfo(RestaurantuploadDTO restaurantuploadDto){
+		System.out.println("인서트 시작 전");
+		
 		
 		getSqlSession().insert("restaurantupload.insertPath", restaurantuploadDto);
 		
+		
+		System.out.println("인서트 시작 후");
 	}
 	
 	
@@ -28,6 +32,13 @@ public class RestaurantuploadDAO extends SqlSessionDaoSupport{
 	//이미 이미지가 등록되어 있으면 update하는 처리
 	
 	public void updateInfo(RestaurantuploadDTO restaurantuploadDto){
+		
+		System.out.println("파일 업데이트 수행 전");
+		System.out.println(restaurantuploadDto.getRestaurant_number());
+		System.out.println(restaurantuploadDto.getM_path());
+		System.out.println(restaurantuploadDto.getD_path1());
+		
+		System.out.println(restaurantuploadDto.getMn_path());
 		
 		getSqlSession().update("restaurantupload.updatePath", restaurantuploadDto);
 		

@@ -52,19 +52,28 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 	//업주가 레스토랑 정보 수정 요청 시 파일 업로드 처리
 	public void upload(MultipartFile image, String restaurant_number,RestaurantuploadDTO restaurantuploadDto) {
 		
+		//파일 수정 사항이 없는 경우 return 시킨다.
+		if(image.getOriginalFilename().equals("")){
+			System.out.println("파일내용변동사항없음");
+			return;
+		}
+		
 		long now = System.currentTimeMillis();
 		Random r = new Random();
 		int i = r.nextInt(50);
 		String name = restaurant_number + "_" + now + "_" + i;
 		String ori_name = image.getOriginalFilename();
 		//File new_file = new File("f://E_image//" + name + "_" + ori_name);
-		File new_file = new File("C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\" + name + "_" + ori_name);
-		
+		File new_file = new File("C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\" + name + "_" + ori_name);
+		System.out.println(new_file);
+		//김동규 집 컴퓨터 C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\
+		//김동규 노트북  C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\
 		
 		try {
+			
 			//파일을 업로드 처리
 			image.transferTo(new_file);
-			
+			System.out.println("파일 업로드 완료");
 			
 			if(image.getName().equals("main_image")){
 				restaurantuploadDto.setM_path(new_file.getAbsolutePath());

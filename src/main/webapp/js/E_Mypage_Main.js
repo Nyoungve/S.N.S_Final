@@ -60,7 +60,7 @@ $(function() {
 		var url = "E_Mypage_Reserve.do"
 		var query = "restaurant_number="+restaurant_number
 		
-			
+		//예약현황 가져오는 ajax	
 		$.ajax({
 
 			type : "GET",
@@ -84,9 +84,9 @@ $(function() {
 				console.log(e.responseText);
 			}
 
-		})
+		}) //ajax 끝
 
-	})
+	}) //업주 예약 현황 끝
 
 	// 업주 정보수정
 	$(document).on('click', '#E_Mypage_EnterInfoBtn', function() {
@@ -94,6 +94,7 @@ $(function() {
 		var url = "E_Mypage_EnterInfo.do"
 		var query = "restaurant_number="+restaurant_number
 
+		//정보 수정 시 레스토랑 초기 정보를 가져오는 ajax
 		$.ajax({
 
 			type : "POST",
@@ -117,12 +118,45 @@ $(function() {
 				console.log(e.responseText);
 			}
 
-		})
+		})//ajax 끝
+			
+		}) //업주 정보수정 끝
 
-	})
 
-	
-	
+	//노쇼리스트를 눌렀을 때 확정 처리
+		$(document).on('click','#E_Mypage_NoShowUserListBtn',function(){
+			alert('노쇼리스트');
+			var restaurant_number = $('#sessionRestaurant_number').val()
+			
+				var url = "E_Mypage_NoShowUserList.do"
+				var query = "restaurant_number="+restaurant_number
+				
+				$.ajax({
+
+					type : "POST",
+					url : url,
+					data : query,
+					success : function(data) {
+
+						// 기존 데이터를 지워준다.
+						$('#divBox').html("");
+
+						// 기존에 불러온 캘린더가 있으면 없애준다.
+						$("#calendar").datepicker("destroy");
+
+						// 처리된 데이터를 뿌려준다.
+						$('#divBox').append(data);
+
+					}
+
+					,
+					error : function(e) {
+						console.log(e.responseText);
+					}
+
+				})//ajax 종료 
+
+		}) //노쇼 리스트 눌렀을 때 이벤트 종료
 //-------------------------------------------------------------휴일처리--------------------	
 	
 	
@@ -135,7 +169,7 @@ $(function() {
 		$('#divBox').html("");
 		
 		// 달력을 세팅
-		makingCalendar1(defaultDate);
+		makingCalendar(defaultDate);
 
 	})
 
@@ -208,9 +242,9 @@ function noBefore(dateStr) { // date == 모든 날짜
 //============== 함수 정의부분
 
 // 달력 만드는 메소드
-function makingCalendar1(defaultDate) {
+function makingCalendar(defaultDate) {
 
-	$("#calendar1").datepicker(
+	$("#calendar").datepicker(
 					{
 						inline : true,
 						constrainInput : true,
@@ -246,12 +280,12 @@ function makingCalendar1(defaultDate) {
 
 							
 											// 기존 달력을 삭제한다.
-											$("#calendar1").datepicker("destroy");
+											$("#calendar").datepicker("destroy");
 											
 											// 달력 defaultDate 설정
 											defaultDate = data.defaultDate
 														
-											makingCalendar1(defaultDate)
+											makingCalendar(defaultDate)
 
 										} // success 메소드 종료
 										,

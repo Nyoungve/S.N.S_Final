@@ -44,8 +44,8 @@ $(function(){
 		
 
 		$('#restaurant_number').val(restaurant_number);
-		
-		
+		console.log($('#restaurant_number'))
+		console.log($('#formId'))
 		$('#formId').submit();
 	})
 	

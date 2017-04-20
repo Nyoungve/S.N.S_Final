@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-
+ 
 <link rel="stylesheet" type="text/css" href="css/datepicker.css">
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -24,9 +23,6 @@ jQuery.browser = {};
 })();
 </script>
 
-<style type="text/css">
-
-</style>
 
 
 </head>
@@ -39,15 +35,6 @@ jQuery.browser = {};
 
 
 <script type="text/javascript">
-
-$('#cal').datepicker({
-	onSelect: function(value, date) {
-		alert('a1322')
-	   
-		
-	}
-
-});
 
 
 
