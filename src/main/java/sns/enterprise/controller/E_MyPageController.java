@@ -1,13 +1,14 @@
 package sns.enterprise.controller;
 
+import java.io.BufferedReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONObject;
+import sns.dao.CustomerDAO;
 import sns.dao.HolidaysDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
@@ -68,6 +69,13 @@ public class E_MyPageController {
 	
 	public void setRestaurantuploadDao(RestaurantuploadDAO restaurantuploadDao) {
 		this.restaurantuploadDao = restaurantuploadDao;
+	}
+
+	@Autowired
+	private CustomerDAO customerDao;
+	
+	public void setCustomerDao(CustomerDAO customerDao) {
+		this.customerDao = customerDao;
 	}
 
 
@@ -302,12 +310,63 @@ public class E_MyPageController {
 	
 	//업주가 노쇼 회원들을 등록하는 처리​
 	@RequestMapping(value="/noShowSave.do",method=RequestMethod.POST)
-	@ResponseBody
-	public String noShowSave(@RequestBody Map<String,Object> params){
+	public String noShowSave(HttpServletRequest request){
+		
 		System.out.println("/noShowSave.do");
 		
+		//넘어온 json 데이터를 받는 처리
+		StringBuffer json = new StringBuffer();
+		String line=null;
 		
-		Map<String,Object> resultMap = new HashMap<>();
+		try {
+			BufferedReader reader = request.getReader();
+			while((line =reader.readLine()) !=null){
+				json.append(line);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//string 타입을 json 타입으로
+		org.json.JSONObject jso = new org.json.JSONObject(json.toString());
+		
+		
+		Iterator<String> jsoIterator = jso.keys();
+		
+		while(jsoIterator.hasNext()){
+			
+			//jsoKeyName은 reserveNumber
+			String jsoKeyName = jsoIterator.next();
+			System.out.println(jsoKeyName);
+			
+			//jsoValue는 Y,N 상태
+			String jsoValue= (String)jso.get(jsoKeyName);
+			System.out.println(jsoValue);
+			
+			
+			if(jsoValue.equals("n")){ //안 온 사람 확정
+				
+				//reserve 테이블에서 r_state를 6으로 만든다.
+				reserveDao.updateNoShow(jsoKeyName);
+				
+				
+				//예약 번호에 해당하는 고객 아이디를 가져온다.
+				String userid= reserveDao.selectId(jsoKeyName);
+				
+				
+				//customer 테이블에서 NoShowCount를 1 증가 시킨다.
+				customerDao.updateNoShowPlusone(jsoKeyName);
+				
+			}
+			
+			
+			
+			
+		}
+		
+		
+		
 		
 		
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
