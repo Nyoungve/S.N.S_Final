@@ -200,14 +200,15 @@ insert into customer values('a','김동규','1','010-3333-3333','ad@naver,com','
 insert into customer values('b','최빛찬','2','010-3333-3332','ad2@naver,com','0');
 insert into customer values('c','김나영','3','010-3333-3333','ad3@naver,com','0');
 insert into customer values('d','이희성','4','010-3333-3334','ad4@naver,com','0');
+insert into customer values('e','이수진','5','010-3333-3334','ad4@naver,com','0');
 commit;
 
 --2.기업 
-insert into owner values('0101','ea1','김동규','1','010-1111-1111','ea@naver,com');
-insert into owner values('0202','ea2','최빛찬','2','010-1111-1112','ea2@naver,com');
-insert into owner values('0303','ea3','김나영','3','010-1111-1113','ea3@naver,com');
-insert into owner values('0404','ea4','이희성','4','010-1111-1114','ea4@naver,com');
-insert into owner values('0505','ea4','이수진','4','010-1111-1114','ea4@naver,com');
+insert into owner values('0101','a','김동규','1','010-1111-1111','ea@naver,com');
+insert into owner values('0202','b','최빛찬','2','010-1111-1112','ea2@naver,com');
+insert into owner values('0303','c','김나영','3','010-1111-1113','ea3@naver,com');
+insert into owner values('0404','d','이희성','4','010-1111-1114','ea4@naver,com');
+insert into owner values('0505','e','이수진','4','010-1111-1114','ea4@naver,com');
 commit;
 
 --3.레스토랑

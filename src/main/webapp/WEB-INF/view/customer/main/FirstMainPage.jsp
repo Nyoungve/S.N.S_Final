@@ -59,12 +59,12 @@ ${restaurantDtos}
                     <div class="ih-item square effect13 left_to_right">
                     	<a href="#">
                         <div class="img">
-                        <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
+                        <img src="img/${restaurantInfo.m_path}" class="img-responsive" alt="레스토랑메인이미지">
                         </div> <!-- img -->
                         
                         <div class="info">
-				          <h3>레스토랑 명</h3>
-       			          <p>요리 타입</p>
+				          <h3>${restaurantInfo.e_name}</h3>
+       			          <p>${restaurantInfo.type}</p>
 				        </div> <!-- info -->
 				        </a>
 				    </div>  <!-- square -->
