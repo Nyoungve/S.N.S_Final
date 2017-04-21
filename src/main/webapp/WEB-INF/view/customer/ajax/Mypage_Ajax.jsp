@@ -65,12 +65,13 @@ $(function(){
 					
 				}
 			 	,error:function(e){
-				  console.log(e.responseText);
-				 }
+					console.log(e.responseText);
+				}
 				
 			});
 			
 		});
+		
 		
 		//후기목록
 		$('#Mypage_ReviewBtn').on('click',function() {
