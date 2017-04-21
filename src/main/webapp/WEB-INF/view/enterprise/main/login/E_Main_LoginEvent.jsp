@@ -6,12 +6,12 @@
 $(function(){
 
 	//로그인 성공
-	if(${userid !=null}){
+	if( ${userid != null} ){
 		$('#ownerRestaurantList').modal({backdrop: "static"});
 	}
 
 	//로그인 실패
-	if(${loginFail != null}){
+	if( ${loginFail != null} ){
 		$('#loginFail').modal();
 		
 	}
@@ -40,12 +40,12 @@ $(function(){
 	$('.ownerMain').on('click',function(){
 		
 		//사업장 클릭 시 사업장 번호를 input type="hidden"
-		var restaurant_number =$(this).find('.resNum').html()
+		var restaurant_number =$(this).find('.resNum').html();
 		
 
 		$('#restaurant_number').val(restaurant_number);
-		
-		
+		console.log($('#restaurant_number'))
+		console.log($('#formId'))
 		$('#formId').submit();
 	})
 	

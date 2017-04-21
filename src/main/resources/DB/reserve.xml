@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="c_getReserve" parameterType="String" resultType="sns.dto.ReserveDTO">
 		<!-- select * from reserve where userid = #{userid} order by Reserve_Date desc  -->
-		select T.* from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.userid, B.reserve_date, B.r_state, B.reserveNumber, B.reviewCheck from restaurant A, reserve B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserve_date desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{end_rno}
+		select T.* from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.userid, B.reserve_date, B.r_state, B.reserveNumber, B.reviewCheck from restaurant A, reserve B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserve_date desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{reserve_rno}
 	</select>
 	
 	
@@ -25,9 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reserve set r_state = '3' where reserveNumber = #{reserveNumber}
 	</update>
 	
-	<select id="e_getReserve" parameterType="String" resultType="sns.dto.ReserveDTO">
+	<select id="e_getReserve" parameterType="map" resultType="sns.dto.ReserveDTO">
 		<!-- select * from reserve where userid = #{userid} order by Reserve_Date desc  -->
-		select T.* from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.guestCount, B.userid, B.reserve_date, B.R_state from restaurant A, reserve B where A.restaurant_number = B.restaurant_number order by B.reserve_date desc ) V where V.restaurant_number = #{restaurant_number} ) T where T.rno between 1 and #{end_rno}
+		select T.reserve_date, T.r_state, T.userid,T.restaurant_number,T.guestCount,T.E_name from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.guestCount, B.userid, B.reserve_date, B.R_state from restaurant A, reserve B where A.restaurant_number = B.restaurant_number order by B.reserve_date desc ) V where V.restaurant_number = #{restaurant_number} ) T where T.rno between 1 and #{end_rno}
 	</select>
 	
 	<update id="e_reserveOk" parameterType="sns.dto.ReserveDTO">
@@ -91,5 +91,34 @@ from reserve
 where restaurant_number= #{restaurant_number} and reserve_date = to_date( #{today} ||'22:00:00','YYYY-MM-DD hh24:mi:ss')
 )	
 </select>
+
+<select id="noShowList" parameterType="string" resultType="sns.dto.ReserveDTO">
+select restaurant_number, to_date(reserve_date,'yyyy-mm-dd hh24:mi:ss') as reserve_date,userid,deposit,r_state,guestCount,reserveNumber,reviewcheck
+from reserve
+where to_char(reserve_date,'yyyy-mm-dd') =to_char(sysdate,'yyyy-mm-dd') 
+and restaurant_number=#{restaurant_number} and r_state=2
+
+
+</select>
+
+<update id="updateNotComePeople" parameterType="int">
+
+update reserve set r_state='6'
+where reserveNumber=#{reserveNumber}
+
+</update>
+
+
+<select id="selectId" parameterType="int" resultType="string">
+select userid from reserve where reserveNumber = #{reserveNumber}
+</select>
+
+
+<update id="updateComePeople" parameterType="int">
+
+update reserve set r_state='5'
+where reserveNumber=#{reserveNumber}
+
+</update>
 
 </mapper>

@@ -3,11 +3,9 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-<meta http-equiv="refresh" content="0; url=ownerLoginMain.do"></meta>
+<meta http-equiv="refresh" content="0; url=adminMain.do"></meta>
 </head>
 <body>
-
-
 </body>
 </html>
     

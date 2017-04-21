@@ -14,7 +14,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
 			if(request.getSession().getAttribute("sessionUserid") == null){
 				//로그인 페이지로 redirect 
 				response.sendRedirect("requestFirstMain.do");
-				return false; 
+				return false;
 			}
 		}catch(Exception e){
 			e.printStackTrace();

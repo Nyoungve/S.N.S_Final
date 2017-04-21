@@ -39,6 +39,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!--bootstrap 설정 끝-->
 
+<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
+<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 	
+
+
 <!-- msie 에러 처리 -->
 <script type="text/javascript">
 jQuery.browser = {};
@@ -53,25 +57,24 @@ jQuery.browser = {};
 </script>
 
 
-<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
-<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 
-
 
 <style type="text/css">
 .Highlighted a {
 	background-color: red !important;
 	background-image: none !important;
 	color: White !important;
-	font-weight: bold !important;
-	font-size: 12px;
 }
 </style>
+
+
+
 </head>
 
 <!-- body 시작 -->
 <body id="page-top">
 
 <input type="hidden" id="sessionRestaurant_number" value="${sessionRestaurant_number}">
+	
 	<!-- 메뉴 -->
 	<%@include file="menu.jsp"%>
 
@@ -79,27 +82,26 @@ jQuery.browser = {};
 	<br />
 	<br />
 	<!-- 헤더 시작 -->
-	<header class="col-md-12" style="border: 2px solid #10f0a0; height: 100%; padding-bottom: 30px">
+	<header class="col-md-12" style="border: 2px solid #10f0a0; height: 100%; width:100%; padding-bottom: 30px">
 		<div class="container-fluid">
 			<div class="header-content">
 
-				<!-- 옆에 버튼들 -->
-				<aside class="header-content-inner col-md-2">
-					<div style="height: 50px"></div>
- 						
-				
-				</aside>
 				<!-- 여백 -->
-				<div class="header-content-inner col-md-1"></div>
+				<aside class="header-content-inner col-md-3"></aside>
+			
 
 				<!-- 버튼을 클릭하면 나오는 바디 내용 부분 -->
 				<div class="header-content-inner col-md-6">
 
+				<!-- 휴일 선택시 캘린더를 만들어줄 공간 -->
 					<div id="calendar"></div>
-					<div id="testCal"></div>
-					<div id="divBox"><img alt="Logo" src="img/snslogoTransparency500X500.png"></div>
+					
+					<!-- 처음 이미지 로고 -->
+					<div id="divBox"><img alt="Logo" src="img/snslogoTransparency500X500.png" style="width: 100%"></div>
 
 				</div>
+				
+				
 				<!-- 여백 -->
 				<div class="header-content-inner col-md-3"></div>
 			</div>
@@ -118,12 +120,9 @@ jQuery.browser = {};
 	</div>
 	<!-- 로딩용 이미지  끝-->
 
-<form id="redirectForm" action="ownerMain.do" method="post">
-<input type="hidden" name="restaurant_number" value="${sessionRestaurant_number}"> 
-</form>
-
-
 </body>
+
+
 
 
 </html>

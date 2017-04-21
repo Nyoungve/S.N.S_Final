@@ -80,6 +80,15 @@
     	<artifactId>json-lib-ext-spring</artifactId>
     	<version>1.0.2</version>
 	</dependency>
+   
+   
+    <dependency>
+	    <groupId>org.json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>20140107</version>
+	</dependency>
+
+
     
     <!-- 파일 업로드용 -->
   	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
@@ -90,11 +99,13 @@
 	</dependency>
    
     <!-- 이메일인증 -->
+	<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 	<dependency>
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
-	    <version>1.4</version>
+	    <version>1.4.7</version>
 	</dependency>
+
 	
     <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 	<dependency>

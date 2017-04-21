@@ -43,7 +43,7 @@ public class A_MyPageController {
 		
 		model.addAttribute("customerDTO", customerDTO);
 				
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	
@@ -55,14 +55,14 @@ public class A_MyPageController {
 		model.addAttribute("blackList", blackList);
 		
 		
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	@RequestMapping("/noShowCount.do")
 	public String noShowCount(@RequestParam("id")String id){
 		customerDao.noShowCountUpdate(id);
 		
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	@RequestMapping("/insertShop.do")
@@ -80,15 +80,9 @@ public class A_MyPageController {
 			
 		}
 		
-		Object[] obarr = new Object[10];
-		
-		
-		
-		
-		
 		
 		model.addAttribute("insertOk", "ok");
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 		
 	}
 

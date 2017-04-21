@@ -1,16 +1,21 @@
 package sns.customer.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sns.dao.C_LoginDAO;
+import sns.dao.RestaurantDAO;
 import sns.dto.CustomerDTO;
+import sns.dto.RestaurantDTO;
 
 @Controller
 public class C_LoginController {
@@ -22,11 +27,40 @@ public class C_LoginController {
 		this.c_LoginDao = c_LoginDao;
 	}
 	
+	@Autowired
+	private RestaurantDAO restaurantDao;
+	
+	
+	public void setRestaurantDao(RestaurantDAO restaurantDao) {
+		this.restaurantDao = restaurantDao;
+	}
+
 	//첫번째 메인페이지로 이동
 	@RequestMapping(value="/main.do")
-	public String main(){
+	public String main(HttpServletRequest request,Model model){
 		System.out.println("메인페이지로이동!");
-		return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
+		
+		//메인 페이지에서 보여줄 레스토랑 정보를 보내준다.
+		
+		List<RestaurantDTO> restaurantDtos = restaurantDao.selectRestaurantList();
+		
+		model.addAttribute("restaurantDtos", restaurantDtos);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//세션값여부에따라 아이디값을 주어 다르게함.
+		if(request.getSession(true).getAttribute("userid")==null){
+			return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
+		}
+		else{
+			return "customer/main/C_MainPage";//C_MainPage.jsp로 요청
+		}
 	}
 	
 	//고객 로그인페이지로 이동
@@ -53,8 +87,11 @@ public class C_LoginController {
 		try {
 			if(password.equals(customerDTO.getPassword())){
 				request.getSession().setAttribute("sessionUserid",true); //userid 값으로 키 값을 준다.
-				mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
-				mav.addObject("msg","success");//메시지 띄워주기
+				if(userid!=null){
+					request.getSession().setAttribute("userid",userid);
+					mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.
+					mav.addObject("msg","success");//메시지 띄워주기
+				}
 			}
 			
 			if(!password.equals(customerDTO.getPassword())){

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	
 		  		<table class="table">
 					<thead>
@@ -24,17 +25,18 @@
 								<td>${reviewList.e_name}</td>
 								<td>${reviewList.comments}</td>
 								<td>
-									
-									<input type="button" id="btn_modify" class="btn btn-info btn-sm" value="Modify">
-									
+									<button name="btn_reviewModify" class="btn btn-info btn-sm" data-Num="${reviewList.reserveNumber}">
+										Modify
+									</button>
 								</td>
-								
-								
 								<td>
-									<input type="button" id="btn_delete" class="btn btn-info btn-sm" value="Delete" OnClick="window.location='/test/Review_Delete.do?comments=${reviewList.comments}&&userid=${reviewList.userid}&&write_date=${write_date}'">
+									<button name="btn_reviewDelete" class="btn btn-info btn-sm" data-Num="${reviewList.reserveNumber}">
+										Delete
+									</button>
 								</td>
 							</tr>
 						</c:forEach>
 				    </tbody>
 			 	</table>
-			 	
+			 	<input type="button" id="btn_reviewMore" class="btn btn-info btn-sm" value="더 보기">
+			 	<div id="modifyModal"></div>

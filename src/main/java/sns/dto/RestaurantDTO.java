@@ -19,13 +19,18 @@ public class RestaurantDTO {
 	private MultipartFile detail_image;
 	private MultipartFile menu_image;
 	private String zipcode;
+	private String m_path;
 	
 	
 	
 	
 	
-	
-	
+	public String getM_path() {
+		return m_path;
+	}
+	public void setM_path(String m_path) {
+		this.m_path = m_path;
+	}
 	public String getZipcode() {
 		return zipcode;
 	}

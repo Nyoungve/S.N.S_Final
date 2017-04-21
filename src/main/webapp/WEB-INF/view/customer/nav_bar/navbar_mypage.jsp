@@ -24,7 +24,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 			<li>
-			<span style="font-size:20px;background-color:white;"><b>${loginForm.userid}</b>님 환영합니다.</span>
+			<span style="font-size:20px;background-color:white;"><b>${userid}</b>님 환영합니다.</span>
             </li>
             <li>
                     <!-- Logout버튼 --> 

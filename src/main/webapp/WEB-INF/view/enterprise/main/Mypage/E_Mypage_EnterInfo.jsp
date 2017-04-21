@@ -139,10 +139,11 @@
 				<div class="controls">
 					<input type="file" id="main_image" name="main_image" class="btn btn-default form-control-file" onclick="imageViewer('main_image','main_image_view')">
 				</div>
-				<div id="main_image_view"></div>
+				<div id="main_image_view">
+				<img src="img/${restaurantuploadDTO.m_path}" class="img-rounded" width="300" height="200" alt="레스토랑 메인 이미지"/>
+				</div>
 				
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.m_path}"/>
 				${restaurantuploadDTO.m_path}
 		</div>
 		</div>
@@ -152,10 +153,12 @@
 				<div class="controls">
 					<input type="file"  id="detail_image" name="detail_image"  class="btn btn-default form-control-file" onclick="imageViewer('detail_image','detail_image_view')">
 				</div>
-				<div id="detail_image_view"></div>
+				<div id="detail_image_view">
+				<img src="img/${restaurantuploadDTO.d_path1}" class="img-rounded" width="300" height="200" alt="레스토랑 상세 이미지"/>
+				</div>
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.d_path1}"/>
-				${restaurantuploadDTO.d_path1}
+				
+			${restaurantuploadDTO.d_path1}
 		</div>
 		</div>
 		<div class="content">
@@ -165,9 +168,11 @@
 					<input type="file"  id="menu_image" name="menu_image" class="btn btn-default form-control-file" onclick="imageViewer('menu_image','menu_image_view')">
 				</div>
 				
-				<div id="menu_image_view"></div>
+				<div id="menu_image_view">
+				<img src="img/${restaurantuploadDTO.mn_path}" class="img-rounded" width="300" height="200" alt="레스토랑 메뉴 이미지"/>
+				</div>
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.mn_path}"/>
+				
 				${restaurantuploadDTO.mn_path}
 				
 			<div class="content" style="margin-top: 20px; text-align: right;">
@@ -177,4 +182,4 @@
 		</div>
 		</div>
 		</section>
-	</form:form>	
+	</form:form>		
