@@ -26,13 +26,9 @@ public class C_JoinController {
 
 	@RequestMapping(value="/join.do", method =RequestMethod.GET)
 	public String joinForm(){
-		System.out.println("고객로그인 모달폼 get으로요청");
+		System.out.println("고객 회원가입 모달폼 get으로요청");
 		return "customer/body/modal_join"; //modal_join.jsp로 넘겨준다.
 	}
-	
-	
-	
-	
 	
 	//아이디중복검사
 	@RequestMapping(value="/idCheck.do",method=RequestMethod.POST, produces ="text/plain;charset=UTF-8")
@@ -46,13 +42,6 @@ public class C_JoinController {
 		jso.put("customerDTO", customerDTO.getUserid()); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
 		System.out.println("입력받은userid: "+userid+" , DB userid: "+ customerDTO.getUserid());
 		
-		/*if(userid.equals(customerInfoDto.getUserid())){ //DB의 userid와 입력받은 userid가 같을경우
-			System.out.println("입력받은userid: "+userid+" , DB userid: "+ customerInfoDto.getUserid());
-			System.out.println("존재하는 아이디입니다. 다른 아이디를 사용해 주세요.");
-		}else if(!userid.equals(customerInfoDto.getUserid())){
-			System.out.println("사용가능한 아이디입니다.");
-		}*/
-		
 		mav.setViewName("customer/body/modal_join");//joinForm.jsp로 이동 
 		return jso.toString();
 	}
@@ -64,9 +53,10 @@ public class C_JoinController {
 		
 		int resultNum = c_JoinDAO.joinCustomer(customerDTO);
 		mav.addObject("joinForm", resultNum);
+		mav.addObject("joinMsg","joinSuccess");
 		if(resultNum ==1){
 			System.out.println("DB저장성공!");
-			mav.setViewName("customer/body/joinSuccess"); //메인페이지로 다시 이동.
+			mav.setViewName("forward:/main.do"); //메인페이지로 다시 이동. customer/body/joinSuccess
 		}
 		return mav;//joinSuccess 페이지로 이동
 	}
