@@ -12,12 +12,8 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-//빈칸검사?
-		
 $(document).ready(function(){	
-	
  	$("#emailcertification").hide();
-
 	$("#btnJoin").click(function(){
         // 태크.val() : 태그에 입력된 값
         // 태크.val("값") : 태그의 값을 변경 
@@ -51,7 +47,7 @@ $(document).ready(function(){
             $(this).focus(); // 입력포커스 이동
             return false; // 함수 종료
         }
-        if($("#mailCheck").val() != "메일인증완료!!"){
+        if($("#emailCheck").text() != "이메일 인증이 완료되었습니다."){
             alert("이메일 인증이 완료되지 않았습니다.");
             $("#userEmail").focus(); // 입력포커스 이동
             return false; // 함수 종료
@@ -69,7 +65,6 @@ $(document).ready(function(){
 		//alert("클릭!")
 		 var userId = $("#userid").val();
 		 var re_id = /^[a-z0-9_-]{3,16}$/; // 아이디 유효성 검사 정규화 표현식
-		 
 		 if(userId == ""){
 				$("#idCheck").css("font-size", "14px");
 				$("#idCheck").css("color", "#ff1a1a");
@@ -103,7 +98,6 @@ $(document).ready(function(){
 		    			$("#idCheck").css("font-weight", "900");
 		    			//span에 값넣기
 		    			$("#idCheck").text("이미 사용중인 아이디입니다!!>..<");
-		    			
 		    			return false;
 		    		}else{
 		    			//이쪽으로 안넘어오고 바로 에러 페이지로 간당...ㅠㅠ
@@ -118,7 +112,6 @@ $(document).ready(function(){
 		    			$("#idCheck").css("font-weight", "900");
 		    			//span에 값넣기
 		    			$("#idCheck").text("사용가능한 아이디 입니다!(^*^)☆");
-		    			
 		    			return false; 
 		    		}
 		    	}
@@ -231,8 +224,6 @@ $(document).ready(function(){
 			return false;
 		} 
 		//GET방식으로 emailAuth.do로 메일보내고 인증번호를 받아온다.
-
-		
 		console.log(userEmail);
 		 $.ajax({
 			type:"POST"
@@ -246,8 +237,6 @@ $(document).ready(function(){
 	    		$("#emailcertification").show();
 				$("#emailCheck").text("");
   				var AuthNum = data.authNum;
- 				alert('AuthNum: ' + data.authNum);
- 				
  				$("#authNumber").on('blur',function(){
  					if($("#authNumber").val() == 1){
  							$("#emailCheck").css("font-size", "14px");
@@ -257,7 +246,6 @@ $(document).ready(function(){
  							$(this).val("");
  							$(this).focus();
  						} else if($("#authNumber").val() != data.authNum){
- 							
  							$("#emailCheck").css("font-size", "14px");
  							$("#emailCheck").css("color", "#ff1a1a");
  							$("#emailCheck").css("font-weight", "900");
@@ -269,24 +257,14 @@ $(document).ready(function(){
  							$("#emailCheck").css("color", "#006600");
  							$("#emailCheck").css("font-weight", "900");
  							$("#emailCheck").text("이메일 인증이 완료되었습니다.");
- 							$("#mailCheck").text("메일인증완료!!");
  						}
- 					
- 					
  				});
- 			
 	    	} 
 	    	,error:function(data){
 	    		alert("데이터보내기실패...ㅠㅠ");
 	    	}
 		 });
-
 	}); 
-	
-
-	
-
-	
  });
  
 </script>
@@ -367,20 +345,12 @@ $(document).ready(function(){
 				<div class="form-group">
 						<span id="emailCheck"></span>
 				</div>
-				
+								
 				<div class="form-group">
-						<label for="mailCheck">☆메일인증여부☆</label><br>
-						<input type="text" name="mailCheck" id="mailCheck"/> <!-- disabled: 텍스트바 입력 금지설정 -->
-				</div>
-				
-				<div class="form-group">
-						<input type="button" class="btn btn-lg btn-primary btn-block" value="회원가입" id="btnJoin"/> <!--  data-toggle="modal" data-target="#모달창id" data-backdrop="false" -->
+						<input type="button" class="btn btn-lg btn-primary btn-block" value="회원가입" id="btnJoin"/>
 				</div>
 			
 			</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 </body>
 </html>

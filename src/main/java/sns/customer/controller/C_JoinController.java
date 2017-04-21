@@ -53,7 +53,6 @@ public class C_JoinController {
 		
 		int resultNum = c_JoinDAO.joinCustomer(customerDTO);
 		mav.addObject("joinForm", resultNum);
-		mav.addObject("joinMsg","joinSuccess");
 		if(resultNum ==1){
 			System.out.println("DB저장성공!");
 			mav.setViewName("forward:/main.do"); //메인페이지로 다시 이동. customer/body/joinSuccess
