@@ -20,6 +20,7 @@
 <!--// jQuery UI CSS파일 -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <link rel="stylesheet" href="css/datepicker.css">
+<link rel="stylesheet" href="css/normalize.css">
 
 <!--// jQuery 기본 js파일-->
 <script src="vendor/jquery/jquery.min.js"></script>
