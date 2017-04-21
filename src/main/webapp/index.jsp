@@ -48,8 +48,8 @@
 	</div>
 	</div>
 	</a>
-	<script>
 	
-	</script>
+	
+	
 </body>
 </html>

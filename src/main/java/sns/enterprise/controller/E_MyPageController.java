@@ -79,13 +79,15 @@ public class E_MyPageController {
 	}
 
 
-	//업주 마이 페이지
+	//업주가 로그인에 성공했고 관리할 레스토랑을 클릭한 상태의 마이 페이지
 	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
 	public String enterpriseForm(String restaurant_number,HttpSession session){
 	
-		
+	
+	//세션에 설정	
 	session.setAttribute("sessionRestaurant_number", restaurant_number);
-		
+	
+	
 		return "enterprise/main/Mypage/enterprise_Main";
 		
 	}
@@ -94,8 +96,6 @@ public class E_MyPageController {
 	//업주가 예약현황을 보는 것.
 	@RequestMapping("/E_Mypage_Reserve.do")
 	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="20") String end_rno,HttpSession session) {
-		
-		
 		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
@@ -160,7 +160,6 @@ public class E_MyPageController {
 	//업주 회원정보 수정정보 insert처리
 	@RequestMapping("/E_insertInfo.do")
 	public ModelAndView insertEnterInfo(RestaurantDTO restaurantDto) {
-		
 		
 		System.out.println(restaurantDto);
 		
@@ -369,15 +368,20 @@ public class E_MyPageController {
 			
 			
 		} //while 문 종료
-		
-		
-		
-		
-		
+
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
 	}
 	
 	
+	
+	//로그아웃
+	@RequestMapping("/ownerlogout.do")
+	public String logout(HttpSession session){
+		//세션 삭제
+		session.invalidate();
+		
+		return "redirect:ownerLoginMain.do";
+	}
 	
 	
 }

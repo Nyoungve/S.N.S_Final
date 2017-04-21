@@ -2,6 +2,8 @@ package sns.enterprise.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,13 +43,17 @@ public class E_MainController {
 	
 	//업주 로그인 요청 처리
 	@RequestMapping("/ownerLogin.do")
-	public String loginlogic(@RequestParam("user_id")String user_id,@RequestParam("password")String password,Model model){
+	public String loginlogic(@RequestParam("user_id")String user_id,@RequestParam("password")String password,Model model
+								,HttpSession session){
 		
 			
 		//디비에서 아이디와 패스워드에 해당하는게 있는지 확인
 		String userid=ownerDao.searchIdPw(user_id,password);
 		
 			if(userid != null){
+				
+				//세션에 아이디 저장
+				session.setAttribute("sessionUserid", userid);
 				
 				model.addAttribute("userid", userid);
 				
@@ -59,8 +65,6 @@ public class E_MainController {
 				
 				//모델에 업주의 레스토랑들 dto를 보낸다.
 				model.addAttribute("restaurants", restaurants);
-				
-					
 				
 			}else{
 				

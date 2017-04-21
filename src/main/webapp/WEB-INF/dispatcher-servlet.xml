@@ -77,6 +77,11 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 
+
+	<bean id="c_joinDao" class="sns.dao.C_JoinDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
 	
 <!-- 예외처리 페이지 -->	
 <bean
