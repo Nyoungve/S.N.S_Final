@@ -7,9 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="restaurantupload">
 
 <insert id="insertPath" parameterType="sns.dto.RestaurantuploadDTO">
-
 insert into restaurantupload values (#{restaurant_number},#{m_path},#{d_path1},#{mn_path})
-
 </insert>
 
 <select id="searchNumber" parameterType="string" resultType="int"> 
@@ -20,9 +18,9 @@ select count(*) from  restaurantupload where restaurant_number=#{restaurant_numb
 
 update restaurantupload 
 <set> 
-<if test="m_path != null">m_path = #{m_path} ,</if>
-<if test="d_path1 != null">d_path1 = #{d_path1} ,</if>
-<if test="mn_path != null">mn_path  = #{mn_path}</if>
+	<if test="m_path != null">m_path = #{m_path} ,</if>
+	<if test="d_path1 != null">d_path1 = #{d_path1} ,</if>
+	<if test="mn_path != null">mn_path  = #{mn_path}</if>
 </set>
 where restaurant_number = #{restaurant_number}
 

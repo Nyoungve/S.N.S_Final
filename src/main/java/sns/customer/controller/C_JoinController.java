@@ -39,8 +39,13 @@ public class C_JoinController {
 		response.setContentType("text/html; charset=UTF-8");
 		CustomerDTO customerDTO = c_JoinDAO.idCheck(userid);
 		JSONObject jso = new JSONObject();
-		jso.put("customerDTO", customerDTO.getUserid()); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
-		System.out.println("입력받은userid: "+userid+" , DB userid: "+ customerDTO.getUserid());
+		try{
+			jso.put("customerDTO", customerDTO.getUserid()); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
+		}catch(NullPointerException e){
+			System.out.println(e);
+		}
+		
+		//System.out.println("입력받은userid: "+userid+" , DB userid: "+ customerDTO.getUserid());
 		
 		/*if(userid.equals(customerInfoDto.getUserid())){ //DB의 userid와 입력받은 userid가 같을경우
 			System.out.println("입력받은userid: "+userid+" , DB userid: "+ customerInfoDto.getUserid());

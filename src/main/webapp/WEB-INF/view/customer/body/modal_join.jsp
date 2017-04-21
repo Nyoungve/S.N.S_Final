@@ -93,9 +93,8 @@ $(document).ready(function(){
 		    		console.log(data.customerDTO);
 		  			console.log(userId);
 		    		//alert("데이터보내기 성공!");
-		    		if(data.customerDTO){ //DB에서 넘어온 데이터가 입력폼에 입력받은 데이터와 같다면 
+		    		if(data.customerDTO!=null){ //DB에서 넘어온 데이터가 입력폼에 입력받은 데이터와 같다면 
 		    			//alert("이미 사용중인 아이디입니다!! >_<!! ");
-		    			
 		    			//span에 값넣기
 		    			$("#idCheck").text("이미 사용중인 아이디입니다!!>..<");
 		    			
@@ -103,6 +102,7 @@ $(document).ready(function(){
 		    		}else{
 		    			//이쪽으로 안넘어오고 바로 에러 페이지로 간당...ㅠㅠ
 		    			//alert("사용가능한 아이디입니다~^^*")
+		    			$("#idCheck").text("사용가능한 아이디 입니다!(^*^)☆");
 		    			return false;
 		    		}
 		    	},
@@ -111,8 +111,7 @@ $(document).ready(function(){
 		    			//alert("사용가능한 아이디 입니다!(^*^)☆")
 		    			
 		    			//span에 값넣기
-		    			$("#idCheck").text("사용가능한 아이디 입니다!(^*^)☆");
-		    			
+		    			//$("#idCheck").text("사용가능한 아이디 입니다!(^*^)☆");
 		    			return false; 
 		    		}
 		    	}

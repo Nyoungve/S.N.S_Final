@@ -82,9 +82,6 @@ public class E_MyPageController {
 	//업주가 예약현황을 보는 것.
 	@RequestMapping("/E_Mypage_Reserve.do")
 	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="20") String end_rno,HttpSession session) {
-		
-		
-		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
@@ -147,8 +144,6 @@ public class E_MyPageController {
 	//업주 회원정보 수정정보 insert처리
 	@RequestMapping("/E_insertInfo.do")
 	public ModelAndView insertEnterInfo(RestaurantDTO restaurantDto) {
-		
-	
 		//레스토랑 정보 입력
 		restaurantDao.updateInfo(restaurantDto);
 		
@@ -164,24 +159,15 @@ public class E_MyPageController {
 		restaurantDao.upload(restaurantDto.getDetail_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
 		restaurantDao.upload(restaurantDto.getMenu_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
 			
-		
-		
 		//이미 레스토랑 이미지 파일이 있는지 없는지 확인
-	
 		int resultNum = restaurantuploadDao.searchNumber(restaurantDto.getRestaurant_number());
-		
 		System.out.println(resultNum);
 		
-		
 		if(resultNum ==1){ //파일 정보가 있었다면 update
-			
 			restaurantuploadDao.updateInfo(restaurantuploadDto);
-			
 		}else if(resultNum ==0){//파일 정보가 없었으므로 insert
-			
 			//파일정보를 업로드
 			restaurantuploadDao.insertInfo(restaurantuploadDto);
-	
 		}
 		
 		

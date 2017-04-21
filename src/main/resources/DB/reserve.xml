@@ -9,9 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- select * from reserve where userid = #{userid} order by Reserve_Date desc  -->
 		select T.* from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.userid, B.reserve_date, B.r_state, B.reserveNumber, B.reviewCheck from restaurant A, reserve B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserve_date desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{end_rno}
 	</select>
-	
-	
-	
+
 	<!-- 리뷰쓰기위해 예약번호로 사업자등록번호와 예약날짜 가져오기 -->
 	<select id="c_getNum_Date" parameterType="Integer" resultType="sns.dto.ReserveDTO">
 		select restaurant_number, reserve_date from reserve where reserveNumber = #{reserveNumber}

@@ -28,7 +28,6 @@
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 <!-- Dao 등록 -->
-
 	<!-- 회원가입처리 DAO -->
 	<bean id="c_JoinDAO" class="sns.dao.C_JoinDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>

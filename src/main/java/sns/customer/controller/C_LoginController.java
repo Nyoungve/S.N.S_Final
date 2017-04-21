@@ -42,7 +42,6 @@ public class C_LoginController {
 		return "customer/body/modal_login"; //loginForm.jsp로 넘겨준다
 	}
 	
-	
 	//고객 로그인 체크
 	@RequestMapping(value=("/login.do"),method= RequestMethod.POST)
 	public ModelAndView loginCheck(HttpServletRequest request, @RequestParam("userid") String userid ,@RequestParam("password") String password , ModelAndView mav){
@@ -52,9 +51,10 @@ public class C_LoginController {
 		System.out.println(password);
 		
 		CustomerDTO customerDTO = c_LoginDao.selectIdPass(userid);
-		
+		System.out.println(customerDTO);
 		mav.addObject("loginForm",customerDTO); //DB에 저장된 값을 뷰페이지에 넘겨준다.
-		System.out.println("파라미터유저아이디: "+userid+"디비유저아이디: "+ customerDTO.getUserid()+"디비유저비번: "+customerDTO.getPassword());		
+		//System.out.println("파라미터유저아이디: "+userid+"디비유저아이디: "+ customerDTO.getUserid()+"디비유저비번: "+customerDTO.getPassword());		
+		
 		//로그인 성공시
 		try {
 			if(password.equals(customerDTO.getPassword())){
@@ -71,10 +71,9 @@ public class C_LoginController {
 				mav.addObject("msg","PwFailure");
 			}
 			
-		} catch (NullPointerException e) {
+		}catch (NullPointerException e) {
 			mav.setViewName("customer/main/FirstMainPage");//로그인 실패 시 다시 로그인 창을 띄워준다. 
 			mav.addObject("msg","IdFailure");//로그인 실패 메시지
-			
 		}	
 		return mav;
 	}
@@ -106,4 +105,5 @@ public class C_LoginController {
 		System.out.println("레스토랑세션값있음!");	
 		return mav; 
 	}
+	
 }
