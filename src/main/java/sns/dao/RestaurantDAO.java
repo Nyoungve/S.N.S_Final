@@ -52,19 +52,36 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 	//업주가 레스토랑 정보 수정 요청 시 파일 업로드 처리
 	public void upload(MultipartFile image, String restaurant_number,RestaurantuploadDTO restaurantuploadDto) {
 		
+		//파일 수정 사항이 없는 경우 return 시킨다.
+		if(image.getOriginalFilename().equals("")){
+			System.out.println("파일내용변동사항없음");
+			return;
+		}
+		
 		long now = System.currentTimeMillis();
 		Random r = new Random();
 		int i = r.nextInt(50);
 		String name = restaurant_number + "_" + now + "_" + i;
 		String ori_name = image.getOriginalFilename();
 		//File new_file = new File("f://E_image//" + name + "_" + ori_name);
-		File new_file = new File("C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\" + name + "_" + ori_name);
 		
+		//동규 노트북
+		String donggyuNotebook="C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
+		
+		//동규 집컴터
+		String donggyuDesktop ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\";
+
+		//동규 학원
+		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
+		
+		File new_file = new File(donggyuNotebook+name+"_"+ori_name);
+		System.out.println(new_file);
 		
 		try {
+			
 			//파일을 업로드 처리
 			image.transferTo(new_file);
-			
+			System.out.println("파일 업로드 완료");
 			
 			if(image.getName().equals("main_image")){
 				restaurantuploadDto.setM_path(new_file.getAbsolutePath());
@@ -89,13 +106,29 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 	}
 
 	
-	//업주 로그인 시 업주의 사업장 번호들로부터 레스토랑 정보를 가져오는 메스도
+	//업주 로그인 시 업주의 사업장 번호들로부터 레스토랑 정보를 가져오는 메소드
 	public List<RestaurantDTO> getRestaurants(List<String> ownerRestaurantNumberList){
 		
 		List<RestaurantDTO> restaurants = getSqlSession().selectList("restaurant.getRestaurants", ownerRestaurantNumberList);
 		
 		return restaurants;
 	}
+	
+	//메인 페이지에서 레스토랑들을 보여줄 리스트 가져오는 메소드
+	public List<RestaurantDTO> selectRestaurantList(){
+		
+		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList");
+		
+		return restaurantDtos;
+	}
+	
+	//관리자가 레스토랑을 처음 등록하는 처리
+	public void insertRestaurantForm(RestaurantDTO restaurantDto){
+		
+		getSqlSession().insert("restaurant.insertRestaurantForm", restaurantDto);
+		
+	}
+	
 	
 	
 	

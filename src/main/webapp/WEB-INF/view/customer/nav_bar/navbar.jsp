@@ -18,9 +18,6 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 회원가입 -->
-				<!-- <li><a data-toggle="modal" data-target="#SignUp" role="button"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-				
-				<!-- <input type="button" class="page-scroll btn btn-info btn-lg" data-toggle="modal" data-target="#SignUp" value="SingUp"> -->
                	<!-- a태그로 login.do로 get으로 url요청 -->
                 <li><a data-toggle="modal" href="join.do" data-target="#SignUp" role="button" data-backdrop="false"><span class="glyphicon glyphicon-user"></span>
 						회원가입
@@ -28,7 +25,7 @@
 				
 				<!-- 내가 만든 회원가입 폼 content까지만 등록-->
 				<div id="SignUp"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog modal-lg">
+					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
 						<!-- modal_login.jsp에  header, body, footer 작성하기 -->
 						</div>
@@ -36,8 +33,6 @@
 				</div>
 				</li>
 				<!-- 모달 회원가입 끝 -->
-				<!-- <li><a data-toggle="modal" data-target="#Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
-				     <!-- a태그로 login.do로 get으로 url요청 -->
                  <li> <a data-toggle="modal" data-target="#Login" role="button" data-backdrop="false" ><span class="glyphicon glyphicon-log-in"></span>
  						로그인
 					</a>

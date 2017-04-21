@@ -2,8 +2,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!-- 우편번호 찾아주는 javascript -->
-<script src="js/zipcode.js"></script>
+
+
+<script type="text/javascript">
+
+
+	function findZipcode() {
+		url = "findZipcode.do";
+		window.open(url,"post","toolbar=no ,width=500 ,height=300 ,directories=no,status=yes,scrollbars=yes,menubar=no");
+	}
+	
+	//이미지 업로드시 이미지를 볼 수 있게 해준다.
+	function imageViewer(id, viewer) {
+		
+		var upload = document.getElementById(id)
+		var viewDiv = document.getElementById(viewer)
+		
+		upload.onchange = function(e) {
+			
+			e.preventDefault();
+			
+			var file = upload.files[0], 
+			reader = new FileReader();
+			
+			reader.onload = function(event) {
+				var img = new Image();
+				img.src = event.target.result;
+				img.width = 300;
+				viewDiv.innerHTML = '';
+				viewDiv.appendChild(img);
+			};
+			
+			reader.readAsDataURL(file);
+	
+			return false;
+		};
+		
+	}
+
+</script>
 
 
 	<h1 style="color: white;">업체정보 페이지</h1>
@@ -102,10 +139,11 @@
 				<div class="controls">
 					<input type="file" id="main_image" name="main_image" class="btn btn-default form-control-file" onclick="imageViewer('main_image','main_image_view')">
 				</div>
-				<div id="main_image_view"></div>
+				<div id="main_image_view">
+				<img src="img/${restaurantuploadDTO.m_path}" class="img-rounded" width="300" height="200" alt="레스토랑 메인 이미지"/>
+				</div>
 				
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.m_path}"/>
 				${restaurantuploadDTO.m_path}
 		</div>
 		</div>
@@ -115,10 +153,12 @@
 				<div class="controls">
 					<input type="file"  id="detail_image" name="detail_image"  class="btn btn-default form-control-file" onclick="imageViewer('detail_image','detail_image_view')">
 				</div>
-				<div id="detail_image_view"></div>
+				<div id="detail_image_view">
+				<img src="img/${restaurantuploadDTO.d_path1}" class="img-rounded" width="300" height="200" alt="레스토랑 상세 이미지"/>
+				</div>
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.d_path1}"/>
-				${restaurantuploadDTO.d_path1}
+				
+			${restaurantuploadDTO.d_path1}
 		</div>
 		</div>
 		<div class="content">
@@ -128,9 +168,11 @@
 					<input type="file"  id="menu_image" name="menu_image" class="btn btn-default form-control-file" onclick="imageViewer('menu_image','menu_image_view')">
 				</div>
 				
-				<div id="menu_image_view"></div>
+				<div id="menu_image_view">
+				<img src="img/${restaurantuploadDTO.mn_path}" class="img-rounded" width="300" height="200" alt="레스토랑 메뉴 이미지"/>
+				</div>
 				<!-- 원래 있던 이미지를 보여준다. -->
-				<img alt="" src="${restaurantuploadDTO.mn_path}"/>
+				
 				${restaurantuploadDTO.mn_path}
 				
 			<div class="content" style="margin-top: 20px; text-align: right;">
@@ -140,4 +182,4 @@
 		</div>
 		</div>
 		</section>
-	</form:form>	
+	</form:form>		

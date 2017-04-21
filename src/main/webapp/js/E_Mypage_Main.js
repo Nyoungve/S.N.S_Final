@@ -1,6 +1,4 @@
-
-// 휴일 날짜 담을 공간
-var holidaysDaysarr = new Array();
+var holidaysDaysarr = new Array(); // 휴일 날짜 담을 공간
 
 // 초기 달력 상태 페이지
 var defaultDate = null; 
@@ -48,11 +46,12 @@ $.ajax({
 	}
 
 }) // ajax 종료
+//=======================================초기 달력 설정 끝=======================================
 
-
+//=======================================document.ready=======================================
 $(function() {
-	// 이벤트 등록
-	
+		
+//	======================================= 업주가 예약현황을 눌렀을 때 시작=======================================
 	// 업주 예약현황
 	$(document).on('click', '#E_Mypage_ReserveBtn', function() {
 		
@@ -60,7 +59,7 @@ $(function() {
 		var url = "E_Mypage_Reserve.do"
 		var query = "restaurant_number="+restaurant_number
 		
-			
+		//예약현황 가져오는 ajax	
 		$.ajax({
 
 			type : "GET",
@@ -84,16 +83,20 @@ $(function() {
 				console.log(e.responseText);
 			}
 
-		})
+		}) //ajax 끝
 
-	})
+	}) //업주 예약 현황 끝
+//	======================================= 업주가 예약현황을 눌렀을 때 끝 =======================================
+	
 
+//=======================================업주가 정보수정을 눌렀을 때 시작=======================================	
 	// 업주 정보수정
 	$(document).on('click', '#E_Mypage_EnterInfoBtn', function() {
 
 		var url = "E_Mypage_EnterInfo.do"
 		var query = "restaurant_number="+restaurant_number
 
+		//정보 수정 시 레스토랑 초기 정보를 가져오는 ajax
 		$.ajax({
 
 			type : "POST",
@@ -117,13 +120,63 @@ $(function() {
 				console.log(e.responseText);
 			}
 
-		})
+		})//ajax 끝
+			
+		}) //업주 정보수정 끝
 
+//=======================================업주가 정보수정을 눌렀을 때 끝=======================================
+		  
+//======================================= 노쇼 리스트를 눌렀을 때 시작=======================================	
+	//노쇼리스트를 눌렀을 때 확정 처리
+		$(document).on('click','#E_Mypage_NoShowUserListBtn',function(){
+			alert('노쇼리스트');
+			var restaurant_number = $('#sessionRestaurant_number').val()
+			
+				var url = "E_Mypage_NoShowUserList.do"
+				var query = "restaurant_number="+restaurant_number
+				
+				$.ajax({
+
+					type : "POST",
+					url : url,
+					data : query,
+					success : function(data) {
+
+						// 기존 데이터를 지워준다.
+						$('#divBox').html("");
+
+						// 기존에 불러온 캘린더가 있으면 없애준다.
+						$("#calendar").datepicker("destroy");
+
+						// 처리된 데이터를 뿌려준다.
+						$('#divBox').append(data);
+
+					}
+
+					,
+					error : function(e) {
+						console.log(e.responseText);
+					}
+
+				})//ajax 종료 
+
+		}) //노쇼 리스트 눌렀을 때 이벤트 종료
+		
+//=======================================노쇼 리스트를 눌렀을 때 끝=======================================
+		
+//=======================================로그 아웃버튼을 눌렀을 때 시작=======================================	
+	$(document).on('click','#E_Mypage_LogoutBtn',function(){
+		
+		alert('로그아웃');
+		location.href="ownerlogout.do";
+		
+		
+		
 	})
-
-	
-	
-//-------------------------------------------------------------휴일처리--------------------	
+		
+//=======================================로그 아웃버튼을 눌렀을 때 끝=======================================		
+		
+//=======================================휴일버튼 눌렀을 때 시작=======================================
 	
 	
 	
@@ -135,13 +188,14 @@ $(function() {
 		$('#divBox').html("");
 		
 		// 달력을 세팅
-		makingCalendar1(defaultDate);
+		makingCalendar(defaultDate);
 
 	})
 
 	
+//=======================================휴일버튼 눌렀을 때  끝=======================================
 
-	
+//=======================================ajax를 동기식으로 만드는 자바 스크립트 시작=======================================
 	// ajax 끝날때까지 기다리는 메소드
 	jQuery.fn.center = function() {
 		this.css("position", "absolute");
@@ -169,8 +223,10 @@ $(function() {
 
 	
 }); //document.ready 종료
+//=======================================ajax를 동기식으로 만드는 자바 스크립트 끝=======================================	
 
 
+//=======================================내가 설정한 함수들=======================================
 // 이전 날짜 막기 + 배열에 있는 값 색상 변경
 function noBefore(dateStr) { // date == 모든 날짜
 
@@ -203,14 +259,10 @@ function noBefore(dateStr) { // date == 모든 날짜
 } // noBefore(dateStr) 종료
 
 
-
-
-//============== 함수 정의부분
-
 // 달력 만드는 메소드
-function makingCalendar1(defaultDate) {
+function makingCalendar(defaultDate) {
 
-	$("#calendar1").datepicker(
+	$("#calendar").datepicker(
 					{
 						inline : true,
 						constrainInput : true,
@@ -246,12 +298,12 @@ function makingCalendar1(defaultDate) {
 
 							
 											// 기존 달력을 삭제한다.
-											$("#calendar1").datepicker("destroy");
+											$("#calendar").datepicker("destroy");
 											
 											// 달력 defaultDate 설정
 											defaultDate = data.defaultDate
 														
-											makingCalendar1(defaultDate)
+											makingCalendar(defaultDate)
 
 										} // success 메소드 종료
 										,
@@ -264,5 +316,5 @@ function makingCalendar1(defaultDate) {
 						}// onselect 종료
 
 					}) // 데이트 피커 종료
-} // makingCalendar1() 종료
+} // makingCalendar() 종료
 

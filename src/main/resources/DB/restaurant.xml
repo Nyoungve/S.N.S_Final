@@ -29,4 +29,25 @@ open="(" separator="," close=")">
 
 
 
+<select id="mainRestaurantList" resultType="sns.dto.RestaurantDTO">
+
+select *
+from restaurant R join 
+(
+select restaurant_number, substr(m_path, instr(m_path,'\', -1,1) +1) as m_path
+from restaurantupload
+)T
+on R.restaurant_number = T.restaurant_number
+
+
+</select>
+
+<insert id="insertRestaurantForm" parameterType="sns.dto.RestaurantDTO">
+
+insert into restaurant values(#{restaurant_number},#{e_name},#{address},#{teamCount},#{type},#{pay_key},#{r_info},#{r_time},#{openingTime},#{closingTime},#{zipcode})
+
+
+</insert>
+
+
 </mapper>

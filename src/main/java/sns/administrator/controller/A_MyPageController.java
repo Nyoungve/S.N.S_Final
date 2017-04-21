@@ -1,8 +1,6 @@
 package sns.administrator.controller;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import exception.InsertShopException;
 import sns.dao.CustomerDAO;
 import sns.dao.OwnerDAO;
+import sns.dao.RestaurantDAO;
+import sns.dao.RestaurantuploadDAO;
 import sns.dto.CustomerDTO;
 import sns.dto.OwnerDTO;
+import sns.dto.RestaurantDTO;
+import sns.dto.RestaurantuploadDTO;
 
 @Controller
 public class A_MyPageController {
@@ -35,6 +37,22 @@ public class A_MyPageController {
 	}
 
 
+	@Autowired
+	private RestaurantDAO restaurantDao;
+	
+	
+	public void setRestaurantDao(RestaurantDAO restaurantDao) {
+		this.restaurantDao = restaurantDao;
+	}
+	
+	@Autowired
+	private RestaurantuploadDAO restaurantuploadDao;
+
+	public void setRestaurantuploadDao(RestaurantuploadDAO restaurantuploadDao) {
+		this.restaurantuploadDao = restaurantuploadDao;
+	}
+
+
 	// 업체를 등록하기 위한 처리
 	@RequestMapping("/owner.do")
 	public String searchCustomer(@RequestParam("id")String id,Model model){
@@ -43,7 +61,7 @@ public class A_MyPageController {
 		
 		model.addAttribute("customerDTO", customerDTO);
 				
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	
@@ -55,23 +73,23 @@ public class A_MyPageController {
 		model.addAttribute("blackList", blackList);
 		
 		
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
 	@RequestMapping("/noShowCount.do")
 	public String noShowCount(@RequestParam("id")String id){
 		customerDao.noShowCountUpdate(id);
 		
-		return "administratorMainPage";
+		return "admin/administratorMainPage";
 	}
 	
-	@RequestMapping("/insertShop.do")
-	public String insertShop(OwnerDTO ownerDto,Model model) throws InsertShopException{
+	@RequestMapping("/insertOwner.do")
+	public String insertOwner(OwnerDTO ownerDto,Model model) throws InsertShopException{
 		
 		
 		try {
 			
-			ownerDao.insertShop(ownerDto);
+			ownerDao.insertOwner(ownerDto);
 			
 			
 		} catch (Exception e) {
@@ -80,17 +98,66 @@ public class A_MyPageController {
 			
 		}
 		
-		Object[] obarr = new Object[10];
 		
-		
-		
-		
-		
-		
-		model.addAttribute("insertOk", "ok");
-		return "administratorMainPage";
+		model.addAttribute("insertOk", "insertOk");
+		return "admin/administratorMainPage";
 		
 	}
 
+	//관리자가 레스토랑을 등록
+	@RequestMapping("/insertRestaurant.do")
+	public String insertRestaurantForm(RestaurantDTO restaurantDto,Model model){
+		
+		System.out.println("/insertRestaurant.do");
+		
+		
+		//reserve 테이블에서 등록
+		restaurantDao.insertRestaurantForm(restaurantDto);
+		
+		//이미지 등록
+		//파일 업로드 처리할 dto
+	RestaurantuploadDTO restaurantuploadDto = new RestaurantuploadDTO();
+						
+	//파일 업로드 처리할 dto에 레스토랑 번호 세팅
+	restaurantuploadDto.setRestaurant_number(restaurantDto.getRestaurant_number());
+	System.out.println(restaurantDto.getRestaurant_number());	
+						
+	//각각의 파일 패스를 담는다.
+	restaurantDao.upload(restaurantDto.getMain_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+				
+	restaurantDao.upload(restaurantDto.getDetail_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+				
+	restaurantDao.upload(restaurantDto.getMenu_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+					
+				
+	//이미 레스토랑 이미지 파일이 있는지 없는지 확인
+			
+	int resultNum = restaurantuploadDao.searchNumber(restaurantDto.getRestaurant_number());
+				
+	System.out.println(resultNum);
+				
+				
+				if(resultNum >=1){ //파일 정보가 있었다면 update
+					
+					System.out.println("파일정보 업로드");
+					restaurantuploadDao.updateInfo(restaurantuploadDto);
+					
+				}else if(resultNum ==0){//파일 정보가 없었으므로 insert
+					
+					System.out.println("파일 정보 인서트");
+					
+					restaurantuploadDao.insertInfo(restaurantuploadDto);
+			
+				}
+			
+		
+		
+		
+		
+		model.addAttribute("insertOk", "insertOk");
+		return "admin/administratorMainPage";
+	}
+	
+	
 	
 }

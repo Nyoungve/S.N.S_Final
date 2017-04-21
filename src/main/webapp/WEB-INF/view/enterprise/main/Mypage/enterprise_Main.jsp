@@ -39,6 +39,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!--bootstrap 설정 끝-->
 
+<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
+<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 	
+
 
 <!-- msie 에러 처리 -->
 <script type="text/javascript">
@@ -90,8 +93,10 @@ jQuery.browser = {};
 				<!-- 버튼을 클릭하면 나오는 바디 내용 부분 -->
 				<div class="header-content-inner col-md-6">
 
-					<div id="calendar1"></div>
-					<div id="calendar2"></div>
+				<!-- 휴일 선택시 캘린더를 만들어줄 공간 -->
+					<div id="calendar"></div>
+					
+					<!-- 처음 이미지 로고 -->
 					<div id="divBox"><img alt="Logo" src="img/snslogoTransparency500X500.png" style="width: 100%"></div>
 
 				</div>

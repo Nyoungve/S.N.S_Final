@@ -48,6 +48,9 @@
 					<c:if test="${reserveList.r_state==5}">
 						이용완료
 					</c:if>
+					<c:if test="${reserveList.r_state==6}">
+						NoShow
+					</c:if>
 				</td>
 				<td>
 					<fmt:parseDate value="${reserve_date}" var="reDay" pattern="yyyy-MM-dd HH:mm" />
@@ -80,7 +83,7 @@
 	</tbody>
 </table>
 
-<input type="button" id="btn_more" class="btn btn-info btn-sm" value="더 보기">
+<input type="button" id="btn_reserveMore" class="btn btn-info btn-sm" value="더 보기">
 
 
 

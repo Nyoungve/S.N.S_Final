@@ -36,11 +36,11 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	
 	
 	//고객 예약 정보 확인을 위해 reserve테이블에서 알려주는 Dao
-	public List<ReserveDTO> c_getReserveList(String userid, String end_rno) {
+	public List<ReserveDTO> c_getReserveList(String userid, String reserve_rno) {
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", userid);
-		map.put("end_rno", end_rno);
+		map.put("reserve_rno", reserve_rno);
 		
 		List<ReserveDTO> reserveDTO = getSqlSession().selectList("reserve.c_getReserve", map);
 		return reserveDTO;
@@ -55,7 +55,9 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		map.put("restaurant_number", restaurant_number);
 		map.put("end_rno", end_rno);
 		
+		System.out.println("뭐가 문제일까?");
 		List<ReserveDTO> reserveDTO = getSqlSession().selectList("reserve.e_getReserve", map);
+		System.out.println(reserveDTO);
 		return reserveDTO;
 		
 	}
@@ -70,5 +72,42 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	public void reserveCancel(String reserveNumber) {
 		getSqlSession().update("reserve.c_reserveCancel", reserveNumber);
 	}
+	
+	
+	//업주 마이 페이지에서 노쇼 리스트를 처리하기 위해 reserve 테이블에 접근
+	public List<ReserveDTO> noShowList(String restaurant_number){
+		List<ReserveDTO> noShowList =getSqlSession().selectList("reserve.noShowList", restaurant_number);
+		return noShowList;
+		
+	}
+	
+	//업주 마이 페이지에서 노쇼 확정 처리 , 노쇼인 고객은 r_state 6번으로 업데이트
+	
+	public void updateNotComePeople(String reserveNumber){
+		
+		getSqlSession().update("reserve.updateNotComePeople", Integer.parseInt(reserveNumber));
+		
+		
+	}
+	
+	//예약 번호에 해당하는 유저 id를 가져오는 처리
+	public String selectId(String reserveNumber){
+		
+		String userid =getSqlSession().selectOne("reserve.selectId", Integer.parseInt(reserveNumber));
+		
+		return userid;
+	}
+	
+	
+	//업주 마이 페이지에서 노쇼 확정 처리 , 온  고객은 r_state 5번으로 업데이트
+	
+		public void updateComePeople(String reserveNumber){
+			
+			getSqlSession().update("reserve.updateComePeople", Integer.parseInt(reserveNumber));
+			
+			
+		}
+	
+	
 	
 }

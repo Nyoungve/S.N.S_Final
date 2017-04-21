@@ -34,7 +34,7 @@
     
     </tbody>
   </table>
-  	<!-- 폼 태그 -->
+  	<!-- 로그인 성공 후 레스토랑을 선택하면 숨겨진 폼 태그를 sumbit한다 -->
   	<form id="formId" action="ownerMypageMain.do" method="POST">
   	<input type="hidden" id="restaurant_number" name="restaurant_number" value="">
   	</form>

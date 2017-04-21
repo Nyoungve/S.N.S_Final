@@ -1,17 +1,21 @@
 package sns.enterprise.controller;
 
+import java.io.BufferedReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONObject;
+import sns.dao.CustomerDAO;
 import sns.dao.HolidaysDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
@@ -66,14 +71,23 @@ public class E_MyPageController {
 		this.restaurantuploadDao = restaurantuploadDao;
 	}
 
+	@Autowired
+	private CustomerDAO customerDao;
+	
+	public void setCustomerDao(CustomerDAO customerDao) {
+		this.customerDao = customerDao;
+	}
 
-	//업주 마이 페이지
+
+	//업주가 로그인에 성공했고 관리할 레스토랑을 클릭한 상태의 마이 페이지
 	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
 	public String enterpriseForm(String restaurant_number,HttpSession session){
 	
 	
-		session.setAttribute("sessionRestaurant_number", restaurant_number);
-		
+	//세션에 설정	
+	session.setAttribute("sessionRestaurant_number", restaurant_number);
+	
+	
 		return "enterprise/main/Mypage/enterprise_Main";
 		
 	}
@@ -82,6 +96,7 @@ public class E_MyPageController {
 	//업주가 예약현황을 보는 것.
 	@RequestMapping("/E_Mypage_Reserve.do")
 	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="20") String end_rno,HttpSession session) {
+		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
@@ -113,14 +128,15 @@ public class E_MyPageController {
 		
 		//타입 블럭을  보내준다.
 		mav.addObject("timeBlock", timeBlock);
-		
 	
 		//등록된 이미지를 보여준다.
 		RestaurantuploadDTO restaurantuploadDTO = restaurantuploadDao.selectImageList(restaurant_number);
 		
 		
+		if(restaurantuploadDTO!=null){
 		//등록된 이미지 경로를 보내준다.
 		mav.addObject("restaurantuploadDTO", restaurantuploadDTO);
+		}
 		
 		
 		return mav;
@@ -144,6 +160,9 @@ public class E_MyPageController {
 	//업주 회원정보 수정정보 insert처리
 	@RequestMapping("/E_insertInfo.do")
 	public ModelAndView insertEnterInfo(RestaurantDTO restaurantDto) {
+		
+		System.out.println(restaurantDto);
+		
 		//레스토랑 정보 입력
 		restaurantDao.updateInfo(restaurantDto);
 		
@@ -152,22 +171,34 @@ public class E_MyPageController {
 				
 		//파일 업로드 처리할 dto에 레스토랑 번호 세팅
 		restaurantuploadDto.setRestaurant_number(restaurantDto.getRestaurant_number());
-				
+		System.out.println(restaurantDto.getRestaurant_number());	
 				
 		//각각의 파일 패스를 담는다.
 		restaurantDao.upload(restaurantDto.getMain_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+		
 		restaurantDao.upload(restaurantDto.getDetail_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
+		
 		restaurantDao.upload(restaurantDto.getMenu_image(), restaurantDto.getRestaurant_number(),restaurantuploadDto);
 			
+		
 		//이미 레스토랑 이미지 파일이 있는지 없는지 확인
+	
 		int resultNum = restaurantuploadDao.searchNumber(restaurantDto.getRestaurant_number());
+		
 		System.out.println(resultNum);
 		
-		if(resultNum ==1){ //파일 정보가 있었다면 update
+		
+		if(resultNum >=1){ //파일 정보가 있었다면 update
+			
+			System.out.println("파일정보 업로드");
 			restaurantuploadDao.updateInfo(restaurantuploadDto);
+			
 		}else if(resultNum ==0){//파일 정보가 없었으므로 insert
-			//파일정보를 업로드
+			
+			System.out.println("파일 정보 인서트");
+			
 			restaurantuploadDao.insertInfo(restaurantuploadDto);
+	
 		}
 		
 		
@@ -262,6 +293,95 @@ public class E_MyPageController {
 	}
 	
 
+	// 노쇼회원 리스트를 보내주는 처리 E_Mypage_NoShowUserList.do
+	@RequestMapping("/E_Mypage_NoShowUserList.do")
+	public String noShowList(String restaurant_number,Model model){
+		
+		List<ReserveDTO> noShowList =reserveDao.noShowList(restaurant_number);
+		
+		//노쇼 리스트 세팅
+		model.addAttribute("noShowList", noShowList);
+		
+		
+		
+		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
+	}
+	
+	//업주가 노쇼 회원들을 등록하는 처리​
+	@RequestMapping(value="/noShowSave.do",method=RequestMethod.POST)
+	public String noShowSave(HttpServletRequest request){
+		
+		System.out.println("/noShowSave.do");
+		
+		//넘어온 json 데이터를 받는 처리
+		StringBuffer json = new StringBuffer();
+		String line=null;
+		
+		try {
+			BufferedReader reader = request.getReader();
+			while((line =reader.readLine()) !=null){
+				json.append(line);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		//string 타입을 json 타입으로
+		org.json.JSONObject jso = new org.json.JSONObject(json.toString());
+		
+		
+		Iterator<String> jsoIterator = jso.keys();
+		
+		while(jsoIterator.hasNext()){
+			
+			//jsoKeyName은 reserveNumber
+			String jsoKeyName = jsoIterator.next();
+			System.out.println(jsoKeyName);
+			
+			//jsoValue는 Y,N 상태
+			String jsoValue= (String)jso.get(jsoKeyName);
+			System.out.println(jsoValue);
+			
+			
+			if(jsoValue.equals("n")){ //안 온 사람 확정
+				
+				//reserve 테이블에서 r_state를 6으로 만든다.
+				reserveDao.updateNotComePeople(jsoKeyName);
+				
+				
+				//예약 번호에 해당하는 고객 아이디를 가져온다.
+				String userid= reserveDao.selectId(jsoKeyName);
+				
+				
+				//customer 테이블에서 NoShowCount를 1 증가 시킨다.
+				customerDao.updateNoShowPlusone(userid);
+				
+			}else if(jsoValue.equals("y")){ //온 사람 확정
+				
+				//reserve 테이블에서 r_state를 5으로 만든다.
+				reserveDao.updateComePeople(jsoKeyName);
+				
+			}
+			
+			
+			
+			
+		} //while 문 종료
+
+		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
+	}
+	
+	
+	
+	//로그아웃
+	@RequestMapping("/ownerlogout.do")
+	public String logout(HttpSession session){
+		//세션 삭제
+		session.invalidate();
+		
+		return "redirect:ownerLoginMain.do";
+	}
 	
 	
 }

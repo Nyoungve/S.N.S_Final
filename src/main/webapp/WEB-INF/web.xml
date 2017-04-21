@@ -27,6 +27,7 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+  
    <!-- 세션 타임아웃되는 시간 추가 10분-->
 	<session-config>
       <session-timeout>10</session-timeout>

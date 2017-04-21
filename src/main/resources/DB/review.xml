@@ -4,9 +4,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="review">
-	<select id="c_getReview" parameterType="String" resultType="sns.dto.ReviewDTO">
+	
+	<select id="c_getReviewList" parameterType="String" resultType="sns.dto.ReviewDTO">
 		<!-- select * from review where userid = #{userid} order by write_Date desc -->
-		select * from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER ) V where V.userid = #{userid} order by write_Date desc
+		<!-- select * from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER ) V where V.userid = #{userid} order by write_Date desc -->
+		select T.* from ( select V.*, rownum as rno from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserveNumber desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{review_rno}
+	</select>
+	
+	<select id="c_getReviewInfo" parameterType="String" resultType="sns.dto.ReviewDTO">
+		select restaurant_number, write_date, reserve_date, userid, comments, ranking, substr(Review_filePath, instr(Review_filePath,'\', -1,1) +1) as Review_filePath, reserveNumber from review where reserveNumber = #{reserveNumber}
 	</select>
 	
 	<insert id="c_writeReview" parameterType="sns.dto.ReviewDTO">
@@ -17,9 +23,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reserve set reviewCheck = '1' where reserveNumber = #{reserveNumber}
 	</update>
 	
+	<update id="c_modifyReview" parameterType="sns.dto.ReviewDTO">
+		update review set comments = #{comments}, ranking = #{ranking}, review_filePath = #{review_filePath} where reserveNumber = #{reserveNumber}
+	</update>
+	
 	<delete id="c_deleteReview" parameterType="String">
 		delete from review where reserveNumber = #{reserveNumber}
 	</delete>
 	
 </mapper>
-
+<!-- 
+select T.* from ( select V.*, rownum as rno from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserveNumber desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{end_rno}
+ -->

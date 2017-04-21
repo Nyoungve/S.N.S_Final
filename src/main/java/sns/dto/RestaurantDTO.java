@@ -8,7 +8,7 @@ public class RestaurantDTO {
 	private String restaurant_number;
 	private String e_name;
 	private String address;
-	private String teamCount;
+	private int teamCount;
 	private String type;
 	private String pay_key;
 	private String r_info;
@@ -19,13 +19,24 @@ public class RestaurantDTO {
 	private MultipartFile detail_image;
 	private MultipartFile menu_image;
 	private String zipcode;
+	private String m_path;
+	private int ranking;
 	
 	
 	
 	
-	
-	
-	
+	public int getRanking() {
+		return ranking;
+	}
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+	public String getM_path() {
+		return m_path;
+	}
+	public void setM_path(String m_path) {
+		this.m_path = m_path;
+	}
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -78,10 +89,10 @@ public class RestaurantDTO {
 		this.address = address;
 	}
 	
-	public String getTeamCount() {
+	public int getTeamCount() {
 		return teamCount;
 	}
-	public void setTeamCount(String teamCount) {
+	public void setTeamCount(int teamCount) {
 		this.teamCount = teamCount;
 	}
 	public String getType() {

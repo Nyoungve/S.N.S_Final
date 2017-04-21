@@ -237,7 +237,7 @@
 </div>
 <!-- 모달 IDCheck 시작 -->
 
-	<!-- 모달 인증코드 발송 시작  -->
+<!-- 모달 인증코드 발송 시작  -->
 <div class="modal fade" id="Code" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
@@ -253,6 +253,31 @@
 				<div style="align-content: center">
 					<p>인증코드가 발송되었습니다.</p>
 					<p>입력하신 E-mail을 확인해 주세요.</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  모달 인증코드 발송 끝 -->
+
+<!-- 모달 인증코드 발송 시작  -->
+<div class="modal fade" id="joinSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">회원가입 완료</h4>
+			</div>
+			<div class="modal-body">
+				<div style="align-content: center">
+					<p>회원가입이 완료되었습니다.</p>
+					<p>로그인 해주세요</p>
 				</div>
 			</div>
 			<div class="modal-footer">
