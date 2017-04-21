@@ -309,7 +309,6 @@ public class E_MyPageController {
 		
 		Map<String,Object> resultMap = new HashMap<>();
 		
-		
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
 	}
 	
