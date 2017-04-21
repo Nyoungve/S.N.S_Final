@@ -8,17 +8,24 @@
 	<table border="1" class="table">
 		<tr>
 			<td>예약일자</td>
+			<td>예약번호</td>
 			<td>고객ID</td>
 			<td>고객수</td>
 			<td>상태창</td>
 			<td>예약승인</td>
+			<td>예약취소</td>
 		</tr>
 		<c:forEach var="reserveList" items="${reserveList}">
+		<fmt:formatDate value="${reserveList.reserve_date}" var="reserve_date" type="both" pattern="yyyy-MM-dd HH:mm"/>
 		<c:if test="${reserveList.r_state!=5}">
+			<fmt:parseDate value="${reserve_date}" var="reDay" pattern="yyyy-MM-dd HH:mm" />
+			<c:if test="${reDay.time - toDay.time > 0}">
 				<tr>
 					<td>
-						<fmt:formatDate value="${reserveList.reserve_date}" var="reserve_date" type="both" pattern="yyyy-MM-dd HH:mm"/>
 						${reserve_date}
+					</td>
+					<td>
+						${reserveList.reserveNumber}
 					</td>
 					<td>
 						${reserveList.userid}
@@ -41,15 +48,91 @@
 						</c:if>
 					</td>
 					<td>
-					
-						<a href="E_reserveOk.do?restaurant_number=${reserveList.restaurant_number}&userid=${reserveList.userid}&reserve_date=${reserve_date}">승인</a>
-						
-						<a href="E_reserveCancel.do?restaurant_number=${reserveList.restaurant_number}&userid=${reserveList.userid}&reserve_date=${reserve_date}">취소</a>
-					
+						<c:if test="${reserveList.r_state==1}">
+							<button name="btn_e_reserveOk" class="btn btn-info btn-sm" data-Num="${reserveList.reserveNumber}">
+								예약승인
+							</button>
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${reserveList.r_state==3}">
+							<button name="btn_e_reserveCancel" class="btn btn-info btn-sm" data-Num="${reserveList.reserveNumber}">
+								예약취소
+							</button>
+						</c:if>
 					</td>
 				</tr>
 			</c:if>
+		</c:if>
 		</c:forEach>
 	</table>
 	</section>
+	
+	<script type="text/javascript">
+	
+	$(function(){
+		
+		$('[name="btn_e_reserveOk"]').on('click',function(){
+			
+			var reserveNumber = $(this).attr('data-Num')
+			
+			
+			var url = "E_reserveOk.do"
+			var query = "reserveNumber=" + reserveNumber
+			
+			$.ajax({
+				
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(data){
+					
+					$('#divBox').empty();
+					
+					$('#divBox').html(data);
+					
+				}
+				,error:function(e){
+					console.log(e.responseText);
+				}
+				
+			})
+			
+		})
+		
+		
+		
+		$('[name="btn_e_reserveCancel"]').on('click',function(){
+			
+			var reserveNumber = $(this).attr('data-Num')
+			
+			
+			var url = "E_reserveCancel.do"
+			var query = "reserveNumber=" + reserveNumber
+			
+			$.ajax({
+				
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(data){
+					
+					$('#divBox').empty();
+					
+					$('#divBox').html(data);
+					
+				}
+				,error:function(e){
+					console.log(e.responseText);
+				}
+				
+			})
+			
+		})
+		
+		
+		
+	})
+	
+	</script>
 

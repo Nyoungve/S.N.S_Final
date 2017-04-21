@@ -95,16 +95,30 @@ public class E_MyPageController {
 	
 	//업주가 예약현황을 보는 것.
 	@RequestMapping("/E_Mypage_Reserve.do")
-	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="20") String end_rno,HttpSession session) {
+	public ModelAndView mypage_reserve(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
 		
-		List<ReserveDTO> list = reserveDao.e_getReserveList(restaurant_number, end_rno);
+		List<ReserveDTO> list = reserveDao.e_getReserveList(restaurant_number);
 		mav.addObject("reserveList", list);
 		
 		return mav;
+	}
+	
+	@RequestMapping("/E_reserveOk.do")
+	public String reserveOk(String reserveNumber) {
+		System.out.println("reserveOk");
+		reserveDao.e_reserveOk(reserveNumber);
+		return "redirect:/E_Mypage_Reserve.do";
+	}
+	
+	@RequestMapping("/E_reserveCancel.do")
+	public String reserveCancel(String reserveNumber) {
+		System.out.println("reserveCancel");
+		reserveDao.e_reserveCancel(reserveNumber);
+		return "redirect:/E_Mypage_Reserve.do";
 	}
 	
 	
