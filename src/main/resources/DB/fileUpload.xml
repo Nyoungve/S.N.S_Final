@@ -9,10 +9,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="review_image" parameterType="sns.dto.ReviewImageDTO">
-		insert into review_imagesave values (#{originalFilename}, #{filePath}, #{fileSize}, #{restaurant_number}, #{userid}, default)
-	</insert>	
+		insert into review_imagesave values (#{originalFilename}, #{filePath}, #{fileSize}, #{restaurant_number}, #{userid}, default, #{reserveNumber})
+	</insert>
 	
+	<select id="review_imagePath" parameterType="String" resultType="sns.dto.ReviewImageDTO">
+		select distinct substr(filepath, instr(filepath,'\', -1,1) +1) as filepath from review_imagesave where reserveNumber = #{reserveNumber}
+	</select>	
 	
+	<update id="review_imageModify" parameterType="sns.dto.ReviewImageDTO">
+		update review_imagesave set originalFilename = #{originalFilename}, filePath = #{filePath}, fileSize = #{fileSize} where reserveNumber = #{reserveNumber}
+	</update>
 	
 	
 	

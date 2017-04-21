@@ -1,13 +1,14 @@
 package sns.enterprise.controller;
 
+import java.io.BufferedReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONObject;
+import sns.dao.CustomerDAO;
 import sns.dao.HolidaysDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
@@ -70,14 +71,23 @@ public class E_MyPageController {
 		this.restaurantuploadDao = restaurantuploadDao;
 	}
 
+	@Autowired
+	private CustomerDAO customerDao;
+	
+	public void setCustomerDao(CustomerDAO customerDao) {
+		this.customerDao = customerDao;
+	}
 
-	//업주 마이 페이지
+
+	//업주가 로그인에 성공했고 관리할 레스토랑을 클릭한 상태의 마이 페이지
 	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
 	public String enterpriseForm(String restaurant_number,HttpSession session){
 	
-		
+	
+	//세션에 설정	
 	session.setAttribute("sessionRestaurant_number", restaurant_number);
-		
+	
+	
 		return "enterprise/main/Mypage/enterprise_Main";
 		
 	}
@@ -86,8 +96,6 @@ public class E_MyPageController {
 	//업주가 예약현황을 보는 것.
 	@RequestMapping("/E_Mypage_Reserve.do")
 	public ModelAndView mypage_reserve(@RequestParam(value="end_rno", defaultValue="20") String end_rno,HttpSession session) {
-		
-		
 		
 		ModelAndView mav = new ModelAndView("enterprise/main/Mypage/E_Mypage_Reserve");
 		
@@ -152,7 +160,6 @@ public class E_MyPageController {
 	//업주 회원정보 수정정보 insert처리
 	@RequestMapping("/E_insertInfo.do")
 	public ModelAndView insertEnterInfo(RestaurantDTO restaurantDto) {
-		
 		
 		System.out.println(restaurantDto);
 		
@@ -302,17 +309,79 @@ public class E_MyPageController {
 	
 	//업주가 노쇼 회원들을 등록하는 처리​
 	@RequestMapping(value="/noShowSave.do",method=RequestMethod.POST)
-	@ResponseBody
-	public String noShowSave(@RequestBody Map<String,Object> params){
+	public String noShowSave(HttpServletRequest request){
+		
 		System.out.println("/noShowSave.do");
 		
+		//넘어온 json 데이터를 받는 처리
+		StringBuffer json = new StringBuffer();
+		String line=null;
 		
-		Map<String,Object> resultMap = new HashMap<>();
+		try {
+			BufferedReader reader = request.getReader();
+			while((line =reader.readLine()) !=null){
+				json.append(line);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
+		//string 타입을 json 타입으로
+		org.json.JSONObject jso = new org.json.JSONObject(json.toString());
+		
+		
+		Iterator<String> jsoIterator = jso.keys();
+		
+		while(jsoIterator.hasNext()){
+			
+			//jsoKeyName은 reserveNumber
+			String jsoKeyName = jsoIterator.next();
+			System.out.println(jsoKeyName);
+			
+			//jsoValue는 Y,N 상태
+			String jsoValue= (String)jso.get(jsoKeyName);
+			System.out.println(jsoValue);
+			
+			
+			if(jsoValue.equals("n")){ //안 온 사람 확정
+				
+				//reserve 테이블에서 r_state를 6으로 만든다.
+				reserveDao.updateNotComePeople(jsoKeyName);
+				
+				
+				//예약 번호에 해당하는 고객 아이디를 가져온다.
+				String userid= reserveDao.selectId(jsoKeyName);
+				
+				
+				//customer 테이블에서 NoShowCount를 1 증가 시킨다.
+				customerDao.updateNoShowPlusone(userid);
+				
+			}else if(jsoValue.equals("y")){ //온 사람 확정
+				
+				//reserve 테이블에서 r_state를 5으로 만든다.
+				reserveDao.updateComePeople(jsoKeyName);
+				
+			}
+			
+			
+			
+			
+		} //while 문 종료
+
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
 	}
 	
 	
+	
+	//로그아웃
+	@RequestMapping("/ownerlogout.do")
+	public String logout(HttpSession session){
+		//세션 삭제
+		session.invalidate();
+		
+		return "redirect:ownerLoginMain.do";
+	}
 	
 	
 }

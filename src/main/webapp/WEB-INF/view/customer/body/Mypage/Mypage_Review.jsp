@@ -38,4 +38,5 @@
 						</c:forEach>
 				    </tbody>
 			 	</table>
-			 	
+			 	<input type="button" id="btn_reviewMore" class="btn btn-info btn-sm" value="더 보기">
+			 	<div id="modifyModal"></div>

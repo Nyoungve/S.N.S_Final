@@ -1,16 +1,21 @@
 package sns.customer.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sns.dao.C_LoginDAO;
+import sns.dao.RestaurantDAO;
 import sns.dto.CustomerDTO;
+import sns.dto.RestaurantDTO;
 
 @Controller
 public class C_LoginController {
@@ -22,10 +27,33 @@ public class C_LoginController {
 		this.c_LoginDao = c_LoginDao;
 	}
 	
+	@Autowired
+	private RestaurantDAO restaurantDao;
+	
+	
+	public void setRestaurantDao(RestaurantDAO restaurantDao) {
+		this.restaurantDao = restaurantDao;
+	}
+
 	//첫번째 메인페이지로 이동
 	@RequestMapping(value="/main.do")
-	public String main(HttpServletRequest request){
+	public String main(HttpServletRequest request,Model model){
 		System.out.println("메인페이지로이동!");
+		
+		//메인 페이지에서 보여줄 레스토랑 정보를 보내준다.
+		
+		List<RestaurantDTO> restaurantDtos = restaurantDao.selectRestaurantList();
+		
+		model.addAttribute("restaurantDtos", restaurantDtos);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//세션값여부에따라 아이디값을 주어 다르게함.
 		if(request.getSession(true).getAttribute("userid")==null){
 			return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청

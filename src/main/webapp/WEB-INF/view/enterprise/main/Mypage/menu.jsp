@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>	
 	<!-- 네비 메뉴 시작 -->
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -9,7 +8,9 @@
 			      </button>
 				<a class="navbar-brand page-scroll" href="#page-top">S.N.S</a>
 			</div>
-				<ul class="nav navbar-nav  navbar-right">
+			
+				${sessionUserid}님 환영합니다. 사업자 등록번호: ${sessionRestaurant_number}
+		<ul class="nav navbar-nav  navbar-right">
 		<li id="E_Mypage_ReserveBtn">
 			<a><i class="glyphicon glyphicon-cutlery"></i> 예약 정보</a>
 		</li>
@@ -22,11 +23,13 @@
 		<li id="E_Mypage_NoShowUserListBtn">
 			<a><i class="glyphicon glyphicon-remove"></i> 노쇼 처리 회원목록</a>
 		</li>
+		<li id="E_Mypage_LogoutBtn">
+			<a>로그 아웃</a>
+		</li>
 			</ul>
 		</div>
 	</nav>
 
+ 
 
-<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
-<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 	
 

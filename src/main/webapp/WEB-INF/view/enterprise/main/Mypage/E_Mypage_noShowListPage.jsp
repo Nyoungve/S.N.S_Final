@@ -53,27 +53,26 @@
 
 <script type="text/javascript">
 
-//보낼 데이터를 저장할 맵 생성
-var map = new Map();
-
-function check(){
-	
-}
-
+var data = {};
 
 $(function(){
 	
 	$('input[type=radio]').on('click',function(){
 		
 		var reserveNumber =$(this).attr('data-reserveNumber')
+		
 		console.log(reserveNumber)
+		
+		
 		var ynCheck = $(this).val();
+		
 		console.log(ynCheck)
 
 		
-		map.set(reserveNumber,ynCheck)
+		data[reserveNumber]=ynCheck;
 		
-		console.log(map)
+		
+		
 		
 	})
 	
@@ -81,13 +80,16 @@ $(function(){
 	$('#noShowBtn').on('click',function(){
 		
 		var url="noShowSave.do"
-		var json_data = JSON.stringify(map);
+		//var json_data = JSON.stringify(map);
+		var json_data = JSON.stringify(data)
+			
+		console.log(json_data)
+			
 		
-		
-		 $.ajax({
+		  $.ajax({
 			type : "post",
 			url : url,
-			data : json_data,
+			data :json_data,
 			dataType:"json",
 			success : function(data) {
 
@@ -104,18 +106,12 @@ $(function(){
 				
 
 			}
-
 			,
 			error : function(e) {
 				console.log(e.responseText);
 			}
 
-			
-			
-			
-			
-			
-		})
+		}) //ajax 종료 */
  		
 	})
 	

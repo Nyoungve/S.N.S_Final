@@ -21,9 +21,14 @@ public class CustomerDAO extends SqlSessionDaoSupport{
 		return CustomerDTOs;
 	}
 	
-	//고객 아이디를 받아서 customer 테이블에서 노쇼 카운트를 0으로 초기화
+	//고객 아이디를 받아서 customer 테이블에서 노쇼 카운트를  -1 한다.
 	public void noShowCountUpdate(String id){
 		getSqlSession().update("customer.update",id);	
+	}
+	
+	//고객 아이디를 받아서 customer 테이블에서 노쇼 카운트를 +1 한다.
+	public void updateNoShowPlusone(String userid){
+		getSqlSession().update("customer.updateNoShowPlusone",userid);	
 	}
 	
 	

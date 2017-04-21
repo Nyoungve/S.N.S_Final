@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <script type="text/javascript">
 
@@ -29,7 +30,7 @@
 </script>
  
  <!-- Modal -->
-	  <div class="modal fade" id="myModal" role="dialog">
+	  <div class="modal fade" id="reviewModal" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
@@ -49,6 +50,7 @@
 	              	<br/>
 	              	<textarea class="form-control" rows="5" name="comments"></textarea>
 	              	<br/>
+	              	<h4>평점</h4>
 	              	<c:forEach var="i" begin="1" end="5" step="1">
 	              		<label class="radio-inline">
       						<input type="radio" value="${i}" name="ranking"><c:out value="${i}"/>

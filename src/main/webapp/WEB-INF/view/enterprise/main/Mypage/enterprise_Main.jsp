@@ -39,6 +39,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!--bootstrap 설정 끝-->
 
+<!-- 업주페이지에서 예약현황,정보수정,휴일등록,노쇼처리 버튼에 대한 이벤트 처리 -->
+<script type="text/javascript" src="js/E_Mypage_Main.js"></script> 	
+
 
 <!-- msie 에러 처리 -->
 <script type="text/javascript">

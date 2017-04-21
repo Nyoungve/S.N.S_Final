@@ -38,9 +38,81 @@
 		</div>
 	</header>
 <!--  -->
-	<contents>
+${restaurantDtos}
+	
+	
+	
+	 <section class="no-padding well" id="portfolio">
+       
+      
+        <div class="container-fluid">
+         
+      
+            <div class="row no-gutter popup-gallery">
+           
+           <!-- 레스토랑 정보 하나 시작-->
+           <!-- 반복문 시작 -->
+           <c:forEach var="restaurantInfo" items="${restaurantDtos}">
+                <div class="col-md-4 restaurant1" data-restaurantNumber="${restaurantInfo.restaurant_number}" style="padding:10px;">
+                    <div class="portfolio-box">
+                    
+                    <div class="ih-item square effect13 left_to_right">
+                    	<a href="#">
+                        <div class="img">
+                        <img src="img/${restaurantInfo.m_path}" class="img-responsive" alt="레스토랑메인이미지">
+                        </div> <!-- img -->
+                        
+                        <div class="info">
+				          <h3>${restaurantInfo.e_name}</h3>
+       			          <p>${restaurantInfo.type}</p>
+				        </div> <!-- info -->
+				        </a>
+				    </div>  <!-- square -->
+				        
+                        <div class="well">
+                        <span class="glyphicon glyphicon-star" style="font-size:40px;"></span>
+                        <span class="glyphicon glyphicon-star"  style="font-size:40px;"></span>
+                        <span class="glyphicon glyphicon-star"  style="font-size:40px;"></span>
+                        <span class="glyphicon glyphicon-star"  style="font-size:40px;"></span>
+                        <span class="glyphicon glyphicon-star-empty"  style="font-size:40px;"></span>
+                        <font size="40px;">4.0</font>
+                        </div> <!-- well -->
+                    </div> <!-- portfolio box -->
+                </div> <!-- col-md-4 -->
+           </c:forEach>   <!-- 반복문 끝 -->  
+         <!-- 레스토랑 정보 하나 끝-->
+         		
+                 </div> <!-- row -->
+            </div><!-- container -->
+   
+    </section>
+    
+  <!-- 레스토랑 표시부분 끝 -->  
+   
+   <!-- 더보기 표시부분 (조건 : 보여줄 레스토랑이 6개 이상인 경우)-->
+    <div id="moreBtn" class="container-fluid">
+     <div class="col-md-5"></div>
+     <div id="more" class="btn btn-info btn-lg col-md-2">
+          <span class="glyphicon glyphicon-chevron-down"></span> 더보기
+     </div>
+     <div class="col-md-5"></div>
+     </div>
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<%@include file="../body/body_main.jsp"%>
-	</contents>
+	
 	<footer>
 		<%@include file="../footer/footer.jsp"%>
 	</footer>
