@@ -17,28 +17,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class EmailAuthController {
 	
 	
 	//근데 왜 이메일을 두개 보낼깡... 
-	@RequestMapping(value="/emailAuth.do",method=RequestMethod.GET)
-	public ModelAndView emailAuth(HttpServletResponse response,HttpServletRequest request, @RequestParam("email") String email,String authNum) throws Exception{ 
-		System.out.println("이메일인증 GET으로!");
+	@RequestMapping(value="/emailAuth.do",method=RequestMethod.POST, produces ="text/plain;charset=UTF-8")
+	@ResponseBody 
+	public String emailAuth(HttpServletResponse response,HttpServletRequest request, @RequestParam("email") String email,String authNum, ModelAndView mav) throws Exception{ 
+		System.out.println("이메일인증 POST으로!");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		authNum = ""; 
-		authNum = RandomNum();//전송할 인증번호,함수를 호출하여 리턴값을 authNum에 저장한다. 
+		authNum = RandomNum();//전송할 인증번호,함수를 호출하여 리턴값을 authNum에 저장한다.
 		
 		sendEmail(email.toString(),authNum); //sendEmail 함수를 호출한다. 
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("customer/email/emailCheck"); //emailCheck.jsp 를 호출한다. 
-		mav.addObject("email",email); //입력받은 email파라미터와 
-		mav.addObject("authNum",authNum); //랜덤값을 받아온 인증번호를 모델로 넘겨준다.
-		
-		return mav;
+		JSONObject jso = new JSONObject();
+		jso.put("authNum", authNum); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
+
+		mav.setViewName("forward:/join.do"); //modal_join.jsp 를 호출한다.
+		return jso.toString();
 	}
 	
 	//난수 발생시키는 메소드
@@ -106,3 +110,21 @@ public class EmailAuthController {
 		}//try
 	}//sendEmail
 }
+/*
+//근데 왜 이메일을 두개 보낼깡... 
+@RequestMapping(value="/emailAuth.do",method=RequestMethod.GET)
+public ModelAndView emailAuth(HttpServletResponse response,HttpServletRequest request, @RequestParam("email") String email,String authNum) throws Exception{ 
+	System.out.println("이메일인증 GET으로!");
+	
+	authNum = ""; 
+	authNum = RandomNum();//전송할 인증번호,함수를 호출하여 리턴값을 authNum에 저장한다.
+	
+	sendEmail(email.toString(),authNum); //sendEmail 함수를 호출한다. 
+	
+	ModelAndView mav = new ModelAndView();
+	mav.setViewName("forward:/join.do"); //emailCheck.jsp 를 호출한다.
+	mav.addObject("email",email); //입력받은 email파라미터와 
+	mav.addObject("authNum",authNum); //랜덤값을 받아온 인증번호를 모델로 넘겨준다.
+	
+	return mav;
+}*/
