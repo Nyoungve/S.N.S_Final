@@ -202,6 +202,38 @@ $(document).ready(function(){
 		
 		
 	})
+	
+	$('#btn_userLeave').on('click',function(){
+		
+		var check = confirm("탈퇴하시겠습니까?");
+		var userid = $('#userid').val()
+		
+		if(check) {
+			
+			var url = "Mypage_userLeave.do"
+			var query = "userid=" + userid
+			
+			$.ajax({
+				
+				type:"GET"
+				,url:url
+				,data:query
+				,success:function(){
+					
+					
+					
+				}
+			 	,error:function(e){
+					console.log(e.responseText);
+				}
+			
+				
+			})
+			
+		}		
+		
+		
+	})// 탈퇴 처리 끝
 		
 	
 })
@@ -321,7 +353,7 @@ $(document).ready(function(){
 				        	<button type="button" class="btn btn-default" id="cancel">취소</button>
 				        </div>
 				        <div class="col-lg-2 col-sm-2">
-				        	<button type="button" class="btn btn-default" id="leave">탈퇴</button>
+				        	<button type="button" class="btn btn-default" id="btn_userLeave">탈퇴</button>
 				        </div>
 			      	</div>
 			    </div>

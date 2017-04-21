@@ -204,6 +204,11 @@ public class C_MyPageController {
 		return jso.toString();
 	}
 	
+	@RequestMapping("/Mypage_userLeave.do")
+	public void user_leave(String userid) {
+		System.out.println("탈퇴 userid : " + userid);
+	}
+	
 	
 	//review를 쓸 때 날짜를 형식에 맞춰서 바꿔주기 위한 initbinder 설정
 	@InitBinder
