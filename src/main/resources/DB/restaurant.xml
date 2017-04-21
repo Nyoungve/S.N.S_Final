@@ -42,6 +42,12 @@ on R.restaurant_number = T.restaurant_number
 
 </select>
 
+<insert id="insertRestaurantForm" parameterType="sns.dto.RestaurantDTO">
+
+insert into restaurant values(#{restaurant_number},#{e_name},#{address},#{teamCount},#{type},#{pay_key},#{r_info},#{r_time},#{openingTime},#{closingTime},#{zipcode})
+
+
+</insert>
 
 
 </mapper>

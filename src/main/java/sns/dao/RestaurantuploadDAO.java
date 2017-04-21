@@ -11,7 +11,9 @@ public class RestaurantuploadDAO extends SqlSessionDaoSupport{
 	// 처음에 이미지를 등록하는  처리
 	public void insertInfo(RestaurantuploadDTO restaurantuploadDto){
 		System.out.println("인서트 시작 전");
-		
+		System.out.println(restaurantuploadDto.getM_path());
+		System.out.println(restaurantuploadDto.getD_path1());
+		System.out.println(restaurantuploadDto.getMn_path());
 		
 		getSqlSession().insert("restaurantupload.insertPath", restaurantuploadDto);
 		

@@ -64,12 +64,19 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		String name = restaurant_number + "_" + now + "_" + i;
 		String ori_name = image.getOriginalFilename();
 		//File new_file = new File("f://E_image//" + name + "_" + ori_name);
-		File new_file = new File("C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\" + name + "_" + ori_name);
+		
+		//동규 노트북
+		String donggyuNotebook="C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
+		
+		//동규 집컴터
+		String donggyuDesktop ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\";
+
+		//동규 학원
+		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
+		
+		File new_file = new File(donggyuNotebook+name+"_"+ori_name);
 		System.out.println(new_file);
-		//김동규 집 컴퓨터 C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\
-		//김동규 노트북  C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\
-		//김동규 학원 컴퓨터 C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\
- 		
+		
 		try {
 			
 			//파일을 업로드 처리
@@ -115,7 +122,12 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		return restaurantDtos;
 	}
 	
-	
+	//관리자가 레스토랑을 처음 등록하는 처리
+	public void insertRestaurantForm(RestaurantDTO restaurantDto){
+		
+		getSqlSession().insert("restaurant.insertRestaurantForm", restaurantDto);
+		
+	}
 	
 	
 	
