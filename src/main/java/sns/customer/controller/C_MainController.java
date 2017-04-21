@@ -68,8 +68,17 @@ public class C_MainController {
 
 	//더보기 버튼 요청 처리
 	@RequestMapping("/more.do")
-	public String moreForm(){
-		return "moreRestaurant";
+	public String moreForm(@RequestParam("pageNum") int pageNum,Model model){
+		
+		System.out.println("more.do");
+		
+		List<RestaurantDTO> restaurantDtos = restaurantDao.selectRestaurantList(pageNum);
+		
+		model.addAttribute("restaurantDtos",restaurantDtos);
+		
+		System.out.println("정상적으로 메소드 종료");
+		
+		return "customer/body/moreRestaurant";
 	}
 	
 	
@@ -79,6 +88,10 @@ public class C_MainController {
 	public String reserveForm(@RequestParam("restaurant_number")String restaurant_number
 			,@RequestParam("today")String today
 			,Model model){
+		
+		System.out.println("/reserve.do");
+		System.out.println(restaurant_number);
+		System.out.println(today);
 		
 		//레스토랑의 정보를 가져오는 Dto 생성
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(restaurant_number);
@@ -115,7 +128,7 @@ public class C_MainController {
 		model.addAttribute("ownerDto", ownerDto);
 		
 		
-		return "ReservePage";
+		return "customer/main/reserve/C_Main_ReservePage";
 	}
 
 	
@@ -140,7 +153,7 @@ public class C_MainController {
 		model.addAttribute("resultMap", resultMap);
 		
 		
-		return "ReservePageTimeButtons";
+		return "customer/main/reserve/ReservePageTimeButtons";
 	}
 	
 	
@@ -152,7 +165,7 @@ public class C_MainController {
 	@ResponseBody
 	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp){
 		
-		
+		System.out.println("/reserveData.do");
 		resp.setContentType("text/html;charset=UTF-8");
 			
 		JSONObject jso = new JSONObject();
@@ -168,7 +181,7 @@ public class C_MainController {
 		}
 		
 		
-		
+		System.out.println("/reserveData.do 종료");
 		return jso.toString();
 	}
 	

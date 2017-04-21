@@ -162,7 +162,11 @@ create table review(
   references customer(userid)
 );
 
--- 4. 레스토랑 파일 업로드 RESTAURANTUPLOAD
+--3. 리뷰 더미
+insert into review values('0101',to_date('2017-04-22 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),to_date('2017-04-22 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','맛있다','5','c:/file.jpg','1');
+
+
+-- 4. 레스토랑파일 업로드 RESTAURANTUPLOAD
 drop table RESTAURANTUPLOAD cascade constraint;
 
 create table restaurantupload(
@@ -174,7 +178,8 @@ restaurant_number varchar2(20)
 references restaurant(restaurant_number)
 );
  
- 
+--4.레스토랑파일 더미
+insert into restaurantupload values('0101','c:/main.jpg','c:/detail.jpg','c:/menu.jpg'); 
 --파일업로드용 시퀀스
 drop sequence ru_filenumber;
 create sequence ru_FILENUMBER; 

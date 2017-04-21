@@ -1,7 +1,9 @@
 package sns.dao;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -74,7 +76,7 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		//동규 학원
 		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 		
-		File new_file = new File(donggyuNotebook+name+"_"+ori_name);
+		File new_file = new File(donggyuHak+name+"_"+ori_name);
 		System.out.println(new_file);
 		
 		try {
@@ -114,13 +116,37 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		return restaurants;
 	}
 	
+	
 	//메인 페이지에서 레스토랑들을 보여줄 리스트 가져오는 메소드
-	public List<RestaurantDTO> selectRestaurantList(){
+	public List<RestaurantDTO> selectRestaurantList(int pageNum){
 		
-		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList");
+		Map<String, Integer> map = new HashMap<>();
+		
+		// 보여줄 댓글 수
+		int commentPageSize = 3;
+
+		// 요청 페이지 번호 commentPageNum
+
+		// 한페이지의시작글번호
+		int StartRow = (pageNum - 1) * commentPageSize + 1;
+																					
+		int EndRow = pageNum * commentPageSize;//
+		
+		map.put("startRow", StartRow);
+		map.put("endRow", EndRow);
+		
+		
+		System.out.println(map.get("startRow"));
+		System.out.println(map.get("endRow"));
+		
+		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList",map);
+		
+		System.out.println(restaurantDtos);
+		
 		
 		return restaurantDtos;
 	}
+	
 	
 	//관리자가 레스토랑을 처음 등록하는 처리
 	public void insertRestaurantForm(RestaurantDTO restaurantDto){

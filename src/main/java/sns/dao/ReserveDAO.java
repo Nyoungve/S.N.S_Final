@@ -15,6 +15,9 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	//고객의 예약 정보를 reserve 테이블에 저장하는 Dao
 	public int insertReserveData(ReserveDTO reserveDto){
 	
+		System.out.println(reserveDto.getReserve_date());
+		
+		
 		int resultNum =getSqlSession().insert("reserve.insertReserveData",reserveDto);
 		return resultNum;
 	}

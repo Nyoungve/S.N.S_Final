@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertReserveData" parameterType="sns.dto.ReserveDTO">
-		insert into reserve values(#{restaurant_number},#{reserve_date},#{userid},#{deposit},#{r_state},#{guestCount},seq_reserveNumber.nextval)
+		insert into reserve values(#{restaurant_number},#{reserve_date},#{userid},#{deposit},#{r_state},#{guestCount},seq_reserveNumber.nextval,0)
 	</insert>
 	
 	<update id="c_reserveCancel" parameterType="String">
