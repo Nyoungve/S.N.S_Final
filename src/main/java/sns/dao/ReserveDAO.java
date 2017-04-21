@@ -52,11 +52,10 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	
 	
 	//업주가 예약 정보를 확인을 이해 reserve테이블에서 알려주는 Dao
-	public List<ReserveDTO> e_getReserveList(String restaurant_number, String end_rno) {
+	public List<ReserveDTO> e_getReserveList(String restaurant_number) {
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("restaurant_number", restaurant_number);
-		map.put("end_rno", end_rno);
 		
 		System.out.println("뭐가 문제일까?");
 		List<ReserveDTO> reserveDTO = getSqlSession().selectList("reserve.e_getReserve", map);
@@ -72,8 +71,19 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	}
 	
 	//고객이 예약 취소 요청
-	public void reserveCancel(String reserveNumber) {
+	public void c_reserveCancel(String reserveNumber) {
 		getSqlSession().update("reserve.c_reserveCancel", reserveNumber);
+	}
+	
+	
+	//업체 예약 승인
+	public void e_reserveOk(String reserveNumber) {
+		getSqlSession().update("reserve.e_reserveOk", reserveNumber);
+	}
+	
+	//업체 예약 취소
+	public void e_reserveCancel(String reserveNumber) {
+		getSqlSession().update("reserve.e_reserveCancel", reserveNumber);
 	}
 	
 	

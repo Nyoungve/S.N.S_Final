@@ -61,7 +61,7 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			// 빛찬 집 컴퓨터
 			String projectPath2 = "C:\\Users\\Chan\\Spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\S.N.S\\img\\";
 			
-			String path = projectPath2 + now + "_" + name + "_" + ori_name;
+			String path = projectPath + now + "_" + name + "_" + ori_name;
 			File new_file = new File(path);
 			System.out.println(new_file);
 			try {
@@ -94,7 +94,7 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			// 빛찬 집 컴퓨터
 			String projectPath2 = "C:\\Users\\Chan\\Spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\S.N.S\\img\\";
 						
-			String path = projectPath2 + now + "_" + name + "_" + ori_name;
+			String path = projectPath + now + "_" + name + "_" + ori_name;
 			File new_file = new File(path);
 			System.out.println(new_file);
 			try {

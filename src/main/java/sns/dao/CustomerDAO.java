@@ -31,5 +31,10 @@ public class CustomerDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("customer.updateNoShowPlusone",userid);	
 	}
 	
+	//고객 정보 수정
+	public void userInfo_modify(CustomerDTO userInfo) {
+		getSqlSession().update("userInfo.modifyInfo", userInfo);
+	}
+	
 	
 }
