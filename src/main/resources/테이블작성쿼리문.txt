@@ -46,7 +46,6 @@ RESTAURANT_NUMBER varchar2(20)
 , openingTime number not null
 , closingTime number not null
 ,zipcode varchar2(20)
-,constraint UK_tbl_restaurant_pay_key unique(pay_key)
 ,constraint pK_tbl_r_RESTAURANT_NUMBER primary key(RESTAURANT_NUMBER)
 );
 

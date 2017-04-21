@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>S.N.S_Administrator</title>
  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
@@ -123,12 +122,6 @@
 		  $('#myModal').modal({backdrop: "static"});
 		  
 	  }
-	
-	  if(${insertOk !=null}){
-		  $('#insertOkModal').modal();
-		  
-		  location.href="adminMain.do";
-	  }
 	  
 	  //레스토랑 등록을 눌렀을 때
 	  $('#restaurantBtn').on('click',function(){
@@ -152,9 +145,13 @@
 		  
 	  })
 	  
+	  if(${insertOk!=null}){
+		  $('#insertOkModal').modal();
+	  }
 	  
-	  
-	  
+	  $('#closeBtn').on('click',function(){
+		  location.href="adminMain.do";
+	  })  
   }) // document.ready 끝
   
  
@@ -200,7 +197,7 @@
 
 <!-- 레스토랑 등록용 form 시작 -->
 <div id="div3" class="col-md-8" style= "display : none;">
-	<form name="enterInfo" id="enterInfo" action="E_insertInfo.do" method="post" enctype="multipart/form-data" class="form-inline">
+	<form name="enterInfo" id="enterInfo" action="insertRestaurant.do" method="post" enctype="multipart/form-data" class="form-inline">
 	<section style="border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px;  padding: 20px 20px 20px 20px; background-color: white;">
 		<div class="content">
 			<div class="control-group">
@@ -214,7 +211,7 @@
 			<div class="control-group">
 				<label for="" class="control-label">우편번호</label>
 				<div class="controls">
-					<input type="text" name="zipcode" class="form-control" readonly="true"/>
+					<input type="text" id="zipcode" name="zipcode" class="form-control" readonly="true"/>
 					<input type="button" value="우편번호찾기" onClick="findZipcode()" class="btn btn-default"/>
 				</div>
 		</div>
@@ -223,7 +220,7 @@
 			<div class="control-group">
 				<label for="" class="control-label">상세주소</label>
 				<div class="controls">
-					<input type="text" name="address" size="50" maxlength="50" class="form-control"/>
+					<input type="text" id="address" name="address" size="50" maxlength="50" class="form-control"/>
 				</div>
 		</div>
 		</div>
@@ -231,7 +228,12 @@
 			<div class="control-group">
 				<label for="" class="control-label">수용가능 Team</label>
 				<div class="controls">
-					<input type="text" name="teamCount" class="form-control"/>
+					<select name="teamCount">
+					<c:forEach var="i" begin="1" end="10" step="1">
+					<option value="${i}">${i}팀</option>
+					</c:forEach>
+					</select>
+					
 				</div>
 		</div>
 		</div>
@@ -272,14 +274,14 @@
 				<label for="" class="control-label">영업시간</label>
 				<div class="controls">
 					영업 시작 시간 :
-					<select>
+					<select name="openingTime">
 					<c:forEach var="i" begin="0" end="23" step="1">
 					<option value="${i}">${i}</option>
 					</c:forEach>
 					</select>
 					
 					영업 마감 시간 :
-					<select>
+					<select name="closingTime">
 					<c:forEach var="i" begin="0" end="23" step="1">
 					<option value="${i}">${i}</option>
 					</c:forEach>
@@ -420,7 +422,7 @@
           <p>해당 고객 ID를 업체 ID로 등록 하시겠습니까?</p>
         </div>
         <div class="modal-footer">
-           <form action="insertShop.do">
+           <form action="insertOwner.do">
            <input type="hidden" name="userid" value="${customerDTO.userid}">
            <input type="hidden" name="password" value="${customerDTO.password}">
            <input type="hidden" name="mobile" value="${customerDTO.mobile}">
@@ -448,10 +450,10 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-body">
-        <p>사업주등록이 정상처리되었습니다.</p>
+        <p>등록이 정상처리되었습니다.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 

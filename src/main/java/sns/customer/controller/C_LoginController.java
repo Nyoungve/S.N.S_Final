@@ -49,11 +49,6 @@ public class C_LoginController {
 		
 		
 		
-		
-		
-		
-		
-		
 		//세션값여부에따라 아이디값을 주어 다르게함.
 		if(request.getSession(true).getAttribute("userid")==null){
 			return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
