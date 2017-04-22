@@ -218,9 +218,11 @@ $(document).ready(function(){
 				type:"GET"
 				,url:url
 				,data:query
-				,success:function(){
+			   	,dataType:"json"
+				,success:function(data){
 					
-					
+					alert("탈퇴가 완료되었습니다.")
+					location.href="main.do";
 					
 				}
 			 	,error:function(e){

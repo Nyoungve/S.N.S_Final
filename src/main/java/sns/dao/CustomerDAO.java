@@ -36,5 +36,10 @@ public class CustomerDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("userInfo.modifyInfo", userInfo);
 	}
 	
+	//고객 회원 탈퇴
+	public void userInfo_leave(String userid) {
+		getSqlSession().delete("userInfo.leave", userid);
+	}
+	
 	
 }

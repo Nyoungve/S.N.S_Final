@@ -204,9 +204,20 @@ public class C_MyPageController {
 		return jso.toString();
 	}
 	
+	//고객 탈퇴 요청
 	@RequestMapping("/Mypage_userLeave.do")
-	public void user_leave(String userid) {
+	@ResponseBody
+	public String user_leave(HttpServletRequest request, String userid) {
 		System.out.println("탈퇴 userid : " + userid);
+		
+		//customerDao.userInfo_leave(userid);
+		
+		request.getSession().invalidate();
+		
+		JSONObject jso = new JSONObject();
+		jso.put("test", "test");
+		
+		return jso.toString();
 	}
 	
 	

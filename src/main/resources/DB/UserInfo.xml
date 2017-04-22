@@ -12,5 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="modifyInfo" parameterType="sns.dto.CustomerDTO">
 		update customer set name = #{name}, password = #{password}, mobile = #{mobile}, email = #{email} where userid = #{userid}
 	</update>
+	
+	<delete id="leave" parameterType="String">
+		delete from customer where userid = #{userid}
+	</delete>
 
 </mapper>
