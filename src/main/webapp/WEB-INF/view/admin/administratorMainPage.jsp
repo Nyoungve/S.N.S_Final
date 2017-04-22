@@ -49,7 +49,29 @@
 
   //버튼 이벤트들 등록
   $(function(){
-		
+	
+	//레스토랑 등록을 눌렀을 때
+	  $('#restaurantBtn').on('click',function(){
+		  $('.menu').css("background-color", "");
+		  $(this).css("background-color", "blue");
+			
+			
+			//블랙리스트,업체관리 업체 검색창을 사라지게 한다.
+			$("#div1").css("display","none");
+			
+			
+			//후기 게시판 고객 검색창이 사라지게 한다.
+			$('#div2').css("display","none");
+			
+			//검색되었던 테이블이 사라지게 한다.
+			$('table').remove();
+			
+			//레스토랑 등록 폼이 나타나게 한다.
+			$('#div3').css("display","");
+				  
+	  })
+
+	  
 	  
 	  //업체관리 버튼이 눌렸을 때
 	  $('#customerBtn').on('click',function(){
@@ -123,28 +145,7 @@
 		  
 	  }
 	  
-	  //레스토랑 등록을 눌렀을 때
-	  $('#restaurantBtn').on('click',function(){
-		
-			alert('asf');
-			
-			//블랙리스트,업체관리 업체 검색창을 사라지게 한다.
-			$("#div1").css("display","none");
-			
-			
-			//후기 게시판 고객 검색창이 사라지게 한다.
-			$('#div2').css("display","none");
-			
-			//검색되었던 테이블이 사라지게 한다.
-			$('table').remove();
-			
-			//레스토랑 등록 폼이 나타나게 한다.
-			$('#div3').css("display","");
-			
-			
 		  
-	  })
-	  
 	  if(${insertOk!=null}){
 		  $('#insertOkModal').modal();
 	  }
@@ -392,7 +393,7 @@
 <!-- 블랙리스트 회원 보여주는 테이블 끝 -->
 
 
-<!-- 등록업체 보여주는 모달 시작-->
+<!-- 업주관리 보여주는 모달 시작-->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -427,6 +428,7 @@
            <input type="hidden" name="password" value="${customerDTO.password}">
            <input type="hidden" name="mobile" value="${customerDTO.mobile}">
            <input type="hidden" name="email" value="${customerDTO.email}">
+           <input type="hidden" name="name" value="${customerDTO.name}">
             <div class="form-group">
     		<label for="restaurant_number">사업자 등록번호:</label>
     		<input type="text" class="form-control" id="restaurant_number" name="restaurant_number" placeholder="사업자 등록번호를 입력해주세요.">
@@ -441,7 +443,7 @@
     </div>
  </div>
  
-<!-- 등록업체 보여주는 모달 시작-->
+<!-- 업주 관리 보여주는 모달 시작-->
 
 
 <!-- 정상적인 사업주 등록 시 모달 시작 -->

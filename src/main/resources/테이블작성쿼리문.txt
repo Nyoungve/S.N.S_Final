@@ -15,16 +15,16 @@ USERID varchar2(20) not null
 
 --고객 더미 데이터
 --1.customer--
-insert into customer values('a','김동규','1','010-3333-3333','ad@naver,com','0');
-insert into customer values('b','최빛찬','1','010-3333-3332','ad2@naver,com','0');
-insert into customer values('c','김나영','1','010-3333-3333','ad3@naver,com','0');
-insert into customer values('d','이희성','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('e','이수진','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('f','조두현','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('g','김태경','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('h','최태휘','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('i','한규필','1','010-3333-3334','ad4@naver,com','0');
-insert into customer values('j','수미','1','010-3333-3334','ad4@naver,com','0');
+insert into customer values('a','김동규','1','010-3333-3333','ad@naver.com','0');
+insert into customer values('b','최빛찬','1','010-3333-3332','ad2@naver.com','0');
+insert into customer values('c','김나영','1','010-3333-3333','ad3@naver.com','0');
+insert into customer values('d','이희성','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('e','이수진','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('f','조두현','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('g','김태경','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('h','최태휘','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('i','한규필','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('j','수미','1','010-3333-3334','ad4@naver.com','0');
 
 commit;
 
@@ -70,7 +70,6 @@ RESTAURANT_NUMBER varchar2(20) not null
 ,password varchar2(20) not null
 ,mobile varchar2(20) 
 ,email varchar2(30)
-,constraint UK_tbl_e_RESTAURANT_NUMBER unique(RESTAURANT_NUMBER)
 ,constraint FK_tbl_owner_restaurant_number foreign key(RESTAURANT_NUMBER)
 references restaurant(RESTAURANT_NUMBER)
 ,constraint FK_tbl_userid foreign key(userid)

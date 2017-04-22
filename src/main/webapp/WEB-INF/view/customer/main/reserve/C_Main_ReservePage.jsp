@@ -77,8 +77,9 @@ $.datepicker.setDefaults($.datepicker.regional['ko']);
 
 
 
+//--------------------------------------------------------초기세팅 끝--------------------------------
 
-
+//-----------------------------------------------내가 등록한 메소스들 시작-------------------------------
 //업주가 휴일로 등록한 날을 막는 메소드
 
 function disableAllTheseDays(date) {
@@ -88,7 +89,6 @@ function disableAllTheseDays(date) {
 	var day = date.getDate()>9 ? ''+date.getDate() : '0'+date.getDate();
      
 	var qwer = year + '-' +mon + '-' + day
-	
 	
     for (i = 0; i < arrHoliday.length; i++) {
 		
@@ -101,117 +101,53 @@ function disableAllTheseDays(date) {
      
 }
 
+//새로고침을 끄고 켤 전역변수
+var settingValiable= null;
+var settingValiableBoolean = false;
 
-//달력과 시간 입력 단추 설정
-$(function(){
+//setInterval시킬 함수
+function timeBlockSetting(){
 	
-	alert('ag')
-	//처음 포커스를 맞추는 이벤트
-  
-	var val = $('#focusDiv').position().top;
-    val = val-200;
-    
-	$('body,html').animate({scrollTop:val},300);
-
+	var url="getAvailableButtomResultMap.do";
+	var query="restaurant_number=${restaurantDto.restaurant_number}"+"&selectDay="+$('#testDatepicker').val();
+	console.log(query)
 	
-	
-	//달력 만드는 소스
-	$( "#testDatepicker" ).datepicker({
-		minDate: 0
-		,beforeShowDay: disableAllTheseDays 
-	 	,onSelect: function(dateText) {
-	 		
-	 		//버튼에 날짜를 속성값으로 넣어줌.
-	 		$('.timeBlock').attr("data-reserveDate",dateText)
-	 		
-	 		
-	 		//날짜값이 찍히면 날짜에 대한 버튼 상황값을 resultMap으로 가져와야 한다. 
-	 	var url="getAvailableButtomResultMap.do";
-		var query="restaurant_number=${restaurantDto.restaurant_number}"+"&selectDay="+$('#testDatepicker').val();
-		console.log(query)
+	$.ajax({
+		 type:"GET"
+		 ,url:url
+		 ,data:query
+		 ,success:function(data){
+			
+			//원래 있던 버튼 표시창을 없애준다. 
+			$('#buttonShow').html("");
+						
+			//버튼 표시창에 새로운 resultMap으로 세팅된 단추들을 보여준다.
+			$('#buttonShow').append(data);
+			 
+			
+		 }
+		 ,error:function(e){
+		  console.log(e.responseText);
+		 }
 		
-		$.ajax({
-			 type:"GET"
-			 ,url:url
-			 ,data:query
-			 ,success:function(data){
-				
-				//원래 있던 버튼 표시창을 없애준다. 
-				$('#buttonShow').html("");
-				
-				
-				//버튼 표시창에 새로운 resultMap으로 세팅된 단추들을 보여준다.
-				$('#buttonShow').append(data)
-				 
-				
-			 }
-			 ,error:function(e){
-			  console.log(e.responseText);
-			 }
-			
-		}) //ajax 종료	 		
-	 		
-	 		
-	 	
-	 	}// onSelect 종료
-			
-	}) //datepicker메소드 종료
-	 
-	
-	  
-	  //시간 입력 단추 보였다 안 보였다.
-	  $('#btn1').on('click',function(){
-		  
-		  var isHidden = $('#div1').is(":hidden");
-			
-			if(isHidden){
-				$('#div1').show(100); //파라미터는 걸리는 시간.
-			}else {
-				$('#div1').hide(100);
-			}
-		  
-	  });
-	  
-	
-	  //시간 입력 단추 중 하나값만 받아오기
-	  $(document).on('click','.timeBlock',function(){
-		 
-		  //버튼들 초기화
-		  $('.timeBlock').attr('class', 'timeBlock btn-lg');
-		  
-		  //클릭된 버튼만 class 추가
-		  $(this).attr("class","timeBlock btn-lg btn-success");
-		   
-		  
-		 //예약시간값을 저장 
-		 reserveTime = $(this).attr("date-reserveTime");
-			   
-	  })
-	  
-	  
-	  
-	  //sub 단추를 눌렀을 때(예약 신청)
-	  
-	  $('#sub').on('click',function(){
-		  
-		  checkValue();
-		 
+	}) //ajax 종료	 		
 		
-	  })
-	  
-	  
-	  //예약 임시 버튼
-	  $('#btn3').on('click',function(){
-		  
-		  //예약 하기 전 value 체크
-		  checkValue();
-		  
-	  })
-	  
-	  
-	  
-})  //document.ready 끝
+}
 
+
+//ajax 끝날때까지 기다리는 메소드
+jQuery.fn.center = function() {
+	this.css("position", "absolute");
+	this.css("top", Math.max(0, (($(window).height() - $(this)
+			.outerHeight()) / 2)
+			+ $(window).scrollTop())
+			+ "px");
+	this.css("left", Math.max(0,
+			(($(window).width() - $(this).outerWidth()) / 2)
+					+ $(window).scrollLeft())
+			+ "px");
+	return this;
+}
 
 //예약신청 임시버튼처리
 function test(){
@@ -314,17 +250,133 @@ function checkValue(){
 	// pay(); 
 } 
 
+//-----------------------------------------------내가 등록한 메소스들 끝-------------------------------
+
+
+//----------------------------------------------이벤트 등록 시작---------------------------------
+//달력과 시간 입력 단추 설정
+$(function(){
+	
+	//처음 포커스를 맞추는 이벤트  
+	var val = $('#focusDiv').position().top;
+    val = val-200;
+    
+	$('body,html').animate({scrollTop:val},300);
+	
+	
+	//계속적으로 상황판 새로고침
+	settingValiable = setInterval(timeBlockSetting,5000);
+
+	//달력 만드는 소스
+	$("#testDatepicker").datepicker({
+		minDate: 0
+		,beforeShowDay: disableAllTheseDays 
+	 	,onSelect: function(dateText) {
+		
+	 	//날짜값이 찍히면 날짜에 대한 버튼 상황값을 resultMap으로 가져와야 한다.	
+		timeBlockSetting();
+	 
+	 	if(settingValiableBoolean){
+	 		console.log('인터벌 시작')
+	 		settingValiableBoolean = false;
+	 		settingValiable = setInterval(timeBlockSetting,5000);
+	 		
+	 	}
+	 	
+	 	}// onSelect 종료
+			
+	}) //datepicker메소드 종료
+	 
+	
+	  
+	  //시간 입력 단추 보였다 안 보였다.
+	  $('#btn1').on('click',function(){
+		  
+		  var isHidden = $('#div1').is(":hidden");
+			
+			if(isHidden){
+				$('#div1').show(100); //파라미터는 걸리는 시간.
+			}else {
+				$('#div1').hide(100);
+			}
+		  
+	  });
+	  
+	   
+	  //시간 입력 단추 중 하나값만 받아오기
+	  $(document).on('click','.timeBlock',function(){
+		
+		
+		if(!settingValiableBoolean){
+			console.log('인터벌 종료')
+		clearInterval(settingValiable);
+		 settingValiableBoolean = true;
+		}
+		  //버튼들 초기화
+		  $('.timeBlock').attr('class', 'timeBlock btn-lg');
+		  
+		  //클릭된 버튼만 class 추가
+		  $(this).attr("class","timeBlock btn-lg btn-success");
+		   
+		  
+		 //예약시간값을 저장 
+		 reserveTime = $(this).attr("date-reserveTime");
+			   
+	  })
+	  
+	  
+	  
+	  //sub 단추를 눌렀을 때(예약 신청)
+	  
+	  $('#sub').on('click',function(){
+		  
+		  checkValue();
+		 
+		
+	  })
+	  
+	  
+	  //예약 임시 버튼
+	  $('#btn3').on('click',function(){
+		  
+		  //예약 하기 전 value 체크
+		  checkValue();
+		  
+	  })
+	  
+	  $(document).ajaxStart(function() {
+	  	
+	  	$('#loading').center();
+	  	$('#loadingLayout').fadeTo('slow', 0.5);
+
+	  }).ajaxComplete(function(){
+	  	
+	  	$('#loadingLayout').hide();
+	  	
+	  });
+
+	  
+})  //document.ready 끝
+
+
 
 </script>
 
 </head>
 
 <body>
+
 <!-- 로딩용 이미지 -->  
 	<%@include file="/WEB-INF/view/customer/nav_bar/navbar_logout.jsp"%>
 	
 
-   <%@include file="/WEB-INF/view/customer/header/header.jsp"%>
+<header class="row">
+		<div class="header-content blur">
+			<div>
+				<%@include file="../../header/header.jsp"%>
+			</div>
+		</div>
+</header>
 	
 	<focus id="focusDiv"></focus>
 <jsp:useBean id="sys" class="java.util.Date"/>
@@ -365,6 +417,14 @@ function checkValue(){
 <form action="" method="GET" onsubmit="checkValue();">
 <div class="container-fluid">
 
+	<!-- 로딩용 이미지  시작-->
+	<div id="loadingLayout"
+		style="display: none; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: #eee; z-index: 9000;">
+		<img id="loading" src="img/loading.gif" border="0">
+	</div>
+	<!-- 로딩용 이미지  끝-->
+
+
 <!-- 데이트피커 표시 부분 -->
 <div class="col-md-6"><div id="testDatepicker"></div></div>
 
@@ -397,7 +457,7 @@ ${restaurantDto.r_time}
 <input type="button" id="btn3" value="예약 임시 버튼"> 
 
 <div id="reserveData"></div>
-</div><!-- col-md-8 -->
+</div><!-- col-md-6 -->
 </div>
 </form>
 <!-- 예약 정보 컨테이너 끝 -->
