@@ -352,7 +352,7 @@ $(document).ready(function(){
 			      	<div class="col-sm-offset-2">
 				      	<div class="col-lg-6 col-sm-6">
 				        	<button type="button" class="btn btn-default" id="submit">수정</button>
-				        	<button type="button" class="btn btn-default" id="cancel">취소</button>
+				        	<button class="btn btn-default" id="cancel">취소</button>
 				        </div>
 				        <div class="col-lg-2 col-sm-2">
 				        	<button type="button" class="btn btn-default" id="btn_userLeave">탈퇴</button>
