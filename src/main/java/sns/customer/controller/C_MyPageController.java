@@ -210,7 +210,7 @@ public class C_MyPageController {
 	public String user_leave(HttpServletRequest request, String userid) {
 		System.out.println("탈퇴 userid : " + userid);
 		
-		//customerDao.userInfo_leave(userid);
+		customerDao.userInfo_leave(userid);
 		
 		request.getSession().invalidate();
 		
