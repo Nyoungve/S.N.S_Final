@@ -4,10 +4,10 @@
 	
 <!-- 레스토랑 표시부분 시작 -->
 
-    <section class="no-padding well" id="portfolio">
+    <section class="no-padding well">
        
       
-        <div class="container-fluid">
+        <div class="container-fluid" id="portfolio">
          
       
             <div class="row no-gutter popup-gallery">

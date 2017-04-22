@@ -38,8 +38,6 @@ var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
 //날짜 형식을 yyyy-mm-dd 로 만듬
 today = year + '-' + mon + '-' + day;
 
-
-
 //예약 시간
 var reserveTime = null;
 
@@ -443,8 +441,6 @@ ${restaurantDto.r_time}
 <!-- 날짜에 따른 버튼  끝-->
 </div>
 
-
-
 <select id="people" name="guestCount" class="form-control">
 <option value="">인원을 선택해주세요</option>
 <c:forEach var="i" begin="1" end="10" step="1">
@@ -508,7 +504,6 @@ ${restaurantDto.r_time}
 
 
 <!-- 판매자 정보 끝-->
-
 
 
 <!-- 모달 메세지 시작-->
