@@ -25,6 +25,19 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			return reviewDTO;
 		}
 		
+		//레스토랑의 후기들을 보기 위해 review 테이블에서 알려주는 Dao
+		public List<ReviewDTO> getReviewList(String restaurant_number){
+			
+			List<ReviewDTO> reviewDTOs = getSqlSession().selectList("review.r_getReviewList", restaurant_number);
+			
+			
+			return reviewDTOs;
+		}
+		
+		
+		
+		
+		
 		public ReviewDTO getReviewInfo(String reserveNumber) {
 			
 			ReviewDTO reviewDTO = getSqlSession().selectOne("review.c_getReviewInfo", reserveNumber);

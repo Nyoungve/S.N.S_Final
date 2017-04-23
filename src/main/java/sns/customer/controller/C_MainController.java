@@ -2,7 +2,6 @@ package sns.customer.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,10 +25,12 @@ import sns.dao.HolidaysDAO;
 import sns.dao.OwnerDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
+import sns.dao.ReviewDAO;
 import sns.dto.HolidayDTO;
 import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
+import sns.dto.ReviewDTO;
 
 @Controller
 public class C_MainController {
@@ -65,6 +66,14 @@ public class C_MainController {
 		this.ownerDao = ownerDao;
 	}
 	
+	@Autowired
+	private ReviewDAO reviewDao;
+	
+	public void setReviewDao(ReviewDAO reviewDao) {
+		this.reviewDao = reviewDao;
+	}
+
+
 
 	//더보기 버튼 요청 처리
 	@RequestMapping("/more.do")
@@ -110,9 +119,6 @@ public class C_MainController {
 		//오늘 날짜의 버튼 결과를 보내주므로 todayBtn은 true
 		model.addAttribute("todayBtn", true);
 		
-		
-		
-		
 		//레스토랑 휴일 정보를 json 형태로 보내준다.
 		JSONObject jso = new JSONObject();
 		
@@ -129,6 +135,13 @@ public class C_MainController {
 		OwnerDTO ownerDto = ownerDao.getOwnerInfo(restaurant_number);
 		
 		model.addAttribute("ownerDto", ownerDto);
+		
+		
+		//레스토랑에 대한 리뷰 정보를 보내준다.
+		List<ReviewDTO> reviewDtos = reviewDao.getReviewList(restaurant_number);
+		
+		model.addAttribute("reviewDtos", reviewDtos);
+		
 		
 		
 		return "customer/main/reserve/C_Main_ReservePage";

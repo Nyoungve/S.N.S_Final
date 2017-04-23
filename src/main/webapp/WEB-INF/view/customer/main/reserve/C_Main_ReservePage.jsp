@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -525,7 +524,6 @@ ${restaurantDto.r_time}
  <!-- 지도 표시 부분 -->
 <div id="map" class="col-md-6" style="height:400px;"></div>
 
-
 <div class="col-md-6">
 <h1>판매자 정보</h1>
 <blockquote>
@@ -590,8 +588,6 @@ ${restaurantDto.r_time}
     </div>
     </div>    
 <!-- 모달 메세지 끝 -->
-
-
 
 
 

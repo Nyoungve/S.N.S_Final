@@ -10,6 +10,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- select * from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER ) V where V.userid = #{userid} order by write_Date desc -->
 		select T.* from ( select V.*, rownum as rno from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserveNumber desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{review_rno}
 	</select>
+	  
+	<select id="r_getReviewList" parameterType="string" resultType="sns.dto.ReviewDTO">
+select comments, ranking, userid, write_date,substr(review_filepath, instr(review_filepath,'\', -1,1) +1) as review_filepath
+from review
+where restaurant_number=#{restaurant_number}
+order by write_date desc
+	</select>
+	
+	  
 	
 	<select id="c_getReviewInfo" parameterType="String" resultType="sns.dto.ReviewDTO">
 		select restaurant_number, write_date, reserve_date, userid, comments, ranking, substr(Review_filePath, instr(Review_filePath,'\', -1,1) +1) as Review_filePath, reserveNumber from review where reserveNumber = #{reserveNumber}

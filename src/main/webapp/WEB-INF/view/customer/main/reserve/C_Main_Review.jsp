@@ -1,24 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<c:forEach var="reviewDto" items="${reviewDtos}">
 <!-- 레스토랑 후기 1개 시작 -->
 <div class="row well">
 <div class="col-lg-4">
-<img alt="" class="img-rounded" src="img/portfolio/thumbnails/1.jpg" width="220px" height="150px">
+<img alt="후기 이미지" class="img-responsive" src="img/${reviewDto.review_filePath}" width="220px" height="150px"/>
 
 </div>
 <div class="col-lg-6">
-<dl>
-<dt>또 가고 싶다 애슐리 치즈 파티</dt>
-<dd><span class="glyphicon glyphicon-star"  style="font-size:20px;"></span><span class="glyphicon glyphicon-star"  style="font-size:20px;"></span><span class="glyphicon glyphicon-star"  style="font-size:20px;"></span><span class="glyphicon glyphicon-star"  style="font-size:20px;"></span><span class="glyphicon glyphicon-star-empty"  style="font-size:20px;"></span></dd>
+<c:forEach var="i" begin="1" end="${reviewDto.ranking}" step="1">
+<span class="glyphicon glyphicon-star"  style="font-size:20px;"></span>
+</c:forEach>
+<c:forEach var="i" begin="1" end="${5 - reviewDto.ranking}" step="1">
+<span class="glyphicon glyphicon-star-empty"  style="font-size:20px;"></span>
+</c:forEach>
 <br>
-<dd>정말 맛있었어요. 또 가고 싶어요. 알러뷰</dd>
-</dl>
+<blockquote>${reviewDto.comments}</blockquote>
 </div>
 <div class="col-lg-2">
-<p>작성자 : 김동규</p>
-<p>등록일 : 2017-04-11</p>
-<p>조회수 : 234234</p>
+<p>작성자 : ${reviewDto.userid}</p>
+<fmt:formatDate value="${reviewDto.write_date}" var="write_date" type="both" pattern="yyyy-MM-dd"/>
+<p>등록일 :${write_date}</p>
 </div>
 </div>
 <!-- 레스토랑 후기 1개 끝 -->
+</c:forEach>
