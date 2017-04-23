@@ -1,4 +1,4 @@
-package spring.util;
+package util;
 
 import org.springframework.ui.Model;
 

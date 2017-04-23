@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt2" uri="http://java.sun.com/jstl/fmt_rt"%>
 <jsp:useBean id="today" class="java.util.Date"/>
-<fmt2:formatDate value="${today}" pattern="H" var="sysTime"/>
+<fmt2:formatDate value="${today}" pattern="0H" var="sysTime"/>
+
 
 <!-- 버튼 표시 시작-->
 ${restaurantDto.openingTime}
 ${restaurantDto.closingTime}
-
+${sysTime}
 
 <h3><mark>Lunch</mark></h3> 
 
@@ -27,7 +28,7 @@ ${restaurantDto.closingTime}
 ${availteamLunch}
 </c:when>
 
-<c:when test="${todayBtn && sysTime>=i.key}">
+<c:when test="${todayBtn && sysTime ge i.key}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamLunch}
 </c:when>
@@ -67,15 +68,16 @@ ${availteamLunch}
 
 <c:choose>
  
-<c:when test="${restaurantDto.closingTime le i.key}">
+<c:when test="${restaurantDto.openingTime gt i.key || restaurantDto.closingTime le i.key}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
+${availteamDinner}
 </c:when>
 
 
-<c:when test= "${todayBtn && sysTime>=i.key}" >
+<c:when test= "${todayBtn && sysTime ge i.key}" >
+${fmtsysTime} ${i.key}
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
+${availteamDinner}
 </c:when>
 
 <c:when test= "${availteamDinner<=0}" >

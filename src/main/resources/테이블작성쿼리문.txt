@@ -27,7 +27,7 @@ insert into customer values('f','조두현','1','010-3333-3334','ad4@naver.com',
 insert into customer values('g','김태경','1','010-3333-3334','ad4@naver.com','0');
 insert into customer values('h','최태휘','1','010-3333-3334','ad4@naver.com','0');
 insert into customer values('i','한규필','1','010-3333-3334','ad4@naver.com','0');
-insert into customer values('j','수미','1','010-3333-3334','ad4@naver.com','0');
+insert into customer values('j','강수미','1','010-3333-3334','ad4@naver.com','0');
 
 commit;
 

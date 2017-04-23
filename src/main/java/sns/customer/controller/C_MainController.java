@@ -31,7 +31,7 @@ import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
 import sns.dto.ReviewDTO;
-import spring.util.PageingUtil;
+import util.PageingUtil;
 
 @Controller
 public class C_MainController {
