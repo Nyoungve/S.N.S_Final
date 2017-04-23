@@ -131,4 +131,23 @@ where reserve_date = #{reserve_date}
 
 </select>
 
+
+<select id="getReserveNumber" parameterType="sns.dto.ReserveDTO" resultType="int">
+
+select reserveNumber
+from reserve
+where restaurant_number=#{restaurant_number} 
+and reserve_date=#{reserve_date} 
+and deposit=#{deposit}
+and guestCount=#{guestCount}
+
+</select>
+
+<delete id="deleteReserveData" parameterType="int">
+
+delete from reserve
+where reserveNumber=#{reserveNumber}
+
+</delete>
+
 </mapper>

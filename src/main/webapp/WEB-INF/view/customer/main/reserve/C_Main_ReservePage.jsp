@@ -149,8 +149,8 @@ jQuery.fn.center = function() {
 
 
 //예약신청 디비에 저장
-function insertDBReserveData(imp_uid){
-		console.log(imp_uid);
+function insertDBReserveData(){
+		
 	
 		var restaurant_number='${restaurantDto.restaurant_number}';
 		var reserve_date = $( "#testDatepicker" ).val() +" "+reserveTime;
@@ -165,33 +165,69 @@ function insertDBReserveData(imp_uid){
      
      	
       	 $.ajax({
-        	 type:'GET'
+        	 type:'POST'
         	,url:'reserveData.do'
         	,data:query
         	,dataType:"JSON"
         	,success:function(data){
+        		//디비에 저장시 결제 요청
+        		console.log(data.insertOk);
         		
-        		//예약 결과 알려주기
-        		alert(data.insertOk)
+        		//디비에 저장시 결제 요청
+        		console.log(data.insertOk);
+        		console.log(data.reserveNumber)
         		
-        		location.href="reserve.do?restaurant_number="+restaurant_number+"&today="+today;
- 
-       
+        		
+        		if(data.insertOk){
+        			pay(data.reserveNumber);
+        		}
+        		
+        		
         	} //success 종료
         	,error:function(arg1){
         		
-        		
+        		alert('예약실패')
         		
         	}
         	
         }) //ajax 종료 */
        
-} //test 종료
+} //insertDBReserveData 종료
 
 
+//결제가 취소되면 디비에서 삭제
+function deleteDBReserveData(reserveNumber){
+		
+	
+	var url = "deleteReserveData.do";
+	var query = "reserveNumber="+reserveNumber;
+	console.log(query)
+
+ 	 $.ajax({
+   			 type:'POST'
+   			,url:url
+   			,data:query
+   			,dataType:"JSON"
+   			,success:function(data){
+   					
+   				if(data.deleteOk){
+   				alert('예약이 취소되었습니다.')	
+   				 location.href="reserve.do?restaurant_number="+'${restaurantDto.restaurant_number}'+"&today="+today;  
+   				}
+   		
+   		
+  		 	} //success 종료
+   			,error:function(arg1){
+   		
+   			
+  		 	}
+   	
+  		 }) //ajax 종료 */
+	
+} //deleteDBReserveData 종료
 
 //결제를 위한 함수
-function pay(){
+function pay(reserveNumber){
 	
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp99349216');
@@ -203,7 +239,7 @@ function pay(){
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '주문명:결제테스트',
 	    amount : $('#people').val() * 10000,
-	    buyer_email : 'iamport@siot.do',
+	    buyer_email : '',
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
 	    buyer_addr : '서울특별시 강남구 삼성동',
@@ -211,22 +247,20 @@ function pay(){
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        //결제완료
-	    	var msg = '결제가 완료되었습니다.';
+	    	var msg = '예약이 완료되었습니다.';
 	        msg += '고유ID : ' + rsp.imp_uid;
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	        
-	       //결제 완료 후 DB로 요청
-	       insertDBReserveData(rsp.imp_uid);
-	        
-	        
+	        alert(msg);
+	        location.href="reserve.do?restaurant_number="+'${restaurantDto.restaurant_number}'+"&today="+today;    
+	      
 	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
+			//결제 취소시 디비에서 내용 삭제    	
+	    	deleteDBReserveData(reserveNumber);
+	       
+	        
 	    }
-	    
-	    alert(msg);
 	    
 	});
 
@@ -257,11 +291,10 @@ function checkValue(){
 	 $('#reserveData').html('예약 날짜 : '+$( "#testDatepicker" ).val() + '&nbsp;'+ '예약 시간 : '+  reserveTime + '&nbsp;'+' 예약 인원 : ' + $('#people').val()) 
 	 
 	 
-	 //임시 요청 
-	// insertDBReserveData();
+	 //예약 요청 
+	 insertDBReserveData();
 	 
-	 //결제 요청
-	 pay(); 
+	
 } 
 
 //-----------------------------------------------내가 등록한 메소스들 끝-------------------------------
@@ -350,13 +383,7 @@ $(function(){
 	  })
 	  
 	  
-	  //예약 임시 버튼
-	  $('#btn3').on('click',function(){
-		  
-		  //예약 하기 전 value 체크
-		  checkValue();
-		  
-	  })
+	
 	  
 	  $(document).ajaxStart(function() {
 	  	
@@ -474,7 +501,6 @@ ${restaurantDto.r_time}
 
 <input type="button" id="sub" class="btn-lg btn-info btn-block" value="예약 신청"><br>
 <!-- 임시 버튼 -->
-<input type="button" id="btn3" value="예약 임시 버튼"> 
 
 <div id="reserveData"></div>
 </div><!-- col-md-6 -->

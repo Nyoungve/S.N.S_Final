@@ -165,7 +165,7 @@ public class C_MainController {
 	
 	
 	//고객의 예약 정보를 reserve테이블에 넣는 처리
-	@RequestMapping(value="/reserveData.do",method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@RequestMapping(value="/reserveData.do",method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp)
 									throws Exception{
@@ -183,9 +183,10 @@ public class C_MainController {
 		int reserveSituationNum = reserveDao.reserveSituationNum(reserveDto);
 		System.out.println("예약 현황 : " + reserveSituationNum);
 		
+		
 		if(restaurant_teamCount <= reserveSituationNum){ //이미 포화상태 
 			
-			jso.put("insertOk", "예약 자리가 남아있지 않습니다.");
+			jso.put("insertOk", false);
 			
 			return jso.toString();
 		}
@@ -195,15 +196,47 @@ public class C_MainController {
 		int resultNum =reserveDao.insertReserveData(reserveDto);
 		
 		if(resultNum == 1 ){
+			//정상처리
+			jso.put("insertOk", true);
 			
-			jso.put("insertOk", "예약이 정상처리되었습니다.");
+			int reserveNumber = reserveDao.getReserveNumber(reserveDto);
+			
+			jso.put("reserveNumber", reserveNumber);
+			
+			
 		}else{
+			//그 외의 상황
 			throw new Exception();
 		}
 		
 		System.out.println("/reserveData.do 종료");
+		
 		return jso.toString();
 	}
+	
+	
+	//결제 취소시 예약 테이블 내용 삭제
+	@RequestMapping(value="/deleteReserveData.do",method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String deleteReserveData(@RequestParam("reserveNumber") int reserveNumber,HttpServletResponse resp)
+									throws Exception{
+		
+		System.out.println("/deleteReserveData.do");
+		resp.setContentType("text/html;charset=UTF-8");
+			
+		JSONObject jso = new JSONObject();
+			
+		reserveDao.deleteReserveData(reserveNumber);
+		
+		jso.put("deleteOk", true);
+		
+		return jso.toString();
+	}
+	
+	
+	
+	
+	
 	
 	
 	public void compareTodaySelectDay(String selectDay,Model model){

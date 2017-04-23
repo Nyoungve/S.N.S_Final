@@ -132,6 +132,27 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 				return reserveSituationNum;
 	}	
 		
+	//예약 신청 시 사용자에게 예약 번호를 알려주는 처리
+	public int getReserveNumber(ReserveDTO reserveDto){
 		
+		int reserveNumber = getSqlSession().selectOne("reserve.getReserveNumber",reserveDto);
+		
+		System.out.println("예약번호 : " + reserveNumber);
+		return reserveNumber;
+	}
+	
+	
+	
+
+	//예약자가 결제 취소시 디비 데이터 삭제
+	public void deleteReserveData(int reserveNumber){
+	
+		System.out.println("예약번호 삭제 :" +reserveNumber);
+		getSqlSession().delete("reserve.deleteReserveData", reserveNumber);
+	
+	}
+	
+	
+	
 		
 }
