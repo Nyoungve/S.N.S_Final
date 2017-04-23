@@ -2,6 +2,7 @@ package sns.customer.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,8 +64,7 @@ public class C_MainController {
 	public void setOwnerDao(OwnerDAO ownerDao) {
 		this.ownerDao = ownerDao;
 	}
-
-
+	
 
 	//더보기 버튼 요청 처리
 	@RequestMapping("/more.do")
@@ -107,6 +107,9 @@ public class C_MainController {
 	
 		//레스토랑 시간별 예약 현황을 담은 resultMap
 		model.addAttribute("resultMap", resultMap);
+		//오늘 날짜의 버튼 결과를 보내주므로 todayBtn은 true
+		model.addAttribute("todayBtn", true);
+		
 		
 		
 		
@@ -138,7 +141,6 @@ public class C_MainController {
 			,@RequestParam("selectDay")String selectDay
 			,Model model){
 	
-		
 		//레스토랑의 teamCount를 보내준다.
 		//레스토랑의 정보를 가져오는 Dto 생성
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(restaurant_number);
@@ -152,6 +154,8 @@ public class C_MainController {
 		//모델에 세팅
 		model.addAttribute("resultMap", resultMap);
 		
+		//찍힌 날짜가 오늘이면 model에 todayBtn은 true를 만들어준다.
+		compareTodaySelectDay(selectDay,model);	
 		
 		return "customer/main/reserve/ReservePageTimeButtons";
 	}
@@ -171,6 +175,22 @@ public class C_MainController {
 		JSONObject jso = new JSONObject();
 			
 		
+		//예약 테이블에 넣기전에 restaurant의 팀 카운트를 세어본다.
+		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(reserveDto.getRestaurant_number());
+		int restaurant_teamCount= restaurantDto.getTeamCount();
+		System.out.println("레스토랑의 팀 카운트 : " +restaurant_teamCount);
+		int reserveSituationNum = reserveDao.reserveSituationNum(reserveDto);
+		System.out.println("예약 현황 : " + reserveSituationNum);
+		
+		if(restaurant_teamCount <= reserveSituationNum){ //이미 포화상태 
+			
+			jso.put("insertOk", "예약 자리가 남아있지 않습니다.");
+			
+			return jso.toString();
+		}
+		
+		
+		//예약 테이블에 넣는다.
 		int resultNum =reserveDao.insertReserveData(reserveDto);
 		
 		if(resultNum == 1 ){
@@ -186,8 +206,21 @@ public class C_MainController {
 	}
 	
 	
-	
-	
+	public void compareTodaySelectDay(String selectDay,Model model){
+		//오늘과 선택된 날을 비교
+				Date today = new Date();
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String fmtToday = transFormat.format(today);
+				
+				System.out.println("찍힌날"+selectDay);
+				System.out.println("오늘"+fmtToday);
+				
+				if(selectDay.equals(fmtToday)){
+					System.out.println("오늘날짜 버튼 만들어주고 있다.");
+					model.addAttribute("todayBtn", true);
+				}
+			
+	}
 	
 	
 	@InitBinder

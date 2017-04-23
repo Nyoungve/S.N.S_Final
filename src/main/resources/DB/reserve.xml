@@ -122,4 +122,13 @@ where reserveNumber=#{reserveNumber}
 
 </update>
 
+
+<select id="getreserveSituationNum" parameterType="sns.dto.ReserveDTO" resultType="int">
+
+select count(*) 
+from reserve
+where reserve_date = #{reserve_date}
+
+</select>
+
 </mapper>

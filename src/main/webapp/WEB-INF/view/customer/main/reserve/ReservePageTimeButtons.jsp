@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt2" uri="http://java.sun.com/jstl/fmt_rt"%>
+<jsp:useBean id="today" class="java.util.Date"/>
+<fmt2:formatDate value="${today}" pattern="H" var="sysTime"/>
 
 <!-- 버튼 표시 시작-->
+${restaurantDto.openingTime }
+${restaurantDto.closingTime }
 
 
 <h3><mark>Lunch</mark></h3> 
@@ -15,16 +20,26 @@
 
 <c:if test="${i.key<14}">
 
-
 <c:choose>
 
+<c:when test="${restaurantDto.openingTime gt i.key}">
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
+${availteamLunch}
+</c:when>
+
+<c:when test="${todayBtn && sysTime>=i.key}">
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
+${availteamLunch}
+</c:when>
+
+
 <c:when test="${availteamLunch<=0}">
-<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" data-reserveDate="${sysdate}" date-reserveTime="${i.key}:00:00">
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamLunch}
 </c:when>
 
 <c:otherwise>
-<input type="button" class="timeBlock btn-lg" value="${i.key}:00" data-reserveDate="${sysdate}" date-reserveTime="${i.key}:00:00">
+<input type="button" class="timeBlock btn-lg" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamLunch}
 </c:otherwise>
 
@@ -51,15 +66,26 @@ ${availteamLunch}
 <c:if test="${i.key>=14}">
 
 <c:choose>
+ 
+<c:when test="${restaurantDto.closingTime le i.key}">
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
+${availteamLunch}
+</c:when>
+
+
+<c:when test= "${todayBtn && sysTime>=i.key}" >
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
+${availteamLunch}
+</c:when>
 
 <c:when test= "${availteamDinner<=0}" >
-<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" data-reserveDate="${sysdate}" date-reserveTime="${i.key}:00:00">
+<input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamDinner}
 </c:when>
 
 
 <c:otherwise>
-<input type="button" class="timeBlock btn-lg" value="${i.key}:00" data-reserveDate="${sysdate}" date-reserveTime="${i.key}:00:00">
+<input type="button" class="timeBlock btn-lg" value="${i.key}:00"  date-reserveTime="${i.key}:00:00">
 ${availteamDinner}
 </c:otherwise>
 

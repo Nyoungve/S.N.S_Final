@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt2" uri="http://java.sun.com/jstl/fmt_rt"%>     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+     
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -152,7 +152,7 @@ function test(){
 	
 		var restaurant_number='${restaurantDto.restaurant_number}';
 		var reserve_date = $( "#testDatepicker" ).val() +" "+reserveTime;
-        var userid="a";
+        var userid='${userid}';
         var deposit =  $('#people').val() *10000;
 		var r_state = 1;
 		var guestCount= $('#people').val();
@@ -213,7 +213,7 @@ function pay(){
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	        
 	        //결제 완료 후 DB로 요청
-	       
+	        
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
@@ -226,6 +226,13 @@ function pay(){
 //데이터 값이 있는지 없는지 체크하고 값이 다 있다면 예약 신청
 function checkValue(){
 	  
+	if( ${!sessionUserid}){
+		alert('로그인 후 이용해주세요.')
+		$('#Login').modal();
+		return;
+	}
+	
+	
 	 if(reserveTime ==null){
 		 $('#reserveTimeCheck').modal();
 		 
@@ -365,8 +372,17 @@ $(function(){
 <body>
 
 <!-- 로딩용 이미지 -->  
-	<%@include file="/WEB-INF/view/customer/nav_bar/navbar_logout.jsp"%>
+
+<c:if test="${!sessionUserid}">
+<!-- 로그인 전일때 -->
+<%@include file="../../nav_bar/navbar.jsp"%>
+<%@include file="../../body/modal_login.jsp"%>	
+</c:if>
 	
+<c:if test="${sessionUserid}">	
+<!-- 로그인 후일때 -->	
+<%@include file="/WEB-INF/view/customer/nav_bar/navbar_logout.jsp"%>
+</c:if>	
 
 <header class="row">
 		<div class="header-content blur">
@@ -377,8 +393,7 @@ $(function(){
 </header>
 	
 	<focus id="focusDiv"></focus>
-<jsp:useBean id="sys" class="java.util.Date"/>
-<fmt2:formatDate value="${sys}" pattern="yyyy-mm-dd" var="sysdate"/>
+
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#menu1">레스토랑 예약 정보</a></li>

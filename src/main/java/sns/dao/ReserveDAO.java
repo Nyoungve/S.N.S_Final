@@ -1,5 +1,6 @@
 package sns.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -122,5 +123,13 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		}
 	
 	
-	
+	//예약날짜와 시간대에 몇명이나 예약되어 있는지를 확인하는 처리
+	public int reserveSituationNum(ReserveDTO reserveDto){
+		int reserveSituationNum =getSqlSession().selectOne("reserve.getreserveSituationNum", reserveDto);
+				
+				return reserveSituationNum;
+	}	
+		
+		
+		
 }
