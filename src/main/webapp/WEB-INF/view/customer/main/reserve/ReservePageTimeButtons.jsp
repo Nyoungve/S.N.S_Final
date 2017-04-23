@@ -5,8 +5,8 @@
 <fmt2:formatDate value="${today}" pattern="H" var="sysTime"/>
 
 <!-- 버튼 표시 시작-->
-${restaurantDto.openingTime }
-${restaurantDto.closingTime }
+${restaurantDto.openingTime}
+${restaurantDto.closingTime}
 
 
 <h3><mark>Lunch</mark></h3> 
