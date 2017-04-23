@@ -167,7 +167,8 @@ public class C_MainController {
 	//고객의 예약 정보를 reserve테이블에 넣는 처리
 	@RequestMapping(value="/reserveData.do",method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp){
+	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp)
+									throws Exception{
 		
 		System.out.println("/reserveData.do");
 		resp.setContentType("text/html;charset=UTF-8");
@@ -197,9 +198,8 @@ public class C_MainController {
 			
 			jso.put("insertOk", "예약이 정상처리되었습니다.");
 		}else{
-			jso.put("insertOk", "예약이 완료되지 않았습니다.");
+			throw new Exception();
 		}
-		
 		
 		System.out.println("/reserveData.do 종료");
 		return jso.toString();

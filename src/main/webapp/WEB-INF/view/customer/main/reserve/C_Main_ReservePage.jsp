@@ -147,8 +147,10 @@ jQuery.fn.center = function() {
 	return this;
 }
 
-//예약신청 임시버튼처리
-function test(){
+
+//예약신청 디비에 저장
+function insertDBReserveData(imp_uid){
+		console.log(imp_uid);
 	
 		var restaurant_number='${restaurantDto.restaurant_number}';
 		var reserve_date = $( "#testDatepicker" ).val() +" "+reserveTime;
@@ -174,9 +176,12 @@ function test(){
         		
         		location.href="reserve.do?restaurant_number="+restaurant_number+"&today="+today;
  
+       
         	} //success 종료
         	,error:function(arg1){
-        		console.log(arg1)
+        		
+        		
+        		
         	}
         	
         }) //ajax 종료 */
@@ -187,6 +192,7 @@ function test(){
 
 //결제를 위한 함수
 function pay(){
+	
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp99349216');
 
@@ -201,8 +207,7 @@ function pay(){
 	    buyer_name : '구매자이름',
 	    buyer_tel : '010-1234-5678',
 	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'http://www.naver.com'
+	    buyer_postcode : '123-456'
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        //결제완료
@@ -212,13 +217,17 @@ function pay(){
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	        
-	        //결제 완료 후 DB로 요청
+	       //결제 완료 후 DB로 요청
+	       insertDBReserveData(rsp.imp_uid);
+	        
 	        
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
 	    }
+	    
 	    alert(msg);
+	    
 	});
 
 }
@@ -249,10 +258,10 @@ function checkValue(){
 	 
 	 
 	 //임시 요청 
-	 test();
+	// insertDBReserveData();
 	 
 	 //결제 요청
-	// pay(); 
+	 pay(); 
 } 
 
 //-----------------------------------------------내가 등록한 메소스들 끝-------------------------------
