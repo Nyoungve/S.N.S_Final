@@ -31,6 +31,7 @@ import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
 import sns.dto.ReviewDTO;
+import spring.util.PageingUtil;
 
 @Controller
 public class C_MainController {
@@ -96,6 +97,7 @@ public class C_MainController {
 	@RequestMapping("/reserve.do")
 	public String reserveForm(@RequestParam("restaurant_number")String restaurant_number
 			,@RequestParam("today")String today
+			,@RequestParam(value="reviewPageNum", defaultValue="1") int reviewPageNum
 			,Model model){
 		
 		System.out.println("/reserve.do");
@@ -137,16 +139,56 @@ public class C_MainController {
 		model.addAttribute("ownerDto", ownerDto);
 		
 		
-		//레스토랑에 대한 리뷰 정보를 보내준다.
-		List<ReviewDTO> reviewDtos = reviewDao.getReviewList(restaurant_number);
+		//리뷰 페이지 페이징 처리
+		model.addAttribute("reviewPageNum", reviewPageNum);
+		int totalReviewCount = reviewDao.getTotalReviewCount(restaurant_number);
+		model.addAttribute("totalReviewCount", totalReviewCount);
 		
-		model.addAttribute("reviewDtos", reviewDtos);
-		
+		//리뷰 세팅
+		settingReviewList(totalReviewCount,model,reviewPageNum,restaurant_number);
 		
 		
 		return "customer/main/reserve/C_Main_ReservePage";
 	}
 
+	
+	@RequestMapping("/changeReviewList.do")
+	public String changeReviewList(String restaurant_number,int reviewPageNum,Model model){
+		System.out.println(restaurant_number);
+		System.out.println(reviewPageNum);
+		
+		int totalReviewCount = reviewDao.getTotalReviewCount(restaurant_number);
+		model.addAttribute("totalReviewCount", totalReviewCount);
+		
+		
+		
+		settingReviewList(totalReviewCount, model, reviewPageNum,restaurant_number);
+		
+		
+		return "customer/main/reserve/C_Main_Review";
+	}
+	
+	public void settingReviewList(int totalReviewCount,Model model,int reviewPageNum,String restaurant_number){
+		
+		int pageSize = 5;
+		
+		int startRow = (reviewPageNum - 1) * pageSize + 1;//한 페이지의 시작글 번호
+        
+        int endRow = reviewPageNum * pageSize;
+        
+       if(totalReviewCount>0){
+      	List<ReviewDTO> reviewDtos = reviewDao.getReviewList(restaurant_number,startRow,endRow);
+      	model.addAttribute("reviewDtos", reviewDtos);
+       }
+      	
+       PageingUtil.pageing(model,totalReviewCount,pageSize,reviewPageNum,5);
+	}
+	
+	
+	
+	
+	
+	
 	
 	//레스토랑 예약 시 날짜가 선택되었을 때 날짜에 대한 버튼 상황을 resultMap으로 보내주는 요청 처리
 	@RequestMapping("/getAvailableButtomResultMap.do") 

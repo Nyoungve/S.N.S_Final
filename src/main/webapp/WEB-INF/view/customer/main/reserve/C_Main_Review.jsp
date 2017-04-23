@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+
+
+
+<div id="reviewBox">
 <c:forEach var="reviewDto" items="${reviewDtos}">
 <!-- 레스토랑 후기 1개 시작 -->
 <div class="row well">
@@ -26,3 +30,34 @@
 </div>
 <!-- 레스토랑 후기 1개 끝 -->
 </c:forEach>
+</div>
+
+<div id="pagingBlock">
+<c:if test="${ totalReviewCount > 0}">
+
+<c:if test="${startPage >wantPageBlock}">
+   
+     <a href='javascript:void(0);' onClick='getReviewList(${startPage - wantPageBlock}); return false'>[이전]</a>
+</c:if>
+
+<c:forEach var="i" begin="${startPage}" end="${endPage}">
+   
+    <a href='javascript:void(0);' onClick='getReviewList(${i}); return false'>
+    
+    <c:if test="${ i== reviewPageNum}">
+    <b>[${i}]</b>
+    </c:if>
+    <c:if test="${ i != reviewPageNum}">
+    [${i}]
+    </c:if>
+    
+    </a>
+</c:forEach>
+
+<c:if test="${endPage < blockCount}">
+   
+     <a href='javascript:void(0);' onClick='getReviewList(${startPage + wantPageBlock}); return false'>[다음]</a>
+     
+</c:if>
+</c:if>
+</div>

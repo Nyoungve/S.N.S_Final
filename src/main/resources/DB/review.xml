@@ -11,12 +11,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select T.* from ( select V.*, rownum as rno from ( select A.E_name, B.write_date, B.ranking, B.comments, B.userid, B.reserveNumber from restaurant A, review B where A.RESTAURANT_NUMBER = B.RESTAURANT_NUMBER order by B.reserveNumber desc ) V where V.userid = #{userid} ) T where T.rno between 1 and #{review_rno}
 	</select>
 	  
-	<select id="r_getReviewList" parameterType="string" resultType="sns.dto.ReviewDTO">
-select comments, ranking, userid, write_date,substr(review_filepath, instr(review_filepath,'\', -1,1) +1) as review_filepath
+<select id="r_getReviewList" parameterType="map" resultType="sns.dto.ReviewDTO">
+
+select V.comments, V.ranking, V.userid, V.write_date,V.review_filepath,V.restaurant_number
+from
+(
+select rowNum as rno,T.comments, T.ranking, T.userid, T.write_date,substr(review_filepath, instr(review_filepath,'\', -1,1) +1) as review_filepath,T.restaurant_number
+from(
+select *
 from review
 where restaurant_number=#{restaurant_number}
 order by write_date desc
-	</select>
+)T
+)V
+where V.rno between #{startRow} and #{endRow}
+	
+</select>
 	
 	  
 	
@@ -39,6 +49,12 @@ order by write_date desc
 	<delete id="c_deleteReview" parameterType="String">
 		delete from review where reserveNumber = #{reserveNumber}
 	</delete>
+	
+	<select id="getTotalReviewCount" parameterType="string" resultType="int">
+	select count(*) from review where restaurant_number=#{restaurant_number}
+	</select>
+	
+	
 	
 </mapper>
 <!-- 

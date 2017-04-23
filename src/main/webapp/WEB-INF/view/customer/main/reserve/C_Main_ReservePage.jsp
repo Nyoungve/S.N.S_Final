@@ -296,6 +296,41 @@ function checkValue(){
 	
 } 
 
+
+//리뷰 제어 메소드
+function getReviewList(reviewPageNum){
+	var url="changeReviewList.do";
+	var query="restaurant_number="+'${restaurantDto.restaurant_number}'+"&reviewPageNum="+reviewPageNum;
+	
+	console.log(query)
+	
+	$.ajax({
+		 type:"GET"
+		 ,url:url
+		 ,data:query
+		 ,success:function(data){
+			
+			//원래 있던 버튼 표시창을 없애준다. 
+			$('#reviewBox').html("");
+			
+			//페이징 블럭도 초기화
+			$('#pagingBlock').html('');
+			
+			//새로운 후기글을 세팅한다.
+			$('#reviewBox').append(data);
+			 
+			
+		 }
+		 ,error:function(e){
+		  console.log(e.responseText);
+		 }
+		
+	}) //ajax 종료	 		
+
+	
+}
+
+
 //-----------------------------------------------내가 등록한 메소스들 끝-------------------------------
 
 
