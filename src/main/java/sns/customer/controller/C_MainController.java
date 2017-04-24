@@ -1,5 +1,6 @@
 package sns.customer.controller;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +27,7 @@ import sns.dao.OwnerDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
 import sns.dao.ReviewDAO;
+import sns.dao.ZipcodeDAO;
 import sns.dto.HolidayDTO;
 import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
@@ -72,6 +74,15 @@ public class C_MainController {
 	
 	public void setReviewDao(ReviewDAO reviewDao) {
 		this.reviewDao = reviewDao;
+	}
+
+
+	@Autowired
+	private ZipcodeDAO zipcodeDao;
+	
+	
+	public void setZipcodeDao(ZipcodeDAO zipcodeDao) {
+		this.zipcodeDao = zipcodeDao;
 	}
 
 
@@ -314,6 +325,59 @@ public class C_MainController {
 				}
 			
 	}
+	
+	//검색 시도 보내주기
+	
+	//produces="text/plain;charset=UTF-8" 한글 처리가 안될때 써주면 좋다.
+		@RequestMapping(value = "/city/cityList.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+		@ResponseBody
+		public String cityList(HttpServletResponse resp, @RequestParam("snum")String city) throws Exception {
+			
+			resp.setContentType("text/html; charset=UTF-8");
+			
+			List<String> list = null;
+
+			try {
+				list = zipcodeDao.getListData("city.listCity", city);
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			JSONObject jso = new JSONObject();
+			jso.put("data1", list);
+			return jso.toString();
+			
+		}
+	
+	
+		@RequestMapping(value = "/city/sidoList.do", method = RequestMethod.POST)
+		public void sidoList(HttpServletResponse resp) throws Exception {
+			
+			
+			List<String> list = null;
+
+			try {
+				
+				list = zipcodeDao.getListData("city.listSido");
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			
+			JSONObject jso = new JSONObject(); // JASON 객체생성
+			jso.put("data", list); // jason은 map구조(키,값), data라는 key로 list데이터를 주입했다.
+
+			resp.setContentType("text/html;charset=utf-8");
+			
+			PrintWriter out = resp.getWriter(); //writer 는 2byte 씩, stream은 1byte 씩
+			
+			// app ---> response 통로방향 
+			
+			out.print(jso.toString()); // out.print 내용을 ajax의 dataType이 jason에게 데이터 쏴줌
+			
+			
+		}
+	
 	
 	
 	@InitBinder

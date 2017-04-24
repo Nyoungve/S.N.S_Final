@@ -9,4 +9,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from zipcode where area4 like '%'||#{area4}||'%'
 	</select>
 
+
+	<select id="listSido" resultType="String">
+		select distinct area1 from zipcode order by area1 asc
+	</select>
+
+	<select id="listCity" parameterType="String" resultType="String">
+		select distinct area2 from zipcode 
+		where area1 = #{area1} order by area2 asc
+	</select>
+
+
+
 </mapper>

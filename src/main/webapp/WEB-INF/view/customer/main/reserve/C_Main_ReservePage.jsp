@@ -121,7 +121,7 @@ function timeBlockSetting(){
 			$('#buttonShow').html("");
 						
 			//버튼 표시창에 새로운 resultMap으로 세팅된 단추들을 보여준다.
-			$('#buttonShow').append(data);
+			$('#buttonShow').html(data);
 			 
 			
 		 }
@@ -589,10 +589,10 @@ ${restaurantDto.r_time}
 </div><!-- tab-content -->
 
 
-<!-- 판매자 정보 끝-->
+<!-- 판매자 정보 끝  -->
 
 
-<!-- 모달 메세지 시작-->
+<!-- 모달 메세지 시작 -->
 <div class="modal fade" id="reserveTimeCheck" role="dialog">
     <div class="modal-dialog" id="reserveTimeCheck"> 
       <!-- Modal content-->

@@ -18,4 +18,14 @@ public class ZipcodeDAO extends SqlSessionDaoSupport{
 	}
 	
 	
+	public List<String> getListData(String string) {
+		List<String> sido = getSqlSession().selectList("zipcode.listSido",string);
+		return sido;
+	}
+
+	public List<String> getListData(String string, String city) {
+		List<String> selectcity = getSqlSession().selectList("zipcode.listCity", city);
+		return selectcity;
+	}
+	
 }

@@ -16,18 +16,23 @@
 		<div class="col-md-8 div_search_select">
 			<form class="form-inline">
 				<div style="margin-bottom: 20px">
+					
+			<select class ="form-control" id="sido" onchange="cityList();">	<!-- onchange로 선택이 될때마다 cityList()실행 -->
+ 			 <option value="">::시도선택::</option>
+			</select>
+
+				<select class ="form-control" id="city">
+  				<option value="">::도시선택::</option>
+				</select> 
+				
 					<select class="form-control">
-						<option value="">지역선택</option>
-						<option value="서울">서울</option>
-						<option value="경기">경기</option>
-						<option value="인천">인천</option>
-					</select> <select class="form-control">
 						<option value="">인원선택</option>
 						<option value="2">2명</option>
 						<option value="3">3명</option>
 						<option value="4">4명</option>
 						<option value="5">5명</option>
-					</select> <select class="form-control">
+					</select> 
+					<select class="form-control">
 						<option value="">요일선택</option>
 						<option value="월">월</option>
 						<option value="화">화</option>

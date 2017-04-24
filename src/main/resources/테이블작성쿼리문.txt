@@ -127,7 +127,7 @@ create sequence seq_reserveNumber;
 
 delete from reserve;
 
-insert into reserve values('0101',to_date('2017-04-20 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval, '0');
+insert into reserve values('0101',to_date('2017-04-20 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','2', '3', seq_reserveNumber.nextval, '0');
 
 
 insert into reserve values('0101',to_date('2017-04-22 18:00:00', 'yyyy-mm-dd hh24:mi:ss'),'a','30000','5', '3', seq_reserveNumber.nextval, '0');
