@@ -6,10 +6,9 @@
 
 
 <!-- 버튼 표시 시작-->
-${restaurantDto.openingTime}
-${restaurantDto.closingTime}
-${sysTime}
-
+오픈 시간 : ${restaurantDto.openingTime}
+마감 시간 : ${restaurantDto.closingTime}
+현재 시간 : ${sysTime}
 <h3><mark>Lunch</mark></h3> 
 
 
@@ -76,7 +75,7 @@ ${availteamDinner}
 
 
 <c:when test= "${todayBtn && sysTime ge fmtNum}" >
-${fmtsysTime} ${i.key}
+
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamDinner}
 </c:when>

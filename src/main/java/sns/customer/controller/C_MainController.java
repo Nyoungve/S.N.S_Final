@@ -1,5 +1,6 @@
 package sns.customer.controller;
 
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -26,11 +28,13 @@ import sns.dao.OwnerDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.RestaurantDAO;
 import sns.dao.ReviewDAO;
+import sns.dao.ZipcodeDAO;
 import sns.dto.HolidayDTO;
 import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
 import sns.dto.ReviewDTO;
+import sns.dto.SearchDTO;
 import util.PageingUtil;
 
 @Controller
@@ -75,18 +79,27 @@ public class C_MainController {
 	}
 
 
+	@Autowired
+	private ZipcodeDAO zipcodeDao;
+	
+	
+	public void setZipcodeDao(ZipcodeDAO zipcodeDao) {
+		this.zipcodeDao = zipcodeDao;
+	}
+
+
 
 	//더보기 버튼 요청 처리
 	@RequestMapping("/more.do")
 	public String moreForm(@RequestParam("pageNum") int pageNum,Model model){
 		
-		System.out.println("more.do");
+		
 		
 		List<RestaurantDTO> restaurantDtos = restaurantDao.selectRestaurantList(pageNum);
 		
 		model.addAttribute("restaurantDtos",restaurantDtos);
 		
-		System.out.println("정상적으로 메소드 종료");
+	
 		
 		return "customer/body/moreRestaurant";
 	}
@@ -100,17 +113,11 @@ public class C_MainController {
 			,@RequestParam(value="reviewPageNum", defaultValue="1") int reviewPageNum
 			,Model model){
 		
-		System.out.println("/reserve.do");
-		System.out.println(restaurant_number);
-		System.out.println(today);
-		
+	
 		//레스토랑의 정보를 가져오는 Dto 생성
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(restaurant_number);
 		
-		System.out.println(restaurantDto);
-		System.out.println(restaurantDto.getM_path());
-		System.out.println(restaurantDto.getD_path());
-		System.out.println(restaurantDto.getMn_path());
+	
 		
 		//레스토랑의 정보를 model에 세팅
 		model.addAttribute("restaurantDto", restaurantDto);
@@ -190,11 +197,6 @@ public class C_MainController {
 	}
 	
 	
-	
-	
-	
-	
-	
 	//레스토랑 예약 시 날짜가 선택되었을 때 날짜에 대한 버튼 상황을 resultMap으로 보내주는 요청 처리
 	@RequestMapping("/getAvailableButtomResultMap.do") 
 	public String getAvailableButtomResultMap(@RequestParam("restaurant_number")String restaurant_number
@@ -230,7 +232,6 @@ public class C_MainController {
 	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp)
 									throws Exception{
 		
-		System.out.println("/reserveData.do");
 		resp.setContentType("text/html;charset=UTF-8");
 			
 		JSONObject jso = new JSONObject();
@@ -239,9 +240,9 @@ public class C_MainController {
 		//예약 테이블에 넣기전에 restaurant의 팀 카운트를 세어본다.
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(reserveDto.getRestaurant_number());
 		int restaurant_teamCount= restaurantDto.getTeamCount();
-		System.out.println("레스토랑의 팀 카운트 : " +restaurant_teamCount);
+		
 		int reserveSituationNum = reserveDao.reserveSituationNum(reserveDto);
-		System.out.println("예약 현황 : " + reserveSituationNum);
+		
 		
 		
 		if(restaurant_teamCount <= reserveSituationNum){ //이미 포화상태 
@@ -269,8 +270,7 @@ public class C_MainController {
 			throw new Exception();
 		}
 		
-		System.out.println("/reserveData.do 종료");
-		
+	
 		return jso.toString();
 	}
 	
@@ -281,7 +281,7 @@ public class C_MainController {
 	public String deleteReserveData(@RequestParam("reserveNumber") int reserveNumber,HttpServletResponse resp)
 									throws Exception{
 		
-		System.out.println("/deleteReserveData.do");
+		
 		resp.setContentType("text/html;charset=UTF-8");
 			
 		JSONObject jso = new JSONObject();
@@ -305,9 +305,6 @@ public class C_MainController {
 				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String fmtToday = transFormat.format(today);
 				
-				System.out.println("찍힌날"+selectDay);
-				System.out.println("오늘"+fmtToday);
-				
 				if(selectDay.equals(fmtToday)){
 					System.out.println("오늘날짜 버튼 만들어주고 있다.");
 					model.addAttribute("todayBtn", true);
@@ -315,6 +312,106 @@ public class C_MainController {
 			
 	}
 	
+	//검색 시도 보내주기
+	
+	//produces="text/plain;charset=UTF-8" 한글 처리가 안될때 써주면 좋다.
+		@RequestMapping(value = "/cityList.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+		@ResponseBody
+		public String cityList(HttpServletResponse resp, @RequestParam("snum")String city) throws Exception {
+			
+			resp.setContentType("text/html; charset=UTF-8");
+			
+			List<String> list = null;
+
+			try {
+				list = zipcodeDao.getListData("city.listCity", city);
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+
+			JSONObject jso = new JSONObject();
+			jso.put("data1", list);
+			return jso.toString();
+			
+		}
+	
+	
+		@RequestMapping(value = "/sidoList.do", method = RequestMethod.POST)
+		public void sidoList(HttpServletResponse resp) throws Exception {
+			
+			System.out.println("sido");
+			List<String> list = null;
+
+			try {
+				
+				list = zipcodeDao.getListData("city.listSido");
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			
+			JSONObject jso = new JSONObject(); // JASON 객체생성
+			jso.put("data", list); // jason은 map구조(키,값), data라는 key로 list데이터를 주입했다.
+
+			resp.setContentType("text/html;charset=utf-8");
+			
+			PrintWriter out = resp.getWriter(); //writer 는 2byte 씩, stream은 1byte 씩
+			
+			// app ---> response 통로방향 
+			
+			out.print(jso.toString()); // out.print 내용을 ajax의 dataType이 jason에게 데이터 쏴줌
+			
+			
+		}
+	
+	
+		//검색된 레스토랑 정보 보내주기
+		@RequestMapping("/searchRestaurant.do")
+		public String searchRestaurant(@RequestParam("sido")String sido, @RequestParam("city") String city
+									,@RequestParam("guestCount") int guestCount,@RequestParam("type") String type
+									,@RequestParam("e_name")String e_name
+									,Model model,HttpSession session){
+			
+			System.out.println("/searchRestaurant.do");
+			System.out.println(sido);
+			System.out.println(city);
+			System.out.println(guestCount);
+			System.out.println(type);
+			System.out.println(e_name);
+			
+			StringBuffer sb = new StringBuffer();
+			
+			sb.append(sido);
+			
+			if(city !=null){
+				sb.append(" ");
+				sb.append(city);
+			}
+			System.out.println(sb.toString());
+			
+			SearchDTO searchDto = new SearchDTO();
+			searchDto.setAddress(sb.toString());
+			searchDto.setGuestCount(guestCount);
+			searchDto.setType(type);
+			searchDto.setE_name(e_name);
+			
+			
+			List<RestaurantDTO> restaurantDtos = restaurantDao.searchRestaurant(searchDto);
+			model.addAttribute("restaurantDtos", restaurantDtos);
+			
+			boolean loginCk= (boolean) session.getAttribute("sessionUserid");
+			System.out.println(loginCk);
+			if(loginCk){
+				return "customer/main/C_MainPage";
+			}
+			
+			
+			return "customer/main/FirstMainPage";
+		}
+		
+		
+		
+		
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
