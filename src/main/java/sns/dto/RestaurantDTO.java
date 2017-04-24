@@ -20,9 +20,23 @@ public class RestaurantDTO {
 	private MultipartFile menu_image;
 	private String zipcode;
 	private String m_path;
+	private String d_path;
+	private String mn_path;
 	private int avgRanking;
 	
 	
+	public String getD_path() {
+		return d_path;
+	}
+	public void setD_path(String d_path) {
+		this.d_path = d_path;
+	}
+	public String getMn_path() {
+		return mn_path;
+	}
+	public void setMn_path(String mn_path) {
+		this.mn_path = mn_path;
+	}
 	public int getAvgRanking() {
 		return avgRanking;
 	}

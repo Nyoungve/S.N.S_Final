@@ -7,7 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="restaurant">
 
 <select id="selectRestaurantInfo" parameterType="string" resultType="sns.dto.RestaurantDTO">
-	select * from restaurant where restaurant_number=#{restaurant_number}
+	select R.restaurant_number, R.e_name,R.address,R.teamCount,R.type,R.pay_key,R.r_info,R.r_time,R.openingTime,R.closingTime,R.zipcode
+,substr(m_path, instr(m_path,'\', -1,1) +1) as m_path, substr(d_path1, instr(d_path1,'\', -1,1) +1) as d_path,substr(mn_path, instr(mn_path,'\', -1,1) +1) as mn_path
+from (
+select *
+from restaurant
+where restaurant_number = #{restaurant_number})
+R join (select *
+from restaurantupload
+where restaurant_number =  #{restaurant_number}) T
+on R.restaurant_number = T.restaurant_number
+
+	
 </select>
 
 <select id="RestaurantList" parameterType="string" resultType="sns.dto.RestaurantDTO">

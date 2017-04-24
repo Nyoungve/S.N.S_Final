@@ -199,7 +199,6 @@ function insertDBReserveData(){
 //결제가 취소되면 디비에서 삭제
 function deleteDBReserveData(reserveNumber){
 		
-	
 	var url = "deleteReserveData.do";
 	var query = "reserveNumber="+reserveNumber;
 	console.log(query)
@@ -485,7 +484,9 @@ $(function(){
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-6">
-<img src="img/portfolio/thumbnails/1.jpg" class="img-rounded" alt="1.jpg"> 
+
+
+<div class="img"><img src="img/${restaurantDto.m_path}" class="img-responsive" alt="레스토랑 메인 이미지" style="width: 80%;height: 80%"></div>
 </div>
 <div class="col-md-6">
 <h1>${restaurantDto.e_name}</h1>
@@ -547,10 +548,10 @@ ${restaurantDto.r_time}
 <!-- 메뉴판 이미지 시작-->
 <div class="container-fluid">
 <div class="col-md-6">
-음식 사진
+<div class="img"><img src="img/${restaurantDto.d_path}" class="img-responsive" alt="레스토랑 음식 이미지" style="width: 80%;height: 80%"></div>
 </div>
 <div class="col-md-6">
-메뉴판 사진
+<div class="img"><img src="img/${restaurantDto.mn_path}" class="img-responsive" alt="레스토랑 메뉴 이미지" style="width: 80%;height: 80%"></div>
 </div>
 </div>
 <!-- 메뉴판 이미지 끝-->

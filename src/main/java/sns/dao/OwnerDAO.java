@@ -14,12 +14,6 @@ public class OwnerDAO extends SqlSessionDaoSupport{
 	//owner 정보를 받아서 owner 테이블에 정보를 넣는 Dao
 	public void insertOwner(OwnerDTO ownerDto){
 		
-	System.out.println(ownerDto.getRestaurant_number());	
-	System.out.println(ownerDto.getName());	
-	System.out.println(ownerDto.getUserid());	
-	System.out.println(ownerDto.getEmail());	
-	System.out.println(ownerDto);	
-		
 	getSqlSession().insert("enterprise.insert",ownerDto);	
 	
 	
