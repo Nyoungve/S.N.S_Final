@@ -75,8 +75,46 @@ where Y.rno between #{startRow} and #{endRow}
 
 insert into restaurant values(#{restaurant_number},#{e_name},#{address},#{teamCount},#{type},#{pay_key},#{r_info},#{r_time},#{openingTime},#{closingTime},#{zipcode})
 
-
 </insert>
 
+
+<select id="searchRestaurant" parameterType="sns.dto.SearchDTO" resultType="sns.dto.RestaurantDTO">
+
+select *
+from 
+(
+select R.restaurant_number,R.e_name,R.address,R.teamCount,R.type,R.pay_key,R.r_info,R.r_time,R.openingtime,R.closingtime,R.zipcode,T.m_path,nvl(C.avgRanking,0) as avgRanking
+from restaurant R left join 
+(
+select restaurant_number, substr(m_path, instr(m_path,'\', -1,1) +1) as m_path
+from restaurantupload
+)T
+on R.restaurant_number = T.restaurant_number
+left join
+(
+select restaurant_number ,avg(ranking) as avgRanking
+from review
+group by restaurant_number
+) C
+on R.restaurant_number = C.restaurant_number
+order by C.avgRanking desc
+)K
+<where>
+
+<if test="e_name != null"> 
+e_name like '% ||#{e_name} || %' 
+</if>
+
+<if test="address != null">
+and address like '% || #{address} || %' 
+</if>
+
+<if test="type != null">
+and type like '% || #{type} || %'
+</if>
+
+</where>
+
+</select>
 
 </mapper>

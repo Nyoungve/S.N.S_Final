@@ -13,6 +13,7 @@ import sns.dto.FileInfoDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
 import sns.dto.RestaurantuploadDTO;
+import sns.dto.SearchDTO;
 
 
 public class RestaurantDAO extends SqlSessionDaoSupport{
@@ -136,13 +137,7 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		map.put("endRow", EndRow);
 		
 		
-		System.out.println(map.get("startRow"));
-		System.out.println(map.get("endRow"));
-		
 		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList",map);
-		
-		System.out.println(restaurantDtos);
-		
 		
 		return restaurantDtos;
 	}
@@ -156,6 +151,10 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 	}
 	
 	
-	
+	public List<RestaurantDTO> searchRestaurant(SearchDTO searchDto){
+		
+		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.searchRestaurant", searchDto);
+		return restaurantDtos;
+	}
 	
 }

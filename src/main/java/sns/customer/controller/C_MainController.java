@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -33,6 +34,7 @@ import sns.dto.OwnerDTO;
 import sns.dto.ReserveDTO;
 import sns.dto.RestaurantDTO;
 import sns.dto.ReviewDTO;
+import sns.dto.SearchDTO;
 import util.PageingUtil;
 
 @Controller
@@ -193,11 +195,6 @@ public class C_MainController {
       	
        PageingUtil.pageing(model,totalReviewCount,pageSize,reviewPageNum,5);
 	}
-	
-	
-	
-	
-	
 	
 	
 	//레스토랑 예약 시 날짜가 선택되었을 때 날짜에 대한 버튼 상황을 resultMap으로 보내주는 요청 처리
@@ -368,6 +365,53 @@ public class C_MainController {
 		}
 	
 	
+		//검색된 레스토랑 정보 보내주기
+		@RequestMapping("/searchRestaurant.do")
+		public String searchRestaurant(@RequestParam("sido")String sido, @RequestParam("city") String city
+									,@RequestParam("guestCount") int guestCount,@RequestParam("type") String type
+									,@RequestParam("e_name")String e_name
+									,Model model,HttpSession session){
+			
+			System.out.println("/searchRestaurant.do");
+			System.out.println(sido);
+			System.out.println(city);
+			System.out.println(guestCount);
+			System.out.println(type);
+			System.out.println(e_name);
+			
+			StringBuffer sb = new StringBuffer();
+			
+			sb.append(sido);
+			
+			if(city !=null){
+				sb.append(" ");
+				sb.append(city);
+			}
+			System.out.println(sb.toString());
+			
+			SearchDTO searchDto = new SearchDTO();
+			searchDto.setAddress(sb.toString());
+			searchDto.setGuestCount(guestCount);
+			searchDto.setType(type);
+			searchDto.setE_name(e_name);
+			
+			
+			List<RestaurantDTO> restaurantDtos = restaurantDao.searchRestaurant(searchDto);
+			model.addAttribute("restaurantDtos", restaurantDtos);
+			
+			boolean loginCk= (boolean) session.getAttribute("sessionUserid");
+			System.out.println(loginCk);
+			if(loginCk){
+				return "customer/main/C_MainPage";
+			}
+			
+			
+			return "customer/main/FirstMainPage";
+		}
+		
+		
+		
+		
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {

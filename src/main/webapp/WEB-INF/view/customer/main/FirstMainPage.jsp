@@ -88,7 +88,13 @@
 		});
 	}
 
-	
+	//검색버튼 클릭
+	function search(){
+		alert('hello');
+		
+		$('#searchForm').submit();
+		
+	}
 	
 $(function(){
 

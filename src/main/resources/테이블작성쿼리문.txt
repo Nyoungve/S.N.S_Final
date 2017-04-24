@@ -82,10 +82,10 @@ references customer(userid) on delete cascade
 );
 
 --3. 업주 더미 데이터
-insert into owner values('0101','a','김동규','1','010-1111-1111','ea@naver,com');
-insert into owner values('0202','b','최빛찬','2','010-1111-1112','ea2@naver,com');
-insert into owner values('0303','c','김나영','3','010-1111-1113','ea3@naver,com');
-insert into owner values('0404','d','이희성','4','010-1111-1114','ea4@naver,com');
+insert into owner values('0101','a','김동규','1','010-1111-1111','ea@naver.com');
+insert into owner values('0202','b','최빛찬','2','010-1111-1112','ea2@naver.com');
+insert into owner values('0303','c','김나영','3','010-1111-1113','ea3@naver.com');
+insert into owner values('0404','d','이희성','4','010-1111-1114','ea4@naver.com');
 commit;
 
 
@@ -194,7 +194,7 @@ drop table holidays cascade constraint;
 
 create table holidays(
 RESTAURANT_NUMBER VARCHAR2(20)
-,Holiday date 
+,Holiday varchar2(100)
 ,constraint FK_tbl_h_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
 references RESTAURANT(RESTAURANT_NUMBER) on delete cascade
 );
