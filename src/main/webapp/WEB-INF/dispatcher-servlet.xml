@@ -84,8 +84,8 @@
 	</bean>
 
 	
-<!-- 예외처리 페이지 -->	
-<bean
+	<!-- 예외처리 페이지 -->	
+	<bean
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
@@ -100,7 +100,7 @@
 		</property>
 	</bean>			
 
-<!-- 
+	<!-- 
 	인터셉터 세션 로그인 처리 
 	-->
 	<mvc:interceptors>
@@ -111,6 +111,7 @@
 	    </mvc:interceptor>
 	</mvc:interceptors>				
 		
+
 			
 <!-- 한글 처리 -->		
 <mvc:annotation-driven>
