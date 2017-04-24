@@ -10,7 +10,7 @@
         <div class="container-fluid" id="portfolio">
          
       
-            <div class="row no-gutter popup-gallery">
+           <div class="row no-gutter popup-gallery">
          
            <c:forEach var="restuarantDto" items="${restaurantDtos}">
            <!-- 레스토랑 정보 하나 시작-->

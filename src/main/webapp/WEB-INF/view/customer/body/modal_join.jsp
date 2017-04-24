@@ -6,8 +6,10 @@
     String contextPath = request.getContextPath(); //첫번째 경로를 가져온다
 	request.setCharacterEncoding("UTF-8");
 %>
-
-
+<html>
+<head>
+<title>회원가입</title>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 $(document).ready(function(){	
  	$("#emailcertification").hide();
@@ -253,7 +255,7 @@ $(document).ready(function(){
 			return false;
 		} else {
 			$("#emailIcon").attr("class", "glyphicon glyphicon-ok");
-			$("#emailIcon").css("color", "#006600");
+			$("#emailIcon").css("color", "#006600"); 
 		}
 		//GET방식으로 emailAuth.do로 메일보내고 인증번호를 받아온다.
 		console.log(userEmail);
@@ -265,35 +267,49 @@ $(document).ready(function(){
 	    	}
      		,dataType:"json"
 	    	,success:function(data){ //이메일인증 데이터보내기 eventSuccess
-	    		$("#emailCheck1").css("font-size", "12px");
-				$("#emailCheck1").css("color", "#006600");
-				$("#emailCheck1").css("font-weight", "900");
-				$("#emailCheck1").text("Ok");
-	    		$("#emailcertification").show();
-				$("#emailCheck").text("");
-  				var AuthNum = data.authNum;
- 				$("#btncodeCheck").on('click',function(){
- 					if($("#authNumber").val() == 1){
- 							$("#emailCheck2").css("font-size", "12px");
- 							$("#emailCheck2").css("color", "#ff1a1a");
- 							$("#emailCheck2").css("font-weight", "900");
- 							$("#emailCheck2").text("입력하신 이메일로 발송 된 인증번호를 입력하여 주십시오.");
- 							$(this).val("");
- 						} else if($("#authNumber").val() != data.authNum){
- 							$("#emailCheck2").css("font-size", "12px");
- 							$("#emailCheck2").css("color", "#ff1a1a");
- 							$("#emailCheck2").css("font-weight", "900");
- 							$("#emailCheck2").text("틀린 인증번호입니다. 인증번호를 다시 입력해주세요");
- 							$(this).val("");
- 						} else if($("#authNumber").val() == data.authNum){
- 							$("#emailCheck2").css("font-size", "12px");
- 							$("#emailCheck2").css("color", "#006600");
- 							$("#emailCheck2").css("font-weight", "900");
- 							$("#emailCheck2").text("Ok");
- 							$("#authNumberIcon").attr("class", "glyphicon glyphicon-ok");
- 			    			$("#authNumberIcon").css("color", "#006600");
- 						}
- 				});
+	    		
+	    		//입력받은 이메일과 데이터베이스 안의 이메일이 다를 때
+	    		if(data.emailCheck != userEmail){
+	    			//alert("사용가능!");
+	    			$("#emailCheck1").css("font-size", "12px");
+					$("#emailCheck1").css("color", "#006600");
+					$("#emailCheck1").css("font-weight", "900");
+					$("#emailCheck1").text("Ok 사용가능한 이메일 입니다.");
+		    		$("#emailcertification").show();
+					
+	  				var AuthNum = data.authNum;
+	  				
+	  				$("#btncodeCheck").on('click',function(){
+	 						if($("#authNumber").val() == 1){
+	 							$("#emailCheck2").css("font-size", "12px");
+	 							$("#emailCheck2").css("color", "#ff1a1a");
+	 							$("#emailCheck2").css("font-weight", "900");
+	 							$("#emailCheck2").text("입력하신 이메일로 발송 된 인증번호를 입력하여 주십시오.");
+	 							$(this).val("");
+							} else if($("#authNumber").val() != data.authNum){
+								$("#emailCheck2").css("font-size", "12px");
+								$("#emailCheck2").css("color", "#ff1a1a");
+								$("#emailCheck2").css("font-weight", "900");
+								$("#emailCheck2").text("틀린 인증번호입니다. 인증번호를 다시 입력해주세요");
+								$(this).val("");
+							} else if($("#authNumber").val() == data.authNum){
+								$("#emailCheck2").css("font-size", "12px");
+								$("#emailCheck2").css("color", "#006600");
+								$("#emailCheck2").css("font-weight", "900");
+								$("#emailCheck2").text("Ok");
+								
+								$("#authNumberIcon").attr("class", "glyphicon glyphicon-ok");
+				    			$("#authNumberIcon").css("color", "#006600");
+							}
+	 					
+	 				});
+	    		}else if(data.emailCheck == userEmail){//입력받은 이메일과 데이터베이스 안의 이메일이 같을 때 
+	    			//alert("중복된 이메일 입니다."); 
+	    			$("#emailCheck1").css("font-size", "12px");
+					$("#emailCheck1").css("color", "#cc1508");
+					$("#emailCheck1").css("font-weight", "900");
+					$("#emailCheck1").text("중복된 이메일 입니다.");
+	    		}
 	    	} 
 	    	,error:function(data){
 	    		alert("데이터보내기실패...ㅠㅠ");
@@ -377,3 +393,5 @@ $(document).ready(function(){
 			
 			</form>
 			</div>
+</body>
+</html>

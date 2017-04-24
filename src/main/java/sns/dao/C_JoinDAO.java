@@ -21,9 +21,17 @@ public class C_JoinDAO extends SqlSessionDaoSupport{
 	//아이디 찾기 (이메일인증)
 	//이메일을 입력받아서 이름과 이메일을 찾아낸다. 
 	public CustomerDTO idFind(String email){
-		CustomerDTO cDto = 
+		CustomerDTO customerDTO = 
 		getSqlSession().selectOne("join.findId",email);
-		return cDto;
+		return customerDTO;
+	}
+	
+	//이메일 중복체크
+	public CustomerDTO emailCheck(String email){
+		CustomerDTO customerDTO = 
+		getSqlSession().selectOne("join.emailCheck",email); 
+		return customerDTO;
+		
 	}
 	
 	//비밀번호 업데이트 

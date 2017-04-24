@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>★S.N.S★</title>
 <!--플러그인 파일 첨부-->
 	<%@include file="/WEB-INF/view/lib/library.jsp"%>
 

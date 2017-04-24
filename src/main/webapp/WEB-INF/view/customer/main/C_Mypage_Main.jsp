@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>S.N.S</title>
+<title>★S.N.S★</title>
 
 <!-- 플러그인 -->
 <%@include file="../../lib/library.jsp"%>
