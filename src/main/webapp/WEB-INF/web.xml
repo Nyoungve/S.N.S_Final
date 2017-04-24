@@ -27,7 +27,15 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
-  
+  <!-- 파일 다운로드 -->
+	<servlet>
+		<servlet-name>dispatcherNonHtml</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcherNonHtml</servlet-name>
+		<url-pattern>/download/*</url-pattern>
+	</servlet-mapping>
    <!-- 세션 타임아웃되는 시간 추가 10분-->
 	<session-config>
       <session-timeout>10</session-timeout>

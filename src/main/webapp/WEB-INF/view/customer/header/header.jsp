@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 헤더 시작 -->
 <header class="row">
 	<div class="header-content blur">
@@ -14,42 +15,33 @@
 
 		<!-- 첫번째 row의 col-md-8 시작 -->
 		<div class="col-md-8 div_search_select">
-			<form class="form-inline">
+		<form id="searchForm" class="form-inline" action="searchRestaurant.do" method="get">
 				<div style="margin-bottom: 20px">
-					
-			<select class ="form-control" id="sido" onchange="cityList();">	<!-- onchange로 선택이 될때마다 cityList()실행 -->
+				
+			<select class ="form-control" id="sido" name="sido" onchange="cityList();">	<!-- onchange로 선택이 될때마다 cityList()실행 -->
  			 <option value="">::시도선택::</option>
 			</select>
 
-				<select class ="form-control" id="city">
+				<select class ="form-control" id="city" name="city">
   				<option value="">::도시선택::</option>
 				</select> 
 				
-					<select class="form-control">
+					<select class="form-control" name="guestCount">
 						<option value="">인원선택</option>
-						<option value="2">2명</option>
-						<option value="3">3명</option>
-						<option value="4">4명</option>
-						<option value="5">5명</option>
+						<c:forEach var="i" begin="2" end="10" step="1">
+						<option value="${i}">${i}명</option>
+						</c:forEach>
 					</select> 
-					<select class="form-control">
-						<option value="">요일선택</option>
-						<option value="월">월</option>
-						<option value="화">화</option>
-						<option value="수">수</option>
-						<option value="목">목</option>
-						<option value="금">금</option>
-						<option value="토">토</option>
-						<option value="일">일</option>
-					</select>
+				
 				</div>
 				<div>
-					<input type="text" class="form-control" id="type" placeholder="요리 타입을 입력해주세요.">
+					<input type="text" class="form-control" id="type" name="type" placeholder="요리 타입을 입력해주세요.">
 
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="업체명을 입력해주세요.">
+							<input type="text" class="form-control" id="e_name" name="e_name" placeholder="업체명을 입력해주세요.">
 								 <span class="input-group-btn">
-								<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+								<button class="btn btn-default" type="button" onclick="search();"><span class="glyphicon glyphicon-search"></span></button>
+							
 							</span>
 						</div> <!-- /input-group -->
 				</div> <!-- /.row -->

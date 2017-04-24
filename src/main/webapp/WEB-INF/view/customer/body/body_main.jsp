@@ -62,9 +62,9 @@
      
      <br/><br/><br/>  
   	
-        <div class="container text-center">
-            <div class="call-to-action">
-                <a href="" class="btn btn-info btn-xl sr-button"><h1>업체 신청 Click!!</h1></a>
-            </div>
-        </div>
+     <div class="container text-center">
+         <div class="call-to-action">
+             <a href="download/file" class="btn btn-info btn-xl sr-button"><h1>업체 신청 Click!!</h1></a>
+         </div>
+     </div>
      
