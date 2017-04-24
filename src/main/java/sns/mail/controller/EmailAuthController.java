@@ -38,23 +38,37 @@ public class EmailAuthController {
 		this.c_JoinDAO = c_JoinDAO;
 	} 
 	
-	//근데 왜 이메일을 두개 보낼깡...
+	//이메일 인증 + 이메일 중복검사! 
+	//이메일이 DB에 존재하지 않는 경우에만 이메일 인증 가능 !
 	@RequestMapping(value="/emailAuth.do",method=RequestMethod.POST, produces ="text/plain;charset=UTF-8")
 	@ResponseBody 
 	public String emailAuth(HttpServletResponse response,HttpServletRequest request, @RequestParam("email") String email,String authNum, ModelAndView mav) throws Exception{ 
-		System.out.println("이메일인증 POST으로!");
+		
+		System.out.println("이메일인증, 이메일 중복검사 ~ POST로!");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		authNum = ""; 
 		authNum = RandomNum();//전송할 인증번호,함수를 호출하여 리턴값을 authNum에 저장한다.
 		
-		sendEmail(email.toString(),authNum); //sendEmail 함수를 호출한다. 
-		
 		JSONObject jso = new JSONObject();
-		jso.put("authNum", authNum); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
-
+		
+		CustomerDTO customerDTO = c_JoinDAO.emailCheck(email);
+		
+		try{
+			jso.put("emailCheck", customerDTO.getEmail()); //이메일 중복체크!
+			if(email.equals(customerDTO.getEmail())){
+				System.out.println("존재하는 이메일입니다.");
+			}
+		}catch(java.lang.NullPointerException e){
+			System.out.println("존재하지 않는 이메일");
+			System.out.println(e+" : 예외발생처리");
+			//존재하지 않는 이메일
+			jso.put("authNum", authNum); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
+			sendEmail(email.toString(),authNum); //sendEmail 함수를 호출한다.
+		}
 		mav.setViewName("forward:/join.do"); //modal_join.jsp 를 호출한다.
 		return jso.toString();
+
 	}
 	
 	//아이디 찾기 폼 띄우기. 
@@ -157,6 +171,7 @@ public class EmailAuthController {
 		String content="임시비밀번호["+password+"]";
 		
 		try{
+			
 			Properties props = new Properties();
 		
 			//NAVER SMTP 사용함으로 설정 바꿔준다.

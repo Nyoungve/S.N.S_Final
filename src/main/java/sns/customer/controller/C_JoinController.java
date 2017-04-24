@@ -39,6 +39,7 @@ public class C_JoinController {
 		response.setContentType("text/html; charset=UTF-8");
 		CustomerDTO customerDTO = c_JoinDAO.idCheck(userid);
 		JSONObject jso = new JSONObject();
+		
 		try{
 			jso.put("customerDTO", customerDTO.getUserid()); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
 		}catch(NullPointerException e){

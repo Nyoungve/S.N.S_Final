@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>★S.N.S★</title>
 	
 	<script>
 	
