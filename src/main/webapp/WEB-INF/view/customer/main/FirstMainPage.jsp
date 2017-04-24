@@ -91,22 +91,12 @@
 	
 	
 $(function(){
-	
-	
-	// 시도테이블의 리스트 가져오기
-	var url="sidoList.do";
-	
-	//  경로 설정
-	// http://localhost:8181/Srping_MVC/abc/index.jsp에서  'a.jsp'요청하면
-	// http://localhost:8181/Srping_MVC/abc/a.jsp
-	
-	// '/a.jsp' 요청하면  http://localhost:8181/Srping_MVC/a.jsp
 
 	var params="dumi="+new Date();
 	
 	$.ajax({
-		type:"post"		// 포스트방식
-		,url:url		// url 주소
+		type:"POST"		// 포스트방식
+		,url:"sidoList.do"		// url 주소
 		,data:params	//  요청에 전달되는 프로퍼티를 가진 객체
 		,dataType:"json"
 		,success:function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수
@@ -124,15 +114,6 @@ $(function(){
 	    	alert(e.responseText);
 	    }
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//더보기 버튼

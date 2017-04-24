@@ -91,13 +91,13 @@ public class C_MainController {
 	@RequestMapping("/more.do")
 	public String moreForm(@RequestParam("pageNum") int pageNum,Model model){
 		
-		System.out.println("more.do");
+		
 		
 		List<RestaurantDTO> restaurantDtos = restaurantDao.selectRestaurantList(pageNum);
 		
 		model.addAttribute("restaurantDtos",restaurantDtos);
 		
-		System.out.println("정상적으로 메소드 종료");
+	
 		
 		return "customer/body/moreRestaurant";
 	}
@@ -111,17 +111,11 @@ public class C_MainController {
 			,@RequestParam(value="reviewPageNum", defaultValue="1") int reviewPageNum
 			,Model model){
 		
-		System.out.println("/reserve.do");
-		System.out.println(restaurant_number);
-		System.out.println(today);
-		
+	
 		//레스토랑의 정보를 가져오는 Dto 생성
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(restaurant_number);
 		
-		System.out.println(restaurantDto);
-		System.out.println(restaurantDto.getM_path());
-		System.out.println(restaurantDto.getD_path());
-		System.out.println(restaurantDto.getMn_path());
+	
 		
 		//레스토랑의 정보를 model에 세팅
 		model.addAttribute("restaurantDto", restaurantDto);
@@ -241,7 +235,6 @@ public class C_MainController {
 	public String insertReserveData(ReserveDTO reserveDto,BindingResult bindingResult,HttpServletResponse resp)
 									throws Exception{
 		
-		System.out.println("/reserveData.do");
 		resp.setContentType("text/html;charset=UTF-8");
 			
 		JSONObject jso = new JSONObject();
@@ -250,9 +243,9 @@ public class C_MainController {
 		//예약 테이블에 넣기전에 restaurant의 팀 카운트를 세어본다.
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(reserveDto.getRestaurant_number());
 		int restaurant_teamCount= restaurantDto.getTeamCount();
-		System.out.println("레스토랑의 팀 카운트 : " +restaurant_teamCount);
+		
 		int reserveSituationNum = reserveDao.reserveSituationNum(reserveDto);
-		System.out.println("예약 현황 : " + reserveSituationNum);
+		
 		
 		
 		if(restaurant_teamCount <= reserveSituationNum){ //이미 포화상태 
@@ -280,8 +273,7 @@ public class C_MainController {
 			throw new Exception();
 		}
 		
-		System.out.println("/reserveData.do 종료");
-		
+	
 		return jso.toString();
 	}
 	
@@ -292,7 +284,7 @@ public class C_MainController {
 	public String deleteReserveData(@RequestParam("reserveNumber") int reserveNumber,HttpServletResponse resp)
 									throws Exception{
 		
-		System.out.println("/deleteReserveData.do");
+		
 		resp.setContentType("text/html;charset=UTF-8");
 			
 		JSONObject jso = new JSONObject();
@@ -316,9 +308,6 @@ public class C_MainController {
 				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String fmtToday = transFormat.format(today);
 				
-				System.out.println("찍힌날"+selectDay);
-				System.out.println("오늘"+fmtToday);
-				
 				if(selectDay.equals(fmtToday)){
 					System.out.println("오늘날짜 버튼 만들어주고 있다.");
 					model.addAttribute("todayBtn", true);
@@ -329,7 +318,7 @@ public class C_MainController {
 	//검색 시도 보내주기
 	
 	//produces="text/plain;charset=UTF-8" 한글 처리가 안될때 써주면 좋다.
-		@RequestMapping(value = "/city/cityList.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+		@RequestMapping(value = "/cityList.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 		@ResponseBody
 		public String cityList(HttpServletResponse resp, @RequestParam("snum")String city) throws Exception {
 			
@@ -350,10 +339,10 @@ public class C_MainController {
 		}
 	
 	
-		@RequestMapping(value = "/city/sidoList.do", method = RequestMethod.POST)
+		@RequestMapping(value = "/sidoList.do", method = RequestMethod.POST)
 		public void sidoList(HttpServletResponse resp) throws Exception {
 			
-			
+			System.out.println("sido");
 			List<String> list = null;
 
 			try {
