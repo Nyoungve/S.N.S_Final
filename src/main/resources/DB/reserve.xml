@@ -43,9 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 select *
 from(	
-select count(*) as "11"
+select count(*) as "10"
 from reserve
 where restaurant_number= #{restaurant_number} and reserve_date = to_date( #{today} ||'11:00:00','YYYY-MM-DD hh24:mi:ss')
+),(
+select count(*) as "11"
+from reserve
+where restaurant_number= #{restaurant_number} and reserve_date = to_date( #{today} ||'12:00:00','YYYY-MM-DD hh24:mi:ss')
 ),(
 select count(*) as "12"
 from reserve

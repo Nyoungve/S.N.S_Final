@@ -30,9 +30,9 @@
 //오늘 날짜 yyyy-mm-dd 형식으로 Main 페이지에서 전역변수로 가지고 있는다.
 var today = null;
 var now = new Date();
-    var year= now.getFullYear();
-var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
-var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+var year= now.getFullYear();
+var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0' +(now.getMonth()+1);
+var day = now.getDate()>9 ? ''+now.getDate() : '0' +now.getDate();
  
 //날짜 형식을 yyyy-mm-dd 로 만듬
 today = year + '-' + mon + '-' + day;
@@ -50,6 +50,8 @@ var holidays = ${holidays.jsoholidays}
 for(var i =0;i<holidays.length;i++){
 	 arrHoliday.push(holidays[i].holiday)	 
 }
+
+console.log(arrHoliday)
 
 //달력 설정
 $.datepicker.regional['ko'] = {

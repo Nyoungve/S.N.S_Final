@@ -1,4 +1,4 @@
-@CHARSET "EUC-KR";
+@CHARSET "UTF-8";
 /*! normalize.css 2012-03-11T12:53 UTC - http://github.com/necolas/normalize.css */
 
 /* =============================================================================
@@ -502,4 +502,33 @@ textarea {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+.Highlighted{
+
+   background-color : #E05600 !important;
+
+   background-image :none !important;
+
+   color: White !important;
+
+   font-weight:bold !important;
+
+   font-size: 20px;
+
+}
+
+
+.Highlighted a{
+
+   background-color : #E05600 !important;
+
+   background-image :none !important;
+
+   color: White !important;
+
+   font-weight:bold !important;
+
+   font-size: 20px;
+
 }

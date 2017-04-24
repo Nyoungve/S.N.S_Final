@@ -41,21 +41,6 @@
 <!--bootstrap 설정 끝-->
 
 
-<style type="text/css">
-
-  
-.Highlighted span{
-	background-color:red;
-	color: red;
-}
-
-
-</style>
-
-
-
-
-
 <script type="text/javascript">
 var holidaysDaysarr = new Array(); // 휴일 날짜 담을 공간
 
@@ -324,7 +309,7 @@ function noBefore(dateStr) { // date == 모든 날짜
 		
 	} else if ($.inArray(date, holidaysDaysarr) >= 0) {
 
-		return [true, "Highlighted", Highlight]; 
+		return [true, "Highlighted"]; 
 
 	} else if (dateStr > new Date()) {
 

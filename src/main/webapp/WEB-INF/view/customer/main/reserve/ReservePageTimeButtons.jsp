@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt2" uri="http://java.sun.com/jstl/fmt_rt"%>
 <jsp:useBean id="today" class="java.util.Date"/>
-<fmt2:formatDate value="${today}" pattern="0H" var="sysTime"/>
+<fmt2:formatDate value="${today}" pattern="H" var="sysTime"/>
 
 
 <!-- 버튼 표시 시작-->
@@ -20,13 +20,14 @@ ${sysTime}
 <c:set var="availteamLunch" value="${restaurantDto.teamCount - i.value}"></c:set>
 
 <c:if test="${i.key<14}">
-
+<fmt2:parseNumber type="number" value="${i.key}" var="fmtNum"></fmt2:parseNumber>
 <c:choose>
 
-<c:when test="${restaurantDto.openingTime gt i.key}">
+<c:when test="${restaurantDto.openingTime gt fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamLunch}
 </c:when>
+
 
 <c:when test="${todayBtn && sysTime ge i.key}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
@@ -65,7 +66,7 @@ ${availteamLunch}
 
 
 <c:if test="${i.key>=14}">
-
+<fmt2:parseNumber type="number" value="${i.key}" var="fmtNum"></fmt2:parseNumber>
 <c:choose>
  
 <c:when test="${restaurantDto.openingTime gt i.key || restaurantDto.closingTime le i.key}">
@@ -74,7 +75,7 @@ ${availteamDinner}
 </c:when>
 
 
-<c:when test= "${todayBtn && sysTime ge i.key}" >
+<c:when test= "${todayBtn && sysTime ge fmtNum}" >
 ${fmtsysTime} ${i.key}
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamDinner}
