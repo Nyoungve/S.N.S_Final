@@ -25,6 +25,32 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			return reviewDTO;
 		}
 		
+		//레스토랑의 후기들을 보기 위해 review 테이블에서 알려주는 Dao
+		public List<ReviewDTO> getReviewList(String restaurant_number,int startRow,int endRow){
+			
+			Map map = new HashMap<>(); 
+			map.put("restaurant_number", restaurant_number);
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			
+			
+			List<ReviewDTO> reviewDTOs = getSqlSession().selectList("review.r_getReviewList", map);
+			
+			
+			return reviewDTOs;
+		}
+		
+		//레스토랑에 대한 리뷰의 전체 글 갯수를 가져오는 Dao
+		public int getTotalReviewCount(String restaurant_number){
+			int totalReviewCount  = getSqlSession().selectOne("review.getTotalReviewCount", restaurant_number);
+			return totalReviewCount;
+		}
+		
+		
+		
+		
+		
+		
 		public ReviewDTO getReviewInfo(String reserveNumber) {
 			
 			ReviewDTO reviewDTO = getSqlSession().selectOne("review.c_getReviewInfo", reserveNumber);
@@ -61,7 +87,7 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			// 빛찬 집 컴퓨터
 			String projectPath2 = "C:\\Users\\Chan\\Spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\S.N.S\\img\\";
 			
-			String path = projectPath2 + now + "_" + name + "_" + ori_name;
+			String path = projectPath + now + "_" + name + "_" + ori_name;
 			File new_file = new File(path);
 			System.out.println(new_file);
 			try {
@@ -94,7 +120,7 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 			// 빛찬 집 컴퓨터
 			String projectPath2 = "C:\\Users\\Chan\\Spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\S.N.S\\img\\";
 						
-			String path = projectPath2 + now + "_" + name + "_" + ori_name;
+			String path = projectPath + now + "_" + name + "_" + ori_name;
 			File new_file = new File(path);
 			System.out.println(new_file);
 			try {

@@ -21,9 +21,11 @@
 	  		<div id="resultTable" class="col-lg-10 col-sm-10"></div>
 		</div>
 	</section>
-
-	<!-- 불러오기 -->
 	
+	<!-- 후기 수정 div -->
+	<div id="modifyModal"></div>
+	
+	<!-- 불러오기 -->
 	<%@include file="../footer/footer.jsp"%>
 	
 	<!-- 리뷰 모달 -->

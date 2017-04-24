@@ -29,15 +29,33 @@ open="(" separator="," close=")">
 
 
 
-<select id="mainRestaurantList" resultType="sns.dto.RestaurantDTO">
+<select id="mainRestaurantList" parameterType="map" resultType="sns.dto.RestaurantDTO">
 
-select *
-from restaurant R join 
+select Y.restaurant_number,Y.e_name,Y.address,Y.teamCount,Y.type,Y.pay_key,Y.r_info,Y.r_time,Y.openingtime,Y.closingtime,Y.zipcode,Y.m_path,Y.avgRanking
+from
+(
+select rownum as rno, K.restaurant_number,K.e_name,K.address,K.teamCount,K.type,K.pay_key,K.r_info,K.r_time,K.openingtime,K.closingtime,K.zipcode,K.m_path,K.avgRanking
+from
+(
+select R.restaurant_number,R.e_name,R.address,R.teamCount,R.type,R.pay_key,R.r_info,R.r_time,R.openingtime,R.closingtime,R.zipcode,T.m_path,nvl(C.avgRanking,0) as avgRanking
+from restaurant R left join 
 (
 select restaurant_number, substr(m_path, instr(m_path,'\', -1,1) +1) as m_path
 from restaurantupload
 )T
 on R.restaurant_number = T.restaurant_number
+left join
+(
+select restaurant_number ,avg(ranking) as avgRanking
+from review
+group by restaurant_number
+) C
+on R.restaurant_number = C.restaurant_number
+order by avgRanking desc
+) K
+) Y
+where Y.rno between #{startRow} and #{endRow}
+
 
 
 </select>

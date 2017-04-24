@@ -1,127 +1,234 @@
 @charset "utf-8";
-/* CSS Document */
+
 body {
 	background: url('../img/black_denim.png') repeat 0 0 #555;
 }
-/* DatePicker Container */
+
+/* DatePicker 크기 지정, 중앙 정렬, 그림자 추가하여 달력에  prominece 효과 설정. */
 .ui-datepicker {
-	width: 511px;
-	height: auto;
+	width: 500px;
+	height: 500px;
 	margin: 5px auto 0;
 	font: 20pt Arial, sans-serif;
 	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
 }
+
+/* a태그 기본 밑줄 장식 제거 */
 .ui-datepicker a {
 	text-decoration: none;
 }
-/* DatePicker Table */
+
+/* DatePicker 테이블의 너비 100% 설정 */
 .ui-datepicker table {
-	width: 500px;
-	height: 500px;
-/*	font-size: 3.0em;*/
+	width: 100%;
 }
+
+/* 머리글 섹션 설정 */
 .ui-datepicker-header {
-	background: url('../img/dark_leather.png') repeat 0 0 #000;
-	color: #e0e0e0;font-weight: bold;-webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
-	-moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
-	text-shadow: 1px -1px 0px #000;
-	filter: dropshadow(color=#000, offx=1, offy=-1);
-	line-height: 30px;border-width: 1px 0 0 0;
-	border-style: solid;
-	border-color: #111;width: 500px;
+  background: url('../img/dark_leather.png') repeat 0 0 #000;
+  color: #e0e0e0;
+  font-weight: bold;
+  -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+  -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+  box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+  text-shadow: 1px -1px 0px #000;
+  filter: dropshadow(color=#000, offx=1, offy=-1);
+  line-height: 30px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: #111;
 }
+
+/* 머리클 섹션의 월 위치를 가운데로 설정 */
 .ui-datepicker-title {
-	text-align: center;
+  text-align: center;
 }
-.ui-datepicker-prev, .ui-datepicker-next {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	cursor: pointer;
-	background-image: url('../img/arrow.png');
-	background-repeat: no-repeat;
-	line-height: 600%;
-	overflow: hidden;
+
+/* 월 변경 화살표 이미지 변경 */
+ .ui-datepicker-prev, .ui-datepicker-next {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  background-image: url('../img/arrow200.png');
+  background-repeat: no-repeat;
+  line-height: 600%;
+  overflow: hidden;
+
 }
+
+/* 화살표 위치를 각각 조정  */
 .ui-datepicker-prev {
-	float: left;
-	background-position: center -30px;
+  float: left;
+  background-position: -20px -125px;
 }
 .ui-datepicker-next {
-	float: right;
-	background-position: center 0px;
+  float: right;
+  background-position: -14px -25px;
 }
+
 .ui-datepicker thead {
-	background-color: #f7f7f7;
-	background-image: -moz-linear-gradient(top,  #f7f7f7 0%, #f1f1f1 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
-	background-image: -webkit-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
-	background-image: -o-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
-	background-image: -ms-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
-	background-image: linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
-	border-bottom: 1px solid #bbb;
+  background-color: #f7f7f7;
+  background-image: -moz-linear-gradient(top,  #f7f7f7 0%, #f1f1f1 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
+  background-image: -webkit-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: -o-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: -ms-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
+  border-bottom: 1px solid #bbb;
 }
+
+/* 요일 텍스트 설정 */
 .ui-datepicker th {
-	text-transform: uppercase;
-	font-size: 20pt;
-	padding: 5px 0;
-	color: #666666;
-	text-shadow: 1px 0px 0px #fff;
-	filter: dropshadow(color=#fff, offx=1, offy=0);
+  text-transform: uppercase;
+  font-size: 20pt;
+  padding: 5px 0;
+  color: #666666;
+  text-shadow: 1px 0px 0px #fff;
+  filter: dropshadow(color=#fff, offx=1, offy=0);
 }
+
+/* 달력 일자 사이 공백 제거 */
 .ui-datepicker tbody td {
-	padding: 0;
-	border-right: 1px solid #bbb;
+  padding: 0px;
+  border-right: 10px solid #bbb;
 }
+
+/* 테이블 행은 거의 동일하며, 마지막 행을 제외하고 1px border를 갖는다. */
 .ui-datepicker tbody td:last-child {
-	border-right: 0px;
+  border-right: 0px;
 }
+
 .ui-datepicker tbody tr {
-	border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
 }
 .ui-datepicker tbody tr:last-child {
-	border-bottom: 0px;
+  border-bottom: 0px;
 }
-.ui-datepicker td span, .ui-datepicker td a {display: inline-block;font-weight: bold;text-align: center;width: 70px;height: 79px;line-height: 30px;color: #666666;text-shadow: 1px 1px 0px #fff;filter: dropshadow(color=#fff, offx=1, offy=1);}
-.ui-datepicker-calendar .ui-state-default {
-	background: #ededed;
-	background: -moz-linear-gradient(top,  #ededed 0%, #dedede 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
-	background: -webkit-linear-gradient(top,  #ededed 0%,#dedede 100%);
-	background: -o-linear-gradient(top,  #ededed 0%,#dedede 100%);
-	background: -ms-linear-gradient(top,  #ededed 0%,#dedede 100%);
-	background: linear-gradient(top,  #ededed 0%,#dedede 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
-	-webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
-	-moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
-	box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+
+/* 날짜 가르키는 설정과 활성스타일 정의  */
+
+/* 날짜 텍스트 위치를 가운데에 배치하고 그라디언트 색상 및 내부 흰 그림자를 추가  */
+.ui-datepicker td span, .ui-datepicker td a {
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  line-height: 30px;
+  color: #666666;
+  text-shadow: 1px 1px 0px #fff;
+  filter: dropshadow(color=#fff, offx=1, offy=1);
 }
-.ui-datepicker-calendar .ui-state-hover {
-	background: #f7f7f7;
+
+ .ui-datepicker-calendar .ui-state-default {
+  background: #ededed;
+  background: -moz-linear-gradient(top,  #ededed 0%, #dedede 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
+  background: -webkit-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: -o-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: -ms-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: linear-gradient(top,  #ededed 0%,#dedede 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
+  -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+  -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+  box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
 }
+
+.ui-datepicker-unselectable .ui-state-default {
+  background: #f4f4f4;
+  color: #b4b3b3;
+}
+
+/* 날짜가 활성 상태 스타일 지정*/
+
 .ui-datepicker-calendar .ui-state-active {
-	background: #6eafbf;
-	-webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-	-moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-	box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
-	color: #e0e0e0;
-	text-shadow: 0px 1px 0px #4d7a85;
-	filter: dropshadow(color=#4d7a85, offx=0, offy=1);
-	border: 1px solid #55838f;
-	position: relative;
-	margin: -1px;
+  background: red;
+  -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  color: #00ffff;
+  text-shadow: 0px 1px 0px #4d7a85;
+  filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+  border: 1px solid #55838f;
+  position: relative;
+  margin: -1px;
 }
-.ui-datepicker-unselectable .ui-state-default {background: #f4f4f4;color: #b4b3b3;/* font-size: 19pt; */}
-.ui-datepicker-calendar td:first-child .ui-state-active {width: 70px;margin-left: 0;}
-.ui-datepicker-calendar td:last-child .ui-state-active {width: 70px;margin-right: 0;}
+
+/* 위치 고정 */
+
+.ui-datepicker-calendar td:first-child .ui-state-active {
+	width: 100%;
+	margin-left: 0;
+}
+.ui-datepicker-calendar td:last-child .ui-state-active {
+	width: 100%;
+	margin-right: 0;
+}
+
 .ui-datepicker-calendar tr:last-child .ui-state-active {
-	height: 29px;
+	width: 100%;
 	margin-bottom: 0;
 }
 
-.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color: red; }
-.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: blue; }
+/* 일요일 날짜 빨간색으로 */
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a {
+	color: red;
+}
+
+/* 토요일 날짜 파란색으로 */
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a {
+	color: blue;
+}
+
+.ui-datepicker td{
+	border: 0;
+    padding: 10px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+	border: 0px;
+    background: rgba(255, 255, 255, 0);
+    font-weight: normal/*{fwDefault}*/;
+    color: #555555/*{fcDefault}*/;
+}
+
+/* 날짜 위로 마우스를 가져가면 색깔 변경 */
+.ui-datepicker-calendar .ui-state-hover {
+  background: black; /* 마우스 오버시 날짜칸 바탕색 변경 */
+  border-radius: 5px; 
+  color: white;	 /* 마우스 오버시 글자색 변경 */
+}
+
+.Highlighted{
+
+   background-color : #E05600 !important;
+
+   background-image :none !important;
+
+   color: White !important;
+
+   font-weight:bold !important;
+
+   font-size: 20px;
+
+}
+
+
+.Highlighted a{
+
+   background-color : #E05600 !important;
+
+   background-image :none !important;
+
+   color: White !important;
+
+   font-weight:bold !important;
+
+   font-size: 20px;
+
+}

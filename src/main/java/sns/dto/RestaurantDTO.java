@@ -20,16 +20,14 @@ public class RestaurantDTO {
 	private MultipartFile menu_image;
 	private String zipcode;
 	private String m_path;
-	private int ranking;
+	private int avgRanking;
 	
 	
-	
-	
-	public int getRanking() {
-		return ranking;
+	public int getAvgRanking() {
+		return avgRanking;
 	}
-	public void setRanking(int ranking) {
-		this.ranking = ranking;
+	public void setAvgRanking(int avgRanking) {
+		this.avgRanking = avgRanking;
 	}
 	public String getM_path() {
 		return m_path;
@@ -127,12 +125,17 @@ public class RestaurantDTO {
 	public void setClosingTime(int closingTime) {
 		this.closingTime = closingTime;
 	}
+	
 	@Override
 	public String toString() {
 		return "RestaurantDTO [restaurant_number=" + restaurant_number + ", e_name=" + e_name + ", address=" + address
 				+ ", teamCount=" + teamCount + ", type=" + type + ", pay_key=" + pay_key + ", r_info=" + r_info
-				+ ", r_time=" + r_time + ", openingTime=" + openingTime + ", closingTime=" + closingTime + "]";
+				+ ", r_time=" + r_time + ", openingTime=" + openingTime + ", closingTime=" + closingTime
+				+ ", main_image=" + main_image + ", detail_image=" + detail_image + ", menu_image=" + menu_image
+				+ ", zipcode=" + zipcode + ", m_path=" + m_path + ", avgRanking=" + avgRanking + "]";
 	}
+	
+	
 	
 	
 	

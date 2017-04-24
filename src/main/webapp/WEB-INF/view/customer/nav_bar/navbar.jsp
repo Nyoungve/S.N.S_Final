@@ -51,7 +51,7 @@
 				
 				<!-- 내가 만든 회원가입 폼 content까지만 등록-->
 				<div id="SignUp"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog modal-sm">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 						<!-- modal_login.jsp에  header, body, footer 작성하기 -->
 						</div>

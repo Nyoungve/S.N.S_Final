@@ -16,8 +16,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONObject;
 import sns.dao.CustomerDAO;
 import sns.dao.ReserveDAO;
 import sns.dao.ReviewDAO;
@@ -81,7 +83,7 @@ public class C_MyPageController {
 	public String reserveCancel(@RequestParam("reserveNumber") String reserveNumber, @RequestParam("reserve_rno") String reserve_rno) {
 		System.out.println("reserveCancel");
 		System.out.println(reserveNumber);
-		reserveDao.reserveCancel(reserveNumber);
+		reserveDao.c_reserveCancel(reserveNumber);
 		return "redirect:/Mypage_Reserve.do?reserve_rno="+reserve_rno;
 	}
 
@@ -187,6 +189,35 @@ public class C_MyPageController {
 		reviewDao.deleteReview(reserveNumber);
 				
 		return "redirect:/Mypage_Review.do?review_rno=" + review_rno;
+	}
+	
+	//고객 정보 수정
+	@RequestMapping("/UserInfo_Modify.do")
+	@ResponseBody
+	public String userInfo_modify(CustomerDTO userInfo) {
+		System.out.println("userInfo_modify");
+		customerDao.userInfo_modify(userInfo);
+		
+		JSONObject jso = new JSONObject();
+		jso.put("test", "test");
+		
+		return jso.toString();
+	}
+	
+	//고객 탈퇴 요청
+	@RequestMapping("/Mypage_userLeave.do")
+	@ResponseBody
+	public String user_leave(HttpServletRequest request, String userid) {
+		System.out.println("탈퇴 userid : " + userid);
+		
+		customerDao.userInfo_leave(userid);
+		
+		request.getSession().invalidate();
+		
+		JSONObject jso = new JSONObject();
+		jso.put("test", "test");
+		
+		return jso.toString();
 	}
 	
 	

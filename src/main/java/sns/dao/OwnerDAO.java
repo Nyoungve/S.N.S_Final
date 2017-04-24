@@ -13,7 +13,16 @@ public class OwnerDAO extends SqlSessionDaoSupport{
 	
 	//owner 정보를 받아서 owner 테이블에 정보를 넣는 Dao
 	public void insertOwner(OwnerDTO ownerDto){
-	getSqlSession().update("enterprise.insert",ownerDto);	
+		
+	System.out.println(ownerDto.getRestaurant_number());	
+	System.out.println(ownerDto.getName());	
+	System.out.println(ownerDto.getUserid());	
+	System.out.println(ownerDto.getEmail());	
+	System.out.println(ownerDto);	
+		
+	getSqlSession().insert("enterprise.insert",ownerDto);	
+	
+	
 	}
 
 	//레스토랑 정보를 보여줄 때 업주 정보도 owner테이블에서 가져온다.
@@ -31,7 +40,7 @@ public class OwnerDAO extends SqlSessionDaoSupport{
 		map.put("password", password);
 		
 		String userid =getSqlSession().selectOne("enterprise.searchIdPw",map);
-		System.out.println(userid);
+		
 		
 		return userid;
 	}

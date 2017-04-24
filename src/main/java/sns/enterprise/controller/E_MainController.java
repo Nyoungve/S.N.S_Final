@@ -48,17 +48,17 @@ public class E_MainController {
 		
 			
 		//디비에서 아이디와 패스워드에 해당하는게 있는지 확인
-		String userid=ownerDao.searchIdPw(user_id,password);
+		String owneruserid=ownerDao.searchIdPw(user_id,password);
 		
-			if(userid != null){
+			if(owneruserid != null){
 				
 				//세션에 아이디 저장
-				session.setAttribute("sessionUserid", userid);
+				session.setAttribute("owneruserid", owneruserid);
 				
-				model.addAttribute("userid", userid);
+				model.addAttribute("sessionUserid", true);
 				
 				//업주의 레스토랑 사업자 등록번호 리스트를 구해온다.
-				List<String> ownerRestaurantNumberList =ownerDao.ownerRestaurantNumberList(userid);
+				List<String> ownerRestaurantNumberList =ownerDao.ownerRestaurantNumberList(owneruserid);
 		
 				//업주의 사업자 등록번호 리스트로부터 레스토랑 정보들을 구해온다.
 				List<RestaurantDTO> restaurants =restaurantDao.getRestaurants(ownerRestaurantNumberList);
@@ -69,9 +69,7 @@ public class E_MainController {
 			}else{
 				
 				System.out.println("로그인 실패");
-				model.addAttribute("loginFail", "loginFail");
-				
-				
+				model.addAttribute("sessionUserid", false);
 			}
 		
 		

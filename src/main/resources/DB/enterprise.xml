@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="insert" parameterType="sns.dto.OwnerDTO">
 
-insert into owner values(#{restaurant_number},#{userid},#{password},#{mobile},#{email})
+insert into owner values(#{restaurant_number},#{userid},#{name},#{password},#{mobile},#{email})
 
 </insert>
 

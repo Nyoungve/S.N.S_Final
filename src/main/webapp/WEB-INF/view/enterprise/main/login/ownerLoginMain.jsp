@@ -17,8 +17,59 @@
 	<!-- 필요한 라이브 파일들 -->
    <%@include file="/WEB-INF/view/lib/library.jsp" %>
    
-   <!-- 로그인 처리 시(성공,실패) 필요한 자바스크립트 -->
-    <%@include file="E_Main_LoginEvent.jsp" %>   
+  <script type="text/javascript">
+$(function(){
+
+	//로그인 성공
+	if(${sessionUserid}){
+		$('#ownerRestaurantList').modal({backdrop: "static"});
+	}
+  
+	//로그인 실패
+	else if(!${sessionUserid}){
+		$('#loginFail').modal({backdrop: "static"});
+		
+	}else{
+		
+	}
+
+	  
+	//닫기 버튼을 눌렀을 때 다시 redirect 처리
+	$('.closeBtn').on('click',function(){
+	
+		location.href = "ownerLoginMain.do";
+		
+		
+	})
+
+	
+	//로그인 성공 시 사업장 색 변화
+	$('.ownerMain').on('mouseover',function(){
+		
+		$(this).css("background-color",'green')
+		
+	}).on('mouseout',function(){
+		$(this).css("background-color",'')
+	})
+	
+	
+	//로그인 성공 후 사업장 제출
+	$('.ownerMain').on('click',function(){
+		
+		//사업장 클릭 시 사업장 번호를 input type="hidden"
+		var restaurant_number =$(this).find('.resNum').html();
+		
+
+		$('#restaurant_number').val(restaurant_number);
+		console.log($('#restaurant_number'))
+		console.log($('#formId'))
+		$('#formId').submit();
+	})
+	
+	
+})
+
+</script>
        
 </head>
 

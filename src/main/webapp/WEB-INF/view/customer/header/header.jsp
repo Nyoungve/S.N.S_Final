@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!-- 헤더 시작 -->
+<header class="row">
+	<div class="header-content blur">
 		<!-- 첫번째 row의 col-md-4 시작 -->
 
 		<div class="header-content-inner col-md-4" style="margin-top: 5%;">
@@ -46,7 +48,10 @@
 							</span>
 						</div> <!-- /input-group -->
 				</div> <!-- /.row -->
-		</div>
+		</div><!-- col-8 -->
 		</form>
+		
 	<!-- 첫번째 row의 col-md-8 끝-->
 	<!-- 헤더 첫번째 row 끝-->
+	
+	

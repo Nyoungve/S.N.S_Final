@@ -1,5 +1,6 @@
 package sns.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,10 +14,15 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 
 	
 	//고객의 예약 정보를 reserve 테이블에 저장하는 Dao
+	
 	public int insertReserveData(ReserveDTO reserveDto){
 	
+		System.out.println(reserveDto.getReserve_date());
+			
 		int resultNum =getSqlSession().insert("reserve.insertReserveData",reserveDto);
 		return resultNum;
+		
+		
 	}
 	
 	
@@ -49,11 +55,10 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	
 	
 	//업주가 예약 정보를 확인을 이해 reserve테이블에서 알려주는 Dao
-	public List<ReserveDTO> e_getReserveList(String restaurant_number, String end_rno) {
+	public List<ReserveDTO> e_getReserveList(String restaurant_number) {
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("restaurant_number", restaurant_number);
-		map.put("end_rno", end_rno);
 		
 		System.out.println("뭐가 문제일까?");
 		List<ReserveDTO> reserveDTO = getSqlSession().selectList("reserve.e_getReserve", map);
@@ -69,8 +74,19 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	}
 	
 	//고객이 예약 취소 요청
-	public void reserveCancel(String reserveNumber) {
+	public void c_reserveCancel(String reserveNumber) {
 		getSqlSession().update("reserve.c_reserveCancel", reserveNumber);
+	}
+	
+	
+	//업체 예약 승인
+	public void e_reserveOk(String reserveNumber) {
+		getSqlSession().update("reserve.e_reserveOk", reserveNumber);
+	}
+	
+	//업체 예약 취소
+	public void e_reserveCancel(String reserveNumber) {
+		getSqlSession().update("reserve.e_reserveCancel", reserveNumber);
 	}
 	
 	
@@ -109,5 +125,34 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		}
 	
 	
+	//예약날짜와 시간대에 몇명이나 예약되어 있는지를 확인하는 처리
+	public int reserveSituationNum(ReserveDTO reserveDto){
+		int reserveSituationNum =getSqlSession().selectOne("reserve.getreserveSituationNum", reserveDto);
+				
+				return reserveSituationNum;
+	}	
+		
+	//예약 신청 시 사용자에게 예약 번호를 알려주는 처리
+	public int getReserveNumber(ReserveDTO reserveDto){
+		
+		int reserveNumber = getSqlSession().selectOne("reserve.getReserveNumber",reserveDto);
+		
+		System.out.println("예약번호 : " + reserveNumber);
+		return reserveNumber;
+	}
 	
+	
+	
+
+	//예약자가 결제 취소시 디비 데이터 삭제
+	public void deleteReserveData(int reserveNumber){
+	
+		System.out.println("예약번호 삭제 :" +reserveNumber);
+		getSqlSession().delete("reserve.deleteReserveData", reserveNumber);
+	
+	}
+	
+	
+	
+		
 }

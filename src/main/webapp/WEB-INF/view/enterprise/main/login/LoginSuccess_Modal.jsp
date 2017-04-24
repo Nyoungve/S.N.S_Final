@@ -9,7 +9,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-       <b>${userid}</b> 님 환영합니다.
+       <b>${owneruserid}</b> 님 환영합니다.
         </div>
         <div class="modal-body">
          <p class="bg-primary">관리하실 사업장을 선택해주세요.</p>      
@@ -36,6 +36,7 @@
   </table>
   	<!-- 로그인 성공 후 레스토랑을 선택하면 숨겨진 폼 태그를 sumbit한다 -->
   	<form id="formId" action="ownerMypageMain.do" method="POST">
+  	<input type="hidden" id="owneruserid" name="owneruserid" value="${owneruserid}">
   	<input type="hidden" id="restaurant_number" name="restaurant_number" value="">
   	</form>
         </div>

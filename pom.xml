@@ -113,6 +113,14 @@
     	<artifactId>commons-fileupload</artifactId>
     	<version>1.3.2</version>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.10</version>
+</dependency>
+	
   </dependencies>
   <build>
     <finalName>sns_final</finalName>
