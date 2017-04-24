@@ -81,9 +81,11 @@ public class E_MyPageController {
 
 	//업주가 로그인에 성공했고 관리할 레스토랑을 클릭한 상태의 마이 페이지
 	@RequestMapping(value="/ownerMypageMain.do",method = RequestMethod.POST)
-	public String enterpriseForm(String restaurant_number,HttpSession session){
+	public String enterpriseForm(String restaurant_number,String owneruserid,HttpSession session,Model model){
 	
-	
+	//아이디 보내주기
+	model.addAttribute("owneruserid", owneruserid);	
+		
 	//세션에 설정	
 	session.setAttribute("sessionRestaurant_number", restaurant_number);
 	
@@ -279,6 +281,9 @@ public class E_MyPageController {
 		int resultNum =holidaysDao.compareholiday(dateText, restaurant_number);
 		
 		
+		System.out.println(restaurant_number);
+		System.out.println(dateText);
+		System.out.println(resultNum);
 		if(resultNum==1){ //디비에 이미 휴일로 등록되어 있음.
 			
 			

@@ -9,7 +9,7 @@
 				<a class="navbar-brand page-scroll" href="#page-top">S.N.S</a>
 			</div>
 			
-				${sessionUserid}님 환영합니다. 사업자 등록번호: ${sessionRestaurant_number}
+				${owneruserid}님 환영합니다. 사업자 등록번호: ${sessionRestaurant_number}
 		<ul class="nav navbar-nav  navbar-right">
 		<li id="E_Mypage_ReserveBtn">
 			<a><i class="glyphicon glyphicon-cutlery"></i> 예약 정보</a>
