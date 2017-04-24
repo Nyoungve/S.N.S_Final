@@ -4,6 +4,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="join">
 	
+	<!-- 아이디 찾기 해당 이메일을 입력받아 해당 이메일의 아이디를 가져와 보여준다. -->
+	<select id="findId" parameterType="sns.dto.CustomerDTO" resultType="sns.dto.CustomerDTO">
+		select email,userid from customer <![CDATA[where email=#{email}]]>
+	</select>
+	
+	<!-- 비밀번호 찾기는 아이디와 이메일을 입력받아서 아이디와 이메일이 일치할 경우에 임시비밀번호를 발급해준다 가져와서 이메일로 보내준댱  -->
+	<update id="issuePass" parameterType="sns.dto.CustomerDTO">
+		update customer set password=#{password} where email=#{email}
+	</update>
 	
 	<select id="idCheck" parameterType="sns.dto.CustomerDTO" resultType="sns.dto.CustomerDTO">
 		select userid from customer <![CDATA[where userid=#{userid}]]>	
