@@ -8,7 +8,7 @@ USERID varchar2(20) not null
 ,NAME varchar2(20) not null
 ,PASSWORD varchar2(20) not null
 ,MOBILE varchar2(20) not null
-,EMAIL varchar2(20) not null
+,EMAIL varchar2(100) not null
 ,NOSHOWCOUNT number default 0
 ,constraint PK_tbl_customer_userid primary key(userid) 
 );
