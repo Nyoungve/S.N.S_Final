@@ -24,7 +24,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <body>
-
 	<video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
 		<source src='img/open.mp4'>
 	</video>
@@ -37,7 +36,6 @@
 			</div>
 			<div class="col-md-7" style="height: 100%; margin-top: 10%">
 				<h1 id="intro">S.N.S</h1>
-				
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				실시간 레스토랑 예약 서비스</p>
