@@ -1,0 +1,165 @@
+--1. 고객 테이블
+drop table customer cascade constraint;
+
+create table customer(
+USERID varchar2(20) not null
+,NAME varchar2(20) not null
+,PASSWORD varchar2(20) not null
+,MOBILE varchar2(20) not null
+,EMAIL varchar2(20) not null
+,NOSHOWCOUNT number default 0
+,constraint PK_tbl_customer_userid primary key(userid) 
+);
+
+
+--2.레스토랑 테이블
+
+drop table RESTAURANT cascade constraint;
+
+
+create table RESTAURANT(
+RESTAURANT_NUMBER varchar2(20)
+, E_NAME VARCHAR(20)
+, ADDRESS VARCHAR(200)
+, TEAMCOUNT number
+, TYPE VARCHAR(20)
+, PAY_KEY VARCHAR(20)
+, R_info VARCHAR2(3000)
+, R_time varchar2(300)
+, openingTime number not null
+, closingTime number not null
+,zipcode varchar2(20)
+,constraint UK_tbl_restaurant_pay_key unique(pay_key)
+,constraint pK_tbl_r_RESTAURANT_NUMBER primary key(RESTAURANT_NUMBER)
+);
+
+--3. 업주 테이블
+drop table owner cascade constraint;
+
+create table owner(
+RESTAURANT_NUMBER varchar2(20) not null
+,USERID varchar2(20) not null
+,NAME varchar2(20) not null
+,password varchar2(20) not null
+,mobile varchar2(20) 
+,email varchar2(30)
+,constraint UK_tbl_e_RESTAURANT_NUMBER unique(RESTAURANT_NUMBER)
+,constraint FK_tbl_owner_restaurant_number foreign key(RESTAURANT_NUMBER)
+references restaurant(RESTAURANT_NUMBER) on delete cascade
+,constraint FK_tbl_userid foreign key(userid) 
+references customer(userid) on delete cascade
+);
+
+
+
+
+----4. 예약정보테이블              RESERVE
+drop table reserve cascade constraint;
+
+create table reserve(
+  restaurant_number varchar2(20) not null
+  ,reserve_date date
+  ,userid varchar2(20)
+  ,deposit varchar2(20)
+  ,r_state number
+  ,guestCount number
+  ,reserveNumber number
+  ,reviewCheck number default 0
+  ,constraint fk_tbl_rv_restaurant_number foreign key(restaurant_number)
+  references  restaurant(restaurant_number) on delete cascade
+  ,constraint fk_tbl_rv_userid foreign key(userid)
+  references  customer(userid) on delete cascade
+  ,constraint PK_tbl_rv_reserveNumber primary key(reserveNumber)
+);
+
+
+
+
+--5. 리뷰 테이블
+
+drop table review cascade constraint;
+
+create table review(
+  restaurant_number varchar2(20)
+  ,write_date date default sysdate
+  ,reserve_date date
+  ,userid varchar2(20)
+  ,comments varchar2(300)
+  ,ranking number
+  ,Review_filePath varchar2(300)
+  ,reserveNumber number
+  ,constraint fk_tbl_review_r_number foreign key(restaurant_number)
+  references restaurant(restaurant_number) on delete cascade
+  ,constraint fk_tbl_review_userid foreign key(userid)
+  references customer(userid) on delete cascade
+);
+
+
+
+-- 4. 레스토랑 파일 업로드 RESTAURANTUPLOAD
+drop table RESTAURANTUPLOAD cascade constraint;
+
+create table restaurantupload(
+restaurant_number varchar2(20)
+,M_path varchar2(200)
+,D_path1 varchar2(200)
+,Mn_path varchar2(200)
+,constraint fk_tbl_restaurantupload foreign key(restaurant_number)
+references restaurant(restaurant_number) on delete cascade
+);
+ 
+ 
+----5. 휴일 Holidays
+
+drop table holidays cascade constraint;
+
+create table holidays(
+RESTAURANT_NUMBER VARCHAR2(20)
+,Holiday date 
+,constraint FK_tbl_h_RESTAURANT_NUMBER foreign key(RESTAURANT_NUMBER)
+references RESTAURANT(RESTAURANT_NUMBER) on delete cascade
+);
+ 
+ 
+ 
+--6. 집코드     Zipcode
+
+drop table zipcode cascade constraint;
+
+create table zipcode(
+zipcode varchar2(10)
+,area1 varchar2(100)
+,area2 varchar2(100)
+,area3 varchar2(100)
+,area4 varchar2(1000)
+);
+ 
+ 
+
+---- 7. 운영자          ADMINISTRATOR
+drop table  ADMINISTRATOR;
+
+create table  ADMINISTRATOR(
+USERID VARCHAR(20) not null
+, PASSWORD VARCHAR(20) not null
+);
+
+
+
+----------- 8. 리뷰 파일 저장  review_imagesave 
+
+drop table  review_imagesave;
+
+create table review_imagesave (
+  originalFilename varchar2(100)
+  ,filePath varchar2(300)
+  ,fileSize number
+  ,restaurant_number varchar2(20)
+  ,userid varchar2(20)
+  ,write_date date default sysdate
+  ,reserveNumber number
+  ,constraint fk_tbl_image_r_number foreign key(restaurant_number)
+  references restaurant(restaurant_number) on delete cascade
+);
+ 
+

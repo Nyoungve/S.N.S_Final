@@ -6,10 +6,8 @@
     String contextPath = request.getContextPath(); //첫번째 경로를 가져온다
 	request.setCharacterEncoding("UTF-8");
 %>
-<html>
-<head>
-<title>회원가입</title>
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+
 <script>
 $(document).ready(function(){	
  	$("#emailcertification").hide();
@@ -379,5 +377,3 @@ $(document).ready(function(){
 			
 			</form>
 			</div>
-</body>
-</html>

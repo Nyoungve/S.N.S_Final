@@ -6,11 +6,8 @@
     String contextPath = request.getContextPath(); //첫번째 경로를 가져온다
 	request.setCharacterEncoding("UTF-8");
 %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>임시비밀번호 발급</title>
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+
 <script>
 //빈칸검사?
 		
@@ -65,8 +62,7 @@ $(document).ready(function(){
  });
  
 </script>
-</head>
-<body>
+
 <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"
 			aria-label="Close">
@@ -95,5 +91,3 @@ $(document).ready(function(){
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 	</div>
-</body>
-</html>

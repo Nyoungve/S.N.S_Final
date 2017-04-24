@@ -68,17 +68,23 @@ public class EmailAuthController {
 	@RequestMapping(value="/findId.do",method=RequestMethod.POST, produces ="text/plain;charset=UTF-8")
 	@ResponseBody 
 	public String findId(HttpServletResponse response, @RequestParam(value="email") String email ,ModelAndView mav) throws Exception{
+		
 		System.out.println("id찾기!POST로!");
 		response.setContentType("text/html; charset=UTF-8");
 		CustomerDTO customerDTO = c_JoinDAO.idFind(email);
+		
 		JSONObject jso = new JSONObject();
+		
 		try{
+			
 			if(email.equals(customerDTO.getEmail())){ //DB의 userid와 입력받은 userid가 같을경우
 				System.out.println("존재하는 이메일입니다. ");
 				jso.put("customerEmail", customerDTO.getEmail()); //key값과 value값을 정해서 서버로 보내준다. json타입으로!
 				jso.put("customerUserid", customerDTO.getUserid());
 				return jso.toString();
 			}	
+			
+			
 		}catch(NullPointerException e){
 			System.out.println(e + ": 존재하지 않는 이메일입니다.");
 			mav.setViewName("/customer/body/modal_findId");//findId.jsp로 이동 

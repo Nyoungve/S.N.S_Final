@@ -18,6 +18,8 @@
 <context:component-scan base-package="sns.enterprise.controller"></context:component-scan>
 <context:component-scan base-package="sns.mail.controller"></context:component-scan>
 
+
+
 <!-- 뷰 리졸버 등록 -->
 <bean name="viewResolvor" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <property name="prefix" value="/WEB-INF/view/"></property>

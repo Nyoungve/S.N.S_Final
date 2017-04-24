@@ -57,17 +57,20 @@ public class A_MyPageController {
 	@RequestMapping("/owner.do")
 	public String searchCustomer(@RequestParam("id")String id,Model model){
 		
-		CustomerDTO customerDTO =customerDao.getCustomer(id);
 		
+		CustomerDTO customerDTO =customerDao.getCustomer(id);
+
 		model.addAttribute("customerDTO", customerDTO);
 				
 		return "admin/administratorMainPage";
+		
 	}
+	
 	
 	
 	@RequestMapping("/blackList.do")
 	public String searchBlackList(@RequestParam("id")String id,Model model){
-		
+
 		List<CustomerDTO> blackList =customerDao.getBlackList(id);
 		
 		model.addAttribute("blackList", blackList);

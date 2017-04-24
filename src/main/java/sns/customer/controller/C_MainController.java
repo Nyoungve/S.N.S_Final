@@ -107,6 +107,10 @@ public class C_MainController {
 		//레스토랑의 정보를 가져오는 Dto 생성
 		RestaurantDTO restaurantDto = restaurantDao.selectRestaurantInfo(restaurant_number);
 		
+		System.out.println(restaurantDto);
+		System.out.println(restaurantDto.getM_path());
+		System.out.println(restaurantDto.getD_path());
+		System.out.println(restaurantDto.getMn_path());
 		
 		//레스토랑의 정보를 model에 세팅
 		model.addAttribute("restaurantDto", restaurantDto);
@@ -149,6 +153,7 @@ public class C_MainController {
 		
 		
 		return "customer/main/reserve/C_Main_ReservePage";
+		
 	}
 
 	
