@@ -237,13 +237,13 @@ function pay(reserveNumber){
 	    pg : 'danal', // version 1.1.0부터 지원. 
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
+	    name : '레스토랑예약',
 	    amount : $('#people').val() * 10000,
 	    buyer_email : '',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456'
+	    buyer_name : '',
+	    buyer_tel : '',
+	    buyer_addr : '',
+	    buyer_postcode : ''
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        //결제완료
@@ -252,6 +252,9 @@ function pay(reserveNumber){
 	        msg += '상점 거래ID : ' + rsp.merchant_uid;
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        msg +='예약번호 :' + reserveNumber;
+	        
+	        
 	        alert(msg);
 	        location.href="reserve.do?restaurant_number="+'${restaurantDto.restaurant_number}'+"&today="+today;    
 	      
@@ -294,7 +297,6 @@ function checkValue(){
 	 //예약 요청 
 	 insertDBReserveData();
 	 
-	
 } 
 
 
@@ -328,7 +330,6 @@ function getReviewList(reviewPageNum){
 		
 	}) //ajax 종료	 		
 
-	
 }
 
 
@@ -406,10 +407,7 @@ $(function(){
 			   
 	  })
 	  
-	  
-	  
 	  //sub 단추를 눌렀을 때(예약 신청)
-	  
 	  $('#sub').on('click',function(){
 		  
 		  checkValue();
@@ -417,9 +415,7 @@ $(function(){
 		
 	  })
 	  
-	  
-	
-	  
+	  //ajax 비동기화
 	  $(document).ajaxStart(function() {
 	  	
 	  	$('#loading').center();
@@ -433,7 +429,6 @@ $(function(){
 
 	  
 })  //document.ready 끝
-
 
 
 </script>

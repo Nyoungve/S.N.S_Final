@@ -24,6 +24,11 @@
 		<li id="E_Mypage_NoShowUserListBtn">
 			<a><i class="glyphicon glyphicon-remove"></i> 노쇼 처리 회원목록</a>
 		</li>
+		<li id="E_Mypage_PayCheckBtn">
+			<a><i class="glyphicons glyphicons-money"></i> 결제관리</a>
+		</li>
+		
+		
 		<li id="E_Mypage_LogoutBtn">
 			<a>로그 아웃</a>
 		</li>
