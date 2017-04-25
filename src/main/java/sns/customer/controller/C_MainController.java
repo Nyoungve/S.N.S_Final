@@ -172,8 +172,7 @@ public class C_MainController {
 		int totalReviewCount = reviewDao.getTotalReviewCount(restaurant_number);
 		model.addAttribute("totalReviewCount", totalReviewCount);
 		
-		
-		
+	
 		settingReviewList(totalReviewCount, model, reviewPageNum,restaurant_number);
 		
 		
