@@ -11,6 +11,9 @@ USERID varchar2(20) not null
 ,constraint PK_tbl_customer_userid primary key(userid) 
 );
 
+-- 1-1.이메일 컬럼 데이터 타입 변경
+alter table customer modify(EMAIL varchar2(50));
+commit;
 
 --2.레스토랑 테이블
 

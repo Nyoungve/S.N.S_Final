@@ -16,7 +16,7 @@
 			<div class="col-lg-4 text-center">
 				<i class="fa fa-envelope-o fa-3x sr-contact"></i>
 				<p>
-					<a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+					<a href="mailto:gladToBBNS@gmail.com">gladToBBNS@gmail.com</a>
 				</p>
 			</div>
 		</div>
@@ -31,9 +31,9 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
-				<span style="padding: inherit"> 회사명 OOO </span> <span
-					style="padding: inherit"> 대표 OOO</span> <span
-					style="padding: inherit"> 대표전화 00-0000-0000 </span>
+				<span style="padding: inherit"> 회사명 S.N.S </span> <span
+					style="padding: inherit"> 대표 BBNS</span> <span
+					style="padding: inherit"> 대표전화 12-3456-7890 </span>
 			</div>
 		</div>
 		<div class="row">

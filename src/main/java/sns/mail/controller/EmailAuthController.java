@@ -235,6 +235,8 @@ public class EmailAuthController {
 				
 		String content="인증번호["+authNum+"]";
 		
+		System.out.println(authNum);
+		
 		try{
 			
 			Properties props = new Properties();
