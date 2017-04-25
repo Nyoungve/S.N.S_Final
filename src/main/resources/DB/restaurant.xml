@@ -102,15 +102,15 @@ order by C.avgRanking desc
 <where>
 
 <if test="e_name != null"> 
-e_name like '% || #{e_name} || %' 
+e_name like '%' || #{e_name} || '%' 
 </if>
 
 <if test="address != null">
-and address like '% || #{address} || %' 
+and address like '%' || #{address} || '%' 
 </if>
 
 <if test="type != null">
-and type like '% || #{type} || %'
+and type like '%' || #{type} || '%'
 </if>
 
 </where>

@@ -368,7 +368,8 @@ public class C_MainController {
 		//검색된 레스토랑 정보 보내주기
 		@RequestMapping("/searchRestaurant.do")
 		public String searchRestaurant(@RequestParam("sido")String sido, @RequestParam("city") String city
-									,@RequestParam("guestCount") int guestCount,@RequestParam("type") String type
+									,@RequestParam(value="guestCount",defaultValue="1") int guestCount
+									,@RequestParam("type") String type
 									,@RequestParam("e_name")String e_name
 									,Model model,HttpSession session){
 			
@@ -397,15 +398,17 @@ public class C_MainController {
 			
 			
 			List<RestaurantDTO> restaurantDtos = restaurantDao.searchRestaurant(searchDto);
+			System.out.println(restaurantDtos);
+			
 			model.addAttribute("restaurantDtos", restaurantDtos);
 			
-			boolean loginCk= (boolean) session.getAttribute("sessionUserid");
-			System.out.println(loginCk);
-			if(loginCk){
+			
+			if(session.getAttribute("sessionUserid") !=null){
 				return "customer/main/C_MainPage";
 			}
 			
 			
+			System.out.println("정상종료");
 			return "customer/main/FirstMainPage";
 		}
 		
