@@ -414,7 +414,7 @@ jQuery.browser = {};
 	<br />
 	<br />
 	<!-- 헤더 시작 -->
-	<header class="col-md-12" style="border: 2px solid #10f0a0; height: 100%; width:100%; padding-bottom: 30px">
+	<header class="col-md-12" style=" height: 100%; width:100%; padding-bottom: 30px">
 		<div class="container-fluid">
 			<div class="header-content">
 

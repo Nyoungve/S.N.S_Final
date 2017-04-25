@@ -4,12 +4,13 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavMenu">
-			        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>                     
+			        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 			      </button>
 				<a class="navbar-brand page-scroll" href="#page-top">S.N.S</a>
 			</div>
-			
+			<p class="navbar-text">
 				${owneruserid}님 환영합니다. 사업자 등록번호: ${sessionRestaurant_number}
+			</p>
 		<ul class="nav navbar-nav  navbar-right">
 		<li id="E_Mypage_ReserveBtn">
 			<a><i class="glyphicon glyphicon-cutlery"></i> 예약 정보</a>

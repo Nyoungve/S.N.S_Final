@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<section id="contact">
+<section id="contact" style="color: white;">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
@@ -22,7 +22,7 @@
 		</div>
 	</div>
 </section>
-<address id="contact">
+<address id="contact"  style="color: white;">
 	<div class="container col-sm-12">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
