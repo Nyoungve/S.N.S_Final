@@ -21,12 +21,12 @@
 $(function(){
 
 	//로그인 성공
-	if(${sessionUserid}){
+	if(${sessionOwnerUserid}){
 		$('#ownerRestaurantList').modal({backdrop: "static"});
 	}
   
 	//로그인 실패
-	else if(!${sessionUserid}){
+	else if(!${sessionOwnerUserid}){
 		$('#loginFail').modal({backdrop: "static"});
 		
 	}else{

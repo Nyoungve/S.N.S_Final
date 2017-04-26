@@ -20,6 +20,7 @@
 
 <c:if test="${i.key<14}">
 <fmt2:parseNumber type="number" value="${i.key}" var="fmtNum"></fmt2:parseNumber>
+
 <c:choose>
 
 <c:when test="${restaurantDto.openingTime gt fmtNum}">
@@ -28,7 +29,7 @@ ${availteamLunch}
 </c:when>
 
 
-<c:when test="${todayBtn && sysTime ge i.key}">
+<c:when test="${todayBtn && sysTime ge fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamLunch}
 </c:when>
@@ -68,7 +69,7 @@ ${availteamLunch}
 <fmt2:parseNumber type="number" value="${i.key}" var="fmtNum"></fmt2:parseNumber>
 <c:choose>
  
-<c:when test="${restaurantDto.openingTime gt i.key || restaurantDto.closingTime le i.key}">
+<c:when test="${restaurantDto.openingTime gt fmtNum || restaurantDto.closingTime le fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
 ${availteamDinner}
 </c:when>

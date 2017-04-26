@@ -76,6 +76,7 @@ public class ReviewDAO extends SqlSessionDaoSupport{
 		
 		//후기 업로드
 		public String imageUpload(ReviewDTO reviewDTO) {
+		
 			System.out.println("upload");
 			long now = System.currentTimeMillis();
 			String name = reviewDTO.getUserid();

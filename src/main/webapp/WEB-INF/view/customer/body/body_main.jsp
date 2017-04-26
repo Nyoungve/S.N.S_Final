@@ -3,7 +3,7 @@
 	
 	
 <!-- 레스토랑 표시부분 시작 -->
-
+${restuarantDto.m_path}
     <section class="no-padding well">
        
       

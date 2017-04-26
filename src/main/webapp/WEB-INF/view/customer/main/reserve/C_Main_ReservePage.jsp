@@ -290,6 +290,11 @@ function checkValue(){
 		 return;
 	  }
 	 
+	  if(${blackListPeople}){
+		  alert('블랙 리스트 회원으로 등록되셨습니다. 관리자에게 문의바랍니다.')
+		  return;
+	  }
+	  
 	  
 	 $('#reserveData').html('예약 날짜 : '+$( "#testDatepicker" ).val() + '&nbsp;'+ '예약 시간 : '+  reserveTime + '&nbsp;'+' 예약 인원 : ' + $('#people').val()) 
 	 

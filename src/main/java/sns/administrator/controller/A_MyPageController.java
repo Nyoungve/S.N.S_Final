@@ -81,6 +81,7 @@ public class A_MyPageController {
 	
 	@RequestMapping("/noShowCount.do")
 	public String noShowCount(@RequestParam("id")String id){
+		System.out.println("/noShowCount.do");
 		customerDao.noShowCountUpdate(id);
 		
 		return "admin/administratorMainPage";

@@ -28,7 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 
 		select T.* from ( select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.guestCount, B.userid, B.reserve_date, B.R_state, B.reserveNumber from restaurant A, reserve B where A.restaurant_number = B.restaurant_number order by B.reserve_date desc ) V where V.restaurant_number = #{restaurant_number} ) T where T.rno between 1 and #{reserve_rno}
 		-->
-		select V.*, rownum as rno from ( select A.E_name, A.restaurant_number, B.guestCount, B.userid, B.reserve_date, B.R_state, B.reserveNumber from restaurant A, reserve B where A.restaurant_number = B.restaurant_number order by B.reserve_date desc ) V where V.restaurant_number = #{restaurant_number} 
+		select V.*, rownum as rno 
+		from ( select A.E_name, A.restaurant_number, B.guestCount, B.userid, B.reserve_date, B.R_state, B.reserveNumber 
+		from restaurant A, reserve B where A.restaurant_number = B.restaurant_number order by B.reserve_date desc ) V 
+		where V.restaurant_number = #{restaurant_number}
+		 
 	</select>
 	
 	<update id="e_reserveOk" parameterType="String">
@@ -153,5 +157,13 @@ delete from reserve
 where reserveNumber=#{reserveNumber}
 
 </delete>
+
+<select id="reserveCheck" parameterType="map" resultType="int">
+select count(*)
+from reserve
+where restaurant_number=#{restaurant_number} and to_char(reserve_date,'yyyy-mm-dd') =#{dateText}  
+
+</select>
+
 
 </mapper>

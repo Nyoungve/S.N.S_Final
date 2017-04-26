@@ -104,6 +104,7 @@ public class E_MyPageController {
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
 		
 		List<ReserveDTO> list = reserveDao.e_getReserveList(restaurant_number);
+		System.out.println(list);
 		mav.addObject("reserveList", list);
 		
 		return mav;
@@ -277,13 +278,25 @@ public class E_MyPageController {
 		//결과값을 보내줄
 		JSONObject jso = new JSONObject();
 		
+		
+		
+		int reserveCheckNum = reserveDao.reserveCheck(dateText,restaurant_number);
+		
+		if(reserveCheckNum>0){
+			System.out.println("예약사항존재");
+			List<HolidayDTO> holidays = holidaysDao.selectListHoliday(restaurant_number);
+			//내가 달력을 넘긴 경우 유지 값
+			jso.put("defaultDate", dateText);
+			//휴일 목록
+			jso.put("holidays", holidays);
+			jso.put("state", "예약된 사항이 존재합니다. 관리자에게 문의바랍니다.");
+			return  jso.toString();
+		}
+		
+		
 		// 홀리데이 비디에 있는지 비교
 		int resultNum =holidaysDao.compareholiday(dateText, restaurant_number);
 		
-		
-		System.out.println(restaurant_number);
-		System.out.println(dateText);
-		System.out.println(resultNum);
 		if(resultNum==1){ //디비에 이미 휴일로 등록되어 있음.
 			
 			
@@ -383,9 +396,6 @@ public class E_MyPageController {
 				
 			}
 			
-			
-			
-			
 		} //while 문 종료
 
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
@@ -401,6 +411,14 @@ public class E_MyPageController {
 		
 		return "redirect:ownerLoginMain.do";
 	}
+	
+	
+	@RequestMapping("/mainAgain.do")
+	public String mainAgain(){
+		
+		return "enterprise/main/Mypage/enterprise_Main";
+	}
+	
 	
 	
 }
