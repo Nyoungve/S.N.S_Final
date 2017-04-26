@@ -9,7 +9,7 @@
       
         <div class="container-fluid" id="portfolio">
          
-      
+      ${restuarantDto.m_path}
            <div class="row no-gutter popup-gallery">
          
            <c:forEach var="restuarantDto" items="${restaurantDtos}">

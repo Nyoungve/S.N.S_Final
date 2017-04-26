@@ -77,7 +77,10 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		//동규 학원
 		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 		
-		File new_file = new File(donggyuHak+name+"_"+ori_name);
+		//나영이 컴퓨터
+		String nyNotebook="C:\\Users\\User\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\sns_final\\img\\";
+		
+		File new_file = new File(nyNotebook+name+"_"+ori_name);
 		System.out.println(new_file);
 		
 		try {
@@ -97,13 +100,11 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 			if(image.getName().equals("menu_image")){
 				restaurantuploadDto.setMn_path(new_file.getAbsolutePath());
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		
+	
 		//FileInfoDTO f = new FileInfoDTO(image.getOriginalFilename(), new_file.getPath(), image.getSize());
 		//getSqlSession().insert("file.addFile", f);
 	}
@@ -135,7 +136,6 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		
 		map.put("startRow", StartRow);
 		map.put("endRow", EndRow);
-		
 		
 		List<RestaurantDTO> restaurantDtos = getSqlSession().selectList("restaurant.mainRestaurantList",map);
 		
