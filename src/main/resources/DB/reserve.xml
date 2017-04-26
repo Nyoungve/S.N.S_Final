@@ -158,4 +158,12 @@ where reserveNumber=#{reserveNumber}
 
 </delete>
 
+<select id="reserveCheck" parameterType="map" resultType="int">
+select count(*)
+from reserve
+where restaurant_number=#{restaurant_number} and to_char(reserve_date,'yyyy-mm-dd') =#{dateText}  
+
+</select>
+
+
 </mapper>

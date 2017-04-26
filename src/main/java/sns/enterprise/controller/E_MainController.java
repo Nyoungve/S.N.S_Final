@@ -55,7 +55,7 @@ public class E_MainController {
 				//세션에 아이디 저장
 				session.setAttribute("owneruserid", owneruserid);
 				
-				model.addAttribute("sessionUserid", true);
+				model.addAttribute("sessionOwnerUserid", true);
 				
 				//업주의 레스토랑 사업자 등록번호 리스트를 구해온다.
 				List<String> ownerRestaurantNumberList =ownerDao.ownerRestaurantNumberList(owneruserid);
@@ -69,7 +69,7 @@ public class E_MainController {
 			}else{
 				
 				System.out.println("로그인 실패");
-				model.addAttribute("sessionUserid", false);
+				model.addAttribute("sessionOwnerUserid", false);
 			}
 		
 		

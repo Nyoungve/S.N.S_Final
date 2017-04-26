@@ -378,13 +378,18 @@
         <td>${blckCustomer.userid}</td>
         <td>${blckCustomer.noShowCount}</td>
         <td>${blckCustomer.email}</td>
-        <td><button type="submit" class="btn">OK</button></td> 
+        <td>
+        <form action="noShowCount.do">
+   		<input type="hidden" name="id" value="${blckCustomer.userid}">
+        
+        <button type="submit" class="btn">OK</button>
+        </form>
+        </td> 
       </tr>
        </tbody>
   	</table>
-  	<form action="noShowCount.do">
-   <input type="hidden" name="id" value="${blckCustomer.userid}">
-    </form>
+  	
+  	    
       </c:forEach>
       
 </div>

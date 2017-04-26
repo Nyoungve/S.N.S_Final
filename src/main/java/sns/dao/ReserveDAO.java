@@ -152,6 +152,16 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 	}
 	
 	
+	//휴일 등록 시 예약 진행사항이 있는지 확인
+	public int reserveCheck(String dateText,String restaurant_number){
+		Map<String, String> map = new HashMap<>();
+		map.put("dateText", dateText);
+		map.put("restaurant_number", restaurant_number);
+		
+		
+		int  reserveCheckNum = getSqlSession().selectOne("reserve.reserveCheck", map);
+		return  reserveCheckNum;
+	}
 	
 		
 }
