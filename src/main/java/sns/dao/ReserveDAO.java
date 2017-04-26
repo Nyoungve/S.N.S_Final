@@ -60,7 +60,6 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 		Map<String, String> map = new HashMap<>();
 		map.put("restaurant_number", restaurant_number);
 		
-		System.out.println("뭐가 문제일까?");
 		List<ReserveDTO> reserveDTO = getSqlSession().selectList("reserve.e_getReserve", map);
 		System.out.println(reserveDTO);
 		return reserveDTO;

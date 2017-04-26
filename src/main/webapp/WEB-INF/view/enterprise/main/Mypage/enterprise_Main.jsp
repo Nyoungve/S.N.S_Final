@@ -110,7 +110,7 @@ $(function() {
 		alert('예약현황')
 		var url = "E_Mypage_Reserve.do"
 		var query = "restaurant_number="+restaurant_number
-		
+	
 		//예약현황 가져오는 ajax	
 		$.ajax({
 
@@ -291,13 +291,66 @@ $(function() {
 	
 	
 //====================================================================
-	
+
+//	
+var dataArr = {};
+
 	$('#E_Mypage_PayCheckBtn').on('click',function(){
 		
-		alert('hello');
+		
 		window.open("https://admin.iamport.kr/users/login");
 
 	})	
+
+	
+$(document).on('click','input[type=radio]',function(){
+		
+		var reserveNumber =$(this).attr('data-reserveNumber')
+		console.log(reserveNumber);
+		
+		var ynCheck = $(this).val();
+		console.log(ynCheck);
+		
+		dataArr[reserveNumber]=ynCheck;
+		
+	})
+	
+	
+	$(document).on('click','#noShowBtn',function(){
+		
+		var url="noShowSave.do"
+		//var json_data = JSON.stringify(map);
+		var json_data = JSON.stringify(dataArr)
+			
+		console.log(json_data)
+			
+		
+		  $.ajax({
+			
+			type : "post",
+			url : url,
+			data :json_data,
+			dataType:"json",
+			success : function(data) {
+       			
+				console.log('hello')
+				  
+			   
+			}
+			,
+			error : function(e) {
+				console.log('hello')
+				
+				location.href="mainAgain.do"
+			}
+
+		}) //ajax 종료 */
+ 		
+	})
+	
+
+	
+	
 	
 }); //document.ready 종료
 //=======================================ajax를 동기식으로 만드는 자바 스크립트 끝=======================================	

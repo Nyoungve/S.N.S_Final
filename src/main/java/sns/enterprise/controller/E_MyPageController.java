@@ -104,6 +104,7 @@ public class E_MyPageController {
 		String restaurant_number =(String)session.getAttribute("sessionRestaurant_number");
 		
 		List<ReserveDTO> list = reserveDao.e_getReserveList(restaurant_number);
+		System.out.println(list);
 		mav.addObject("reserveList", list);
 		
 		return mav;
@@ -383,9 +384,6 @@ public class E_MyPageController {
 				
 			}
 			
-			
-			
-			
 		} //while 문 종료
 
 		return "enterprise/main/Mypage/E_Mypage_noShowListPage";
@@ -401,6 +399,14 @@ public class E_MyPageController {
 		
 		return "redirect:ownerLoginMain.do";
 	}
+	
+	
+	@RequestMapping("/mainAgain.do")
+	public String mainAgain(){
+		
+		return "enterprise/main/Mypage/enterprise_Main";
+	}
+	
 	
 	
 }
