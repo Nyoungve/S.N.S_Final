@@ -72,12 +72,12 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		String donggyuNotebook="C:\\Users\\user\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 		
 		//동규 집컴터
-		String donggyuDesktop ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns\\img\\";
+		String donggyuDesktop ="C:\\Users\\kim\\Documents\\workspace-sts-3.8.3.RELEASE\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 
 		//동규 학원
 		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 		
-		File new_file = new File(donggyuHak+name+"_"+ori_name);
+		File new_file = new File(donggyuDesktop+name+"_"+ori_name);
 		System.out.println(new_file);
 		
 		try {
