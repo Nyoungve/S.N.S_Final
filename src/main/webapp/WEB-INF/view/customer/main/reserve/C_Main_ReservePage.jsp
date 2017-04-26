@@ -17,7 +17,7 @@
 	
 	
 <!-- 지도 사용을 위한 스크립트 추가 -->
-<!-- parsing block 에러는 소스가 너무 커서 네트워크가 느릴 때에는 보여지지 않을 수 있다는 것을 의미 -->
+<!-- parsing block 에러는 소스가 너무 커서 네트워크가 느릴 때에는 보여지지 않을 수 있다는 것을 의미 -->	
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=6341df44f6867a64500e499940c61c9a&libraries=services"></script>
     
 <!-- 결제 요청을 위한 스크립트 추가 -->
