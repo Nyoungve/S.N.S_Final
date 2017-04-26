@@ -107,7 +107,6 @@ $(function() {
 	// 업주 예약현황
 	$(document).on('click', '#E_Mypage_ReserveBtn', function() {
 		
-		alert('예약현황')
 		var url = "E_Mypage_Reserve.do"
 		var query = "restaurant_number="+restaurant_number
 	
@@ -181,7 +180,6 @@ $(function() {
 //======================================= 노쇼 리스트를 눌렀을 때 시작=======================================	
 	//노쇼리스트를 눌렀을 때 확정 처리
 		$(document).on('click','#E_Mypage_NoShowUserListBtn',function(){
-			alert('노쇼리스트');
 			var restaurant_number = $('#sessionRestaurant_number').val()
 			
 				var url = "E_Mypage_NoShowUserList.do"
@@ -219,7 +217,6 @@ $(function() {
 //=======================================로그 아웃버튼을 눌렀을 때 시작=======================================	
 	$(document).on('click','#E_Mypage_LogoutBtn',function(){
 		
-		alert('로그아웃');
 		location.href="ownerlogout.do";
 		
 		
@@ -235,7 +232,6 @@ $(function() {
 	// 휴일 등록을 눌렀을 때
 	$('#holidayBtn').on('click', function() {
 
-		alert('휴일등록클릭')
 		// 기존 데이터를 지워준다.
 		$('#divBox').html("");
 		

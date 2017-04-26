@@ -47,6 +47,7 @@ public class C_LoginController {
 		
 		//세션값여부에따라 아이디값을 주어 다르게함.
 		if(request.getSession(true).getAttribute("userid")==null){
+			request.getSession().setAttribute("blackListPeople",false);
 			return "customer/main/FirstMainPage";//FirstMainPage.jsp로 요청
 		}
 		else{
@@ -93,6 +94,11 @@ public class C_LoginController {
 					if(customerDTO.getNoShowCount()>3){
 						request.getSession().setAttribute("blackListPeople",true);
 						System.out.println("블랙리스트 회원으로 등록");
+					}
+					
+					if(customerDTO.getNoShowCount()<=2 && customerDTO.getNoShowCount()>=0){
+						request.getSession().setAttribute("blackListPeople",false);
+						System.out.println("일반 회원");
 					}
 					
 					mav.setViewName("customer/main/C_MainPage");//로그인 성공 페이지(고객메인페이지)로 넘겨준다.

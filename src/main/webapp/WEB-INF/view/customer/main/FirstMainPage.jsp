@@ -38,7 +38,7 @@
 	
 	//레스토랑 예약정보
 	function request(restaurant_number){
-		alert('request 함수 호출');
+		//alert('request 함수 호출');
 		console.log(restaurant_number)
 		console.log(today)
 		
@@ -90,7 +90,7 @@
 
 	//검색버튼 클릭
 	function search(){
-		alert('hello');
+		//alert('hello');
 		
 		$('#searchForm').submit();
 		

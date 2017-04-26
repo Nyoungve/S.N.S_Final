@@ -26,7 +26,6 @@
 	var pageNum = 2;
 	
 	function request(restaurant_number){
-		alert('request 함수 호출');
 		console.log(restaurant_number)
 		console.log(today)
 		
@@ -95,7 +94,7 @@ $(function(){
 	
 <c:if test="${msg=='success'}">
 		<script type="text/javascript">
-			alert("로그인 성공!");
+			//alert("로그인 성공!");
 		</script>
 </c:if>
 </body>

@@ -77,7 +77,10 @@ public class RestaurantDAO extends SqlSessionDaoSupport{
 		//동규 학원
 		String donggyuHak ="C:\\spring\\spring-tool-suite-3.8.3.RELEASE-e4.6.2-win32-x86_64\\sts-bundle\\work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\sns_final\\img\\";
 		
-		File new_file = new File(donggyuDesktop+name+"_"+ori_name);
+		// 빛찬 학원 컴퓨터
+		String projectPath = "C:\\Users\\user2\\workspace2\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\S.N.S_Final\\img\\";
+		
+		File new_file = new File(projectPath+name+"_"+ori_name);
 		System.out.println(new_file);
 		
 		try {
