@@ -12,27 +12,31 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+<!-- 필요한 라이브 파일들 -->
+   <%@include file="/WEB-INF/view/lib/library.jsp" %>
+    
     <title>S.N.S_Owner</title>
 
-	<!-- 필요한 라이브 파일들 -->
-   <%@include file="/WEB-INF/view/lib/library.jsp" %>
+	
    
   <script type="text/javascript">
 $(function(){
 
+	
+	if(!${loginTry} && !${sessionOwnerUserid} ){
+		return;
+	}
+	
 	//로그인 성공
-	if(${sessionOwnerUserid}){
+	else if(${sessionOwnerUserid} && ${loginTry}){
 		$('#ownerRestaurantList').modal({backdrop: "static"});
 	}
   
 	//로그인 실패
-	else if(!${sessionOwnerUserid}){
+	else if(!${sessionOwnerUserid} && ${loginTry}){
 		$('#loginFail').modal({backdrop: "static"});
 		
-	}else{
-		
 	}
-
 	  
 	//닫기 버튼을 눌렀을 때 다시 redirect 처리
 	$('.closeBtn').on('click',function(){
@@ -113,15 +117,18 @@ $(function(){
     </header>
 <!-- 헤더 끝-->
 
-    <!-- footer 추가 -->	
-	<%@include file="../../footer/footer.jsp"%>
-    	
+	
 	<!-- 로그인 성공 모달 -->
 	<%@include file="LoginSuccess_Modal.jsp" %>
 	
 	<!-- 로그인 실패 모달 -->
 	<%@include file="LoginFail_Modal.jsp" %>
 	
+
+	<footer>
+		<%@include file="../../footer/footer.jsp"%>
+	</footer>
+    
 	
 	  	
 </body>

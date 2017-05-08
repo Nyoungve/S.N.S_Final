@@ -35,8 +35,10 @@ public class E_MainController {
 
 	//업주 로그인 페이지 보내주기
 	@RequestMapping("/ownerLoginMain.do")
-	public String loginForm(){
+	public String loginForm(Model model){
 		
+		model.addAttribute("loginTry", false);
+		model.addAttribute("sessionOwnerUserid", false);
 		return "enterprise/main/login/ownerLoginMain";
 	}
 	
@@ -55,6 +57,7 @@ public class E_MainController {
 				//세션에 아이디 저장
 				session.setAttribute("owneruserid", owneruserid);
 				
+				model.addAttribute("loginTry", true);
 				model.addAttribute("sessionOwnerUserid", true);
 				
 				//업주의 레스토랑 사업자 등록번호 리스트를 구해온다.
@@ -69,6 +72,7 @@ public class E_MainController {
 			}else{
 				
 				System.out.println("로그인 실패");
+				model.addAttribute("loginTry", true);
 				model.addAttribute("sessionOwnerUserid", false);
 			}
 		
