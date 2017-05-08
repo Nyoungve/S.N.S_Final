@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-	<jsp:useBean id="toDay" class="java.util.Date"/>
+  
 	<h1 style="color: white;">예약 현황</h1>
 	<section style="border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px;  padding: 20px 20px 20px 20px; background-color: white;">
 	<table border="1" class="table">
@@ -16,10 +15,11 @@
 			<td>예약취소</td>
 		</tr>
 		<c:forEach var="reserveList" items="${reserveList}">
-		<fmt:formatDate value="${reserveList.reserve_date}" var="reserve_date" type="both" pattern="yyyy-MM-dd HH:mm"/>
+		<fmt:formatDate value="${reserveList.reserve_date}" var="reserve_date" type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+		
 		<c:if test="${reserveList.r_state!=5}">
-			<fmt:parseDate value="${reserve_date}" var="reDay" pattern="yyyy-MM-dd HH:mm" />
-			<c:if test="${reDay.time - toDay.time > 0}">
+		
+			
 				<tr>
 					<td>
 						${reserve_date}
@@ -63,7 +63,7 @@
 					</td>
 				</tr>
 			</c:if>
-		</c:if>
+
 		</c:forEach>
 	</table>
 	</section>
