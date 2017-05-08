@@ -15,6 +15,7 @@
 
  
 	<bean id="downloadController" class="sns.files.controller.DownloadController" />	
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 	<bean id="download" class="sns.files.view.DownloadView" />
