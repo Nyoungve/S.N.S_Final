@@ -6,11 +6,12 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<!--호환성 보기: http://webdir.tistory.com/38 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--content="너비를 장치너비로 설정, 초기화면배율 설정(Zoom 레벨 설정)": http://aboooks.tistory.com/352-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
 <!-- 필요한 라이브 파일들 -->
    <%@include file="/WEB-INF/view/lib/library.jsp" %>

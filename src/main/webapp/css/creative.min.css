@@ -439,10 +439,6 @@ img::-moz-selection {
 	background: 0 0
 }
 
-header .enterprise_main {
-	background-image: url(img/Enterprise_header.jpg)
-}
-
 /* 새로 작성한 CSS  */
 .form-joinButton {
 	display: inline;

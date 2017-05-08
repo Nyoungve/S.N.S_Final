@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!-- 네이게이션 바 시작 -->
+<div class="container-fluid">
 <nav id="mainNav" class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
+	
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
@@ -65,9 +66,9 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	
 </nav>
-
+</div>
 <script type="text/javascript">	
 $('#home').click( function() {
 	location.href="main.do";

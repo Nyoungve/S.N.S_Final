@@ -6,9 +6,9 @@
 
 
 <!-- 버튼 표시 시작-->
-오픈 시간 : ${restaurantDto.openingTime}
-마감 시간 : ${restaurantDto.closingTime}
-현재 시간 : ${sysTime}
+오픈 시간 : ${restaurantDto.openingTime}시,
+마감 시간 : ${restaurantDto.closingTime}시,
+현재 시간 : ${sysTime}시
 <h3><mark>Lunch</mark></h3> 
 
 
@@ -25,24 +25,21 @@
 
 <c:when test="${restaurantDto.openingTime gt fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
+
 </c:when>
 
 
 <c:when test="${todayBtn && sysTime ge fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
 </c:when>
 
 
 <c:when test="${availteamLunch<=0}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
 </c:when>
 
 <c:otherwise>
 <input type="button" class="timeBlock btn-lg" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamLunch}
 </c:otherwise>
 
 </c:choose>
@@ -71,25 +68,21 @@ ${availteamLunch}
  
 <c:when test="${restaurantDto.openingTime gt fmtNum || restaurantDto.closingTime le fmtNum}">
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamDinner}
 </c:when>
 
 
 <c:when test= "${todayBtn && sysTime ge fmtNum}" >
 
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamDinner}
 </c:when>
 
 <c:when test= "${availteamDinner<=0}" >
 <input type="button" class="btn btn-lg btn-primary disabled" value="${i.key}:00" date-reserveTime="${i.key}:00:00">
-${availteamDinner}
 </c:when>
 
 
 <c:otherwise>
 <input type="button" class="timeBlock btn-lg" value="${i.key}:00"  date-reserveTime="${i.key}:00:00">
-${availteamDinner}
 </c:otherwise>
 
 </c:choose>

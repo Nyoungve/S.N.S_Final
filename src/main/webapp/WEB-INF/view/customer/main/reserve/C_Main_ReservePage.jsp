@@ -3,7 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+
+
 <title>★S.N.S★</title>
 <!--플러그인 파일 첨부-->
 	<%@include file="/WEB-INF/view/lib/library.jsp"%>
@@ -247,11 +252,11 @@ function pay(reserveNumber){
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	        //결제완료
-	    	var msg = '예약이 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    	var msg = '예약이 완료되었습니다.'+"\n";
+	        msg += '고유ID : ' + rsp.imp_uid+"\n";
+	        msg += '상점 거래ID : ' + rsp.merchant_uid+"\n";
+	        msg += '결제 금액 : ' + rsp.paid_amount+"\n";
+	        msg += '카드 승인번호 : ' + rsp.apply_num+"\n";
 	        msg +='예약번호 :' + reserveNumber;
 	        
 	        
@@ -531,7 +536,7 @@ ${restaurantDto.r_time}
 
 <select id="people" name="guestCount" class="form-control">
 <option value="">인원을 선택해주세요</option>
-<c:forEach var="i" begin="1" end="10" step="1">
+<c:forEach var="i" begin="1" end="30" step="1">
 <option value="${i}">${i}명</option>
 </c:forEach>
 </select>

@@ -8,10 +8,8 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
     <title>★S.N.S★</title>
 	
 	<!--플러그인 파일 첨부-->
@@ -162,22 +160,14 @@ $(function(){
 <!-- 로딩용 이미지 -->  
    
 	<%@include file="../nav_bar/navbar.jsp"%>
-	<header class="row">
-		<div class="header-content blur">
-			<div>
-				<%@include file="../header/header.jsp"%>
-			</div>
-		</div>
-	</header>
-
-<!--  -->
-<contents>
-		<%@include file="../body/body_main.jsp"%>
-<contents>
 	
-	<footer>
+	<%@include file="../header/header.jsp"%>
+		
+
+		<%@include file="../body/body_main.jsp"%>
+
 		<%@include file="../footer/footer.jsp"%>
-	</footer>
+	
 
 	<%@include file="../body/modal_login.jsp"%>
 	

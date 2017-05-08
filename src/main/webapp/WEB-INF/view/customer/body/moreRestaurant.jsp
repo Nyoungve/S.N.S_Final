@@ -16,7 +16,7 @@
 				     </a>
 				        
 				        </div>
-                        <div class="well">
+                        
                        <c:forEach begin="1" end="${restuarantDto.avgRanking}" step="1">
                        <span class="glyphicon glyphicon-star" style="font-size:40px;"></span>
                        </c:forEach>
@@ -28,7 +28,7 @@
                       
                         
                         <font size="40px;">${restuarantDto.avgRanking}점</font>
-                        </div> 
+ 
                     </div>
                 </div>
                 </c:forEach>

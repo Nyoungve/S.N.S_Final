@@ -10,7 +10,8 @@
 <!--호환성 보기: http://webdir.tistory.com/38 -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--content="너비를 장치너비로 설정, 초기화면배율 설정(Zoom 레벨 설정)": http://aboooks.tistory.com/352-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
 <title>Owner_Mypage</title>
 

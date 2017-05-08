@@ -23,6 +23,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <body>
+
 	<video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
 		<source src='img/open.mp4'>
 	</video>
@@ -43,8 +44,6 @@
 	</div>
 	</div>
 	</a>
-	
-	
-	
+		
 </body>
 </html>

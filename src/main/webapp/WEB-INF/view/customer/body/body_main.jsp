@@ -3,7 +3,7 @@
 	
 	
 <!-- 레스토랑 표시부분 시작 -->
-${restuarantDto.m_path}
+
     <section class="no-padding well">
        
       
@@ -24,9 +24,7 @@ ${restuarantDto.m_path}
        			          <p>${restuarantDto.type}</p>
 				        </div>
 				     </a>
-				     
 				     </div>
-                        <div class="well">
                        <c:forEach begin="1" end="${restuarantDto.avgRanking}" step="1">
                        <span class="glyphicon glyphicon-star" style="font-size:40px;"></span>
                        </c:forEach>
@@ -37,7 +35,9 @@ ${restuarantDto.m_path}
                         
                       
                         <font size="40px;">${restuarantDto.avgRanking}점</font>
-                        </div> 
+                     
+				     
+                           
                     </div>
                 </div>
                 </c:forEach>
