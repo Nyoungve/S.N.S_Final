@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!-- 네이게이션 바 시작 -->
-<div class="container-fluid">
+
 <nav id="mainNav" class="navbar navbar-inverse navbar-fixed-top">
+
+<div class="container-fluid">
 	
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -9,6 +11,8 @@
 			</button>
 			<a class="navbar-brand page-scroll" href="#page-top" role="button"><img alt="Logo" src="img/snslogoTransparency30x30.png"></a>
 		</div>
+
+		
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<!-- 수정부탁드려욤!!! -->
@@ -67,8 +71,10 @@
 			</ul>
 		</div>
 	
+	</div>
+	
 </nav>
-</div>
+
 <script type="text/javascript">	
 $('#home').click( function() {
 	location.href="main.do";

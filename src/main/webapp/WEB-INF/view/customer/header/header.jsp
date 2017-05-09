@@ -17,8 +17,7 @@
 		<!-- 첫번째 row의 col-md-8 시작 -->
 		<div class="col-md-8 div_search_select">
 		<form id="searchForm" class="form-inline" action="searchRestaurant.do" method="get">
-				<div style="margin-bottom: 20px">
-				
+			
 			<select class ="form-control" id="sido" name="sido" onchange="cityList();">	<!-- onchange로 선택이 될때마다 cityList()실행 -->
  			 <option value="">::시도선택::</option>
 			</select>
@@ -27,18 +26,19 @@
   				<option value="">::도시선택::</option>
 				</select> 
 				
-					<select class="form-control" name="guestCount">
+				<select class="form-control" name="guestCount">
 						<option value="">인원선택</option>
 						<c:forEach var="i" begin="1" end="30" step="1">
 						<option value="${i}">${i}명</option>
 						</c:forEach>
 					</select> 
 				
-				</div>
-				<div>
+				
+				<br>  
+				
 					<input type="text" class="form-control" id="type" name="type" placeholder="요리 타입을 입력해주세요.">
-
 						<div class="input-group">
+						
 							<input type="text" class="form-control" id="e_name" name="e_name" placeholder="업체명을 입력해주세요.">
 								 <span class="input-group-btn">
 								<button class="btn btn-default" type="button" onclick="search();"><span class="glyphicon glyphicon-search"></span></button>
@@ -46,8 +46,9 @@
 							</span>
 						</div> <!-- /input-group -->
 				</div> <!-- /.row -->
-		</div><!-- col-8 -->
+		<!-- col-8 -->
 		</form>
+		</div>
  </header>		
 	<!-- 첫번째 row의 col-md-8 끝-->
 	<!-- 헤더 첫번째 row 끝-->
