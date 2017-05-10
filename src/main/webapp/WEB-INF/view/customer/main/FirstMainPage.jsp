@@ -37,8 +37,6 @@
 	//레스토랑 예약정보
 	function request(restaurant_number){
 		//alert('request 함수 호출');
-		console.log(restaurant_number)
-		console.log(today)
 		
 		location.href="reserve.do?restaurant_number="+restaurant_number+"&today="+today;
 		

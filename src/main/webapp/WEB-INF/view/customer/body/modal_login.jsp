@@ -25,6 +25,30 @@
 							<input name="password" id="password1" value='' placeholder="Password" type="password" class="form-control" required/>
 						<b><p id="pw_value" style="font-size: 12px; color: red;"></p></b>
 					</div>
+					
+					<a data-target="#FindID" href="findId.do" data-toggle="modal" role="button" data-backdrop="false"><span class="glyphicon glyphicon-question-sign"></span>
+				ID찾기</a>
+				<!-- ID찾기 폼 content까지만 등록하기 -->
+				<div class="modal fade" id="FindID" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+						</div>
+					</div>
+				</div>
+				
+				<a data-target="#FindPW" href="passwordIssue.do" data-toggle="modal" role="button" data-backdrop="false"><span class="glyphicon glyphicon-question-sign"></span>
+				PW찾기</a>
+				<!--  PW찾기 폼 content까지만 등록하기! -->
+				<div class="modal fade" id="FindPW" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+						</div>
+					</div>
+				</div>
+					
+					
 					<div class="form-group">
 						<input type="submit" id="btnLogin" class="btn btn-lg btn-primary btn-block" value="Login" />
 					</div>

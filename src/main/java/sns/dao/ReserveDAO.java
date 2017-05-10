@@ -1,6 +1,5 @@
 package sns.dao;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +20,6 @@ public class ReserveDAO extends SqlSessionDaoSupport{
 			
 		int resultNum =getSqlSession().insert("reserve.insertReserveData",reserveDto);
 		return resultNum;
-		
 		
 	}
 	

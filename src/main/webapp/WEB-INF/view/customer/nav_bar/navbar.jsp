@@ -16,35 +16,10 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<!-- 수정부탁드려욤!!! -->
-				<!-- Home 클릭시 FirstMainPage.jsp 초기 페이지로 돌아갈 수 있도록... -->
+				<!-- Home 클릭시 FirstMainPage.jsp 초기 페이지로 돌아갈 수 있도록... --> 
 				<li><a id="home" role="button"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-				<!-- <li><a data-toggle="modal" data-target="#Find" role="button"><span class="glyphicon glyphicon-question-sign"></span> ID/PW 찾기</a></li> -->
-				<!-- ID찾기 버튼 -->
-				<li>
-				<a data-target="#FindID" href="findId.do" data-toggle="modal" role="button" data-backdrop="false"><span class="glyphicon glyphicon-question-sign"></span>
-				ID찾기</a>
-				<!-- ID찾기 폼 content까지만 등록하기 -->
-				<div class="modal fade" id="FindID" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
-						</div>
-					</div>
-				</div>
-				</li>
-				<li>
-				<!-- 임시 비밀번호 발급하기 창 -->
-				<a data-target="#FindPW" href="passwordIssue.do" data-toggle="modal" role="button" data-backdrop="false"><span class="glyphicon glyphicon-question-sign"></span>
-				PW찾기</a>
-				<!--  PW찾기 폼 content까지만 등록하기! -->
-				<div class="modal fade" id="FindPW" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
-						</div>
-					</div>
-				</div>	
-				</li>
+				<li><a id="ownerHome" role="button"><span class="glyphicon glyphicon-home"></span> Enterprise</a></li>
+				
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -68,6 +43,7 @@
  						로그인
 					</a>
 				</li>
+				
 			</ul>
 		</div>
 	
@@ -79,6 +55,11 @@
 $('#home').click( function() {
 	location.href="main.do";
 });
+
+$('#ownerHome').click( function() {
+	location.href="ownerLoginMain.do";
+});
+
 
 $('.Mypage_Main_Open').on('click',function() {
 	

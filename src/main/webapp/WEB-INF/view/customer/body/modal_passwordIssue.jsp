@@ -20,12 +20,12 @@ $(document).ready(function(){
 	$("#btnPasswordIssue").click(function(){
 		
 		//alert("클릭!")
-       	var userId = $("#userid").val();
+       	var userId = $("#pwuserid").val();
 		var userEmail = $("#email").val();
 		
 		if(userId == ""){
             alert("아이디를 입력해주세요.");
-            $("#userId").focus(); // 입력포커스 이동
+            $("#pwuserid").focus(); // 입력포커스 이동
             return false; // 함수 종료
         } 
         if(userEmail == ""){
@@ -37,7 +37,7 @@ $(document).ready(function(){
 	     	type:"POST"
 	     	,url:"<%=contextPath%>/passwordIssue.do"
 	    	,data:{
-	    		"userid":$("#userid").val(),//userid 서버로 보내기
+	    		"userid":$("#pwuserid").val(),//userid 서버로 보내기
 	    		"email":$("#email").val() //email 서버로 보내기
 	    	}
 	     	,dataType:"json"
@@ -75,7 +75,7 @@ $(document).ready(function(){
 			id="passwordIssue" name="passwordIssue">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="ID를 입력해주세요."
-					id="userid" name="userid" required>
+					id="pwuserid" name="pwuserid" required>
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control"

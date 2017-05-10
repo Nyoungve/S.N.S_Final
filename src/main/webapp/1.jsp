@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -21,11 +21,12 @@
 <title> S.N.S.intro </title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
 </head>
 <body>
 
 	<video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-		<source src='img/open.mp4'>
+		<source src='img/open.mp4' >
 	</video>
 	<a href="main.do">
 	<div class="container-fluid">
@@ -44,6 +45,18 @@
 	</div>
 	</div>
 	</a>
+
+<script type="text/javascript">
+
+var video = document.getElementById('video');
+
+video.addEventListener('click',function(){
+	  video.play();
+	},false);
+
+</script>		
+		
+		
 		
 </body>
 </html>

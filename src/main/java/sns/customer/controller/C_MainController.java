@@ -372,12 +372,6 @@ public class C_MainController {
 									,@RequestParam("e_name")String e_name
 									,Model model,HttpSession session){
 			
-			System.out.println("/searchRestaurant.do");
-			System.out.println(sido);
-			System.out.println(city);
-			System.out.println(guestCount);
-			System.out.println(type);
-			System.out.println(e_name);
 			
 			StringBuffer sb = new StringBuffer();
 			
@@ -387,7 +381,6 @@ public class C_MainController {
 				sb.append(" ");
 				sb.append(city);
 			}
-			System.out.println(sb.toString());
 			
 			SearchDTO searchDto = new SearchDTO();
 			searchDto.setAddress(sb.toString());
@@ -400,7 +393,7 @@ public class C_MainController {
 			System.out.println(restaurantDtos);
 			
 			model.addAttribute("restaurantDtos", restaurantDtos);
-			
+			model.addAttribute("searchClick", true);
 			
 			if(session.getAttribute("sessionUserid") !=null){
 				return "customer/main/C_MainPage";

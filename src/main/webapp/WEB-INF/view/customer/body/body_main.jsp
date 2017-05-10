@@ -50,7 +50,8 @@
     </section>
     
   <!-- 레스토랑 표시부분 끝 -->  
-   
+
+<c:if test="${!searchClick}">   
    <!-- 더보기 표시부분 (조건 : 보여줄 레스토랑이 6개 이상인 경우)-->
     <div id="moreBtn" class="container-fluid">
      <div class="col-md-5"></div>
@@ -67,4 +68,4 @@
              <a href="download/file" class="btn btn-info btn-xl sr-button"><h1>업체 신청 Click!!</h1></a>
          </div>
      </div>
-     
+</c:if>     
