@@ -101,8 +101,6 @@ public class A_MyPageController {
 			throw new InsertShopException("사업주 아이디를 등록하는데 에러가 발생했습니다.사업자등록번호를 다시 한번 확인해주세요.");
 			
 		}
-		
-		
 		model.addAttribute("insertOk", "insertOk");
 		return "admin/administratorMainPage";
 		
@@ -112,14 +110,14 @@ public class A_MyPageController {
 	@RequestMapping("/insertRestaurant.do")
 	public String insertRestaurantForm(RestaurantDTO restaurantDto,Model model){
 		
-		System.out.println("/insertRestaurant.do");
+	System.out.println("/insertRestaurant.do");
 		
 		
-		//reserve 테이블에서 등록
-		restaurantDao.insertRestaurantForm(restaurantDto);
+	//reserve 테이블에서 등록
+	restaurantDao.insertRestaurantForm(restaurantDto);
 		
-		//이미지 등록
-		//파일 업로드 처리할 dto
+	//이미지 등록
+	//파일 업로드 처리할 dto
 	RestaurantuploadDTO restaurantuploadDto = new RestaurantuploadDTO();
 						
 	//파일 업로드 처리할 dto에 레스토랑 번호 세팅
@@ -151,13 +149,8 @@ public class A_MyPageController {
 					System.out.println("파일 정보 인서트");
 					
 					restaurantuploadDao.insertInfo(restaurantuploadDto);
-			
 				}
 			
-		
-		
-		
-		
 		model.addAttribute("insertOk", "insertOk");
 		return "admin/administratorMainPage";
 	}
